@@ -1,0 +1,2 @@
+# gundamff.github.io
+My personal blog
