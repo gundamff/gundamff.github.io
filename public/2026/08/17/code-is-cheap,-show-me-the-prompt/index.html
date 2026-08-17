@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"gundamff.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":{"left":16,"right":16},"offset":12,"width":280},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="“Talk is cheap, show me the code.” — Linus Torvalds, 2000 2026 年了，这句话该翻篇了。   先讲个事儿2024 年，一个朋友的团队用 AI 辅助开发一个内部管理系统。三个人，两周，从零到上线——换成以前，这种体量的项目少说也要六七个人干两三个月。 项目上线那天，CTO 很开心，开发很兴奋，所有人都觉得找到了银弹。 三个月后，他们开始后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Code is cheap, show me the prompt">
+<meta property="og:url" content="https://gundamff.github.io/2026/08/17/code-is-cheap,-show-me-the-prompt/index.html">
+<meta property="og:site_name" content="Gund Blog">
+<meta property="og:description" content="“Talk is cheap, show me the code.” — Linus Torvalds, 2000 2026 年了，这句话该翻篇了。   先讲个事儿2024 年，一个朋友的团队用 AI 辅助开发一个内部管理系统。三个人，两周，从零到上线——换成以前，这种体量的项目少说也要六七个人干两三个月。 项目上线那天，CTO 很开心，开发很兴奋，所有人都觉得找到了银弹。 三个月后，他们开始后">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-16T19:03:13.000Z">
+<meta property="article:modified_time" content="2026-08-17T03:03:13.595Z">
+<meta property="article:author" content="gundamff">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://gundamff.github.io/2026/08/17/code-is-cheap,-show-me-the-prompt/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://gundamff.github.io/2026/08/17/code-is-cheap,-show-me-the-prompt/","path":"2026/08/17/code-is-cheap,-show-me-the-prompt/","title":"Code is cheap, show me the prompt"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Code is cheap, show me the prompt | Gund Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Gund Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Software Architecture & AI Thoughts</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E8%AE%B2%E4%B8%AA%E4%BA%8B%E5%84%BF"><span class="nav-number">1.</span> <span class="nav-text">先讲个事儿</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81AI-%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%8F%98%E9%9D%A9%EF%BC%9A%E7%A0%96%E4%B8%8D%E8%A6%81%E9%92%B1%E4%BA%86%EF%BC%8C%E4%BD%86%E4%BD%A0%E8%BF%98%E6%98%AF%E7%9B%96%E4%B8%8D%E8%B5%B7%E6%A5%BC"><span class="nav-number">2.</span> <span class="nav-text">一、AI 带来的变革：砖不要钱了，但你还是盖不起楼</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%BB%A5%E5%89%8D%E5%80%BC%E9%92%B1%E7%9A%84%E4%B8%9C%E8%A5%BF%EF%BC%8C%E7%8E%B0%E5%9C%A8%E4%B8%8D%E5%80%BC%E9%92%B1%E4%BA%86"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 以前值钱的东西，现在不值钱了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E2%80%9C%E8%83%BD%E8%B7%91%E2%80%9D%E5%92%8C%E2%80%9D%E8%83%BD%E4%BF%A1%E2%80%9D%E4%B9%8B%E9%97%B4%E9%9A%94%E7%9D%80%E5%8D%81%E4%B8%87%E5%85%AB%E5%8D%83%E9%87%8C"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 “能跑”和”能信”之间隔着十万八千里</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%AE%A1%E6%9F%A5%E9%80%9F%E5%BA%A6%E8%B7%9F%E4%B8%8D%E4%B8%8A%E7%94%9F%E6%88%90%E9%80%9F%E5%BA%A6%EF%BC%8C%E4%BD%A0%E5%B0%B1%E5%A4%B1%E6%8E%A7%E4%BA%86"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 审查速度跟不上生成速度，你就失控了</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AF%B9%E8%A1%8C%E4%B8%9A%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9A%E4%BB%B7%E5%80%BC%E9%93%BE%E5%9C%A8%E9%87%8D%E7%BB%84%EF%BC%8C%E5%80%BC%E9%92%B1%E7%9A%84%E4%B8%9C%E8%A5%BF%E6%90%AC%E5%AE%B6%E4%BA%86"><span class="nav-number">3.</span> <span class="nav-text">二、对行业的影响：价值链在重组，值钱的东西搬家了</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%BC%96%E7%A0%81%E7%8E%AF%E8%8A%82%E8%A2%AB%E6%8C%A4%E6%89%81%EF%BC%8C%E4%B8%8A%E6%B8%B8%E7%8E%AF%E8%8A%82%E8%A2%AB%E9%A1%B6%E4%B8%8A%E6%9D%A5"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 编码环节被挤扁，上游环节被顶上来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E2%80%9C%E5%85%A8%E6%A0%88%E2%80%9D%E8%BF%99%E4%B8%AA%E8%AF%8D%E8%AF%A5%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E4%BA%86"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 “全栈”这个词该重新定义了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E6%96%B0%E5%B7%A5%E7%A7%8D%E5%9C%A8%E5%86%92%E5%87%BA%E6%9D%A5%EF%BC%8C%E6%97%A7%E5%B7%A5%E7%A7%8D%E5%9C%A8%E5%8F%98%E5%BD%A2"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 新工种在冒出来，旧工种在变形</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AF%B9%E4%BC%81%E4%B8%9A%E7%AE%A1%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9A%E4%BD%A0%E5%9C%A8%E7%AE%A1%E7%90%86%E4%B8%80%E7%BE%A4%E2%80%9D%E8%83%BD%E5%8A%9B%E8%B6%85%E5%BC%BA%E4%BD%86%E6%AF%AB%E6%97%A0%E5%88%A4%E6%96%AD%E5%8A%9B%E2%80%9D%E7%9A%84%E5%91%98%E5%B7%A5"><span class="nav-number">4.</span> <span class="nav-text">三、对企业管理模式的影响：你在管理一群”能力超强但毫无判断力”的员工</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%AE%A1%E7%90%86%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8F%98%E9%87%8F%E5%8F%98%E4%BA%86"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 管理的核心变量变了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Code-Review-%E4%BB%8E%E2%80%9D%E5%A5%BD%E7%9A%84%E5%AE%9E%E8%B7%B5%E2%80%9D%E5%8F%98%E6%88%90%E4%BA%86%E2%80%9D%E7%94%9F%E5%AD%98%E5%BF%85%E9%9C%80%E2%80%9D"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 Code Review 从”好的实践”变成了”生存必需”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E7%BB%8F%E9%AA%8C%E6%AD%A3%E5%9C%A8%E8%A2%AB%E9%87%8D%E6%96%B0%E5%AE%9A%E4%BB%B7"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 经验正在被重新定价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E4%BB%8E%E2%80%9D%E6%9C%89%E7%A9%BA%E5%86%8D%E5%81%9A%E2%80%9D%E5%8F%98%E6%88%90%E4%BA%86%E2%80%9D%E4%B8%8D%E5%81%9A%E5%B0%B1%E6%AD%BB%E2%80%9D"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 知识管理从”有空再做”变成了”不做就死”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AF%B9%E9%A1%B9%E7%9B%AE%E6%B5%81%E7%A8%8B%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9A%E6%95%8F%E6%8D%B7%E6%B2%A1%E8%B5%A2%EF%BC%8C%E7%80%91%E5%B8%83%E4%B9%9F%E6%B2%A1%E6%AD%BB%EF%BC%8C%E8%AF%A5%E9%87%8D%E6%96%B0%E6%B4%97%E7%89%8C%E4%BA%86"><span class="nav-number">5.</span> <span class="nav-text">四、对项目流程的影响：敏捷没赢，瀑布也没死，该重新洗牌了</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E2%80%9C%E5%BF%AB%E9%80%9F%E8%BF%AD%E4%BB%A3%E2%80%9D%E7%9A%84%E5%89%8D%E6%8F%90%E6%AD%A3%E5%9C%A8%E5%8A%A8%E6%91%87"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 “快速迭代”的前提正在动摇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E8%AE%BE%E8%AE%A1%E5%85%88%E8%A1%8C%E5%9C%A8%E5%9B%9E%E5%BD%92%E2%80%94%E2%80%94%E4%BD%86%E4%B8%8D%E6%98%AF%E5%9B%9E%E5%88%B0%E7%80%91%E5%B8%83"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 设计先行在回归——但不是回到瀑布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E2%80%9C%E9%87%8D%E9%A1%B9%E7%9B%AE%E8%BD%BB%E4%BA%A7%E5%93%81%E2%80%9D%E7%9A%84%E6%80%9D%E7%BB%B4%E8%AF%A5%E7%BF%BB%E7%AF%87%E4%BA%86"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 “重项目轻产品”的思维该翻篇了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E6%B5%8B%E8%AF%95%E7%AD%96%E7%95%A5%E9%9C%80%E8%A6%81%E5%85%A8%E9%9D%A2%E5%8D%87%E7%BA%A7%EF%BC%8C%E4%B8%8D%E8%83%BD%E8%BF%98%E5%81%9C%E7%95%99%E5%9C%A8%E2%80%9D%E5%86%99%E5%AE%8C%E5%86%8D%E6%B5%8B%E2%80%9D"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 测试策略需要全面升级，不能还停留在”写完再测”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%AF%B9%E4%B8%AA%E4%BA%BA%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9A%E9%87%8D%E6%96%B0%E5%AE%9A%E4%B9%89%E2%80%9D%E5%80%BC%E9%92%B1%E2%80%9D"><span class="nav-number">6.</span> <span class="nav-text">五、对个人的影响：重新定义”值钱”</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%88%9D%E7%BA%A7%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E5%9B%B0%E5%A2%83%E2%80%94%E2%80%94%E4%BD%86%E4%B8%8D%E6%98%AF%E7%BB%9D%E8%B7%AF"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 初级开发者的困境——但不是绝路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91%E8%80%85%EF%BC%9A%E4%BB%8E%E2%80%9D%E5%B7%A5%E5%8C%A0%E2%80%9D%E5%8F%98%E6%88%90%E2%80%9D%E6%8C%87%E6%8C%A5%E2%80%9D"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 高级开发者：从”工匠”变成”指挥”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E6%9E%B6%E6%9E%84%E5%B8%88%EF%BC%9AAI-%E6%97%B6%E4%BB%A3%E6%9C%80%E7%A8%80%E7%BC%BA%E7%9A%84%E8%B5%84%E6%BA%90"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 架构师：AI 时代最稀缺的资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E2%80%9C%E8%BD%AF%E6%8A%80%E8%83%BD%E2%80%9D%E6%AD%A3%E5%9C%A8%E5%8F%98%E6%88%90%E2%80%9D%E7%A1%AC%E9%80%9A%E8%B4%A7%E2%80%9D"><span class="nav-number">6.4.</span> <span class="nav-text">5.4 “软技能”正在变成”硬通货”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%8E%B0%E5%9C%A8%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9A%E5%88%AB%E5%85%89%E6%83%B3%EF%BC%8C%E5%8A%A8%E6%89%8B"><span class="nav-number">7.</span> <span class="nav-text">六、现在能做什么：别光想，动手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%AD%E6%9C%9F%EF%BC%9A%E6%8A%8A%E7%BA%A6%E6%9D%9F%E5%89%8D%E7%BD%AE%EF%BC%8C%E5%88%AB%E8%AE%A9-AI-%E8%A3%B8%E5%A5%94"><span class="nav-number">7.1.</span> <span class="nav-text">短期：把约束前置，别让 AI 裸奔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%BF%E6%9C%9F%EF%BC%9A%E6%8A%8A%E6%9E%B6%E6%9E%84%E8%B4%A8%E9%87%8F%E7%BA%B3%E5%85%A5%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="nav-number">7.2.</span> <span class="nav-text">长期：把架构质量纳入模型训练</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">8.</span> <span class="nav-text">结语</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="gundamff"
+      src="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=200">
+  <p class="site-author-name" itemprop="name">gundamff</p>
+  <div class="site-description" itemprop="description">A blog about software architecture, AI, and developer career</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gundamff" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gundamff" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gundamff.github.io/2026/08/17/code-is-cheap,-show-me-the-prompt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=200">
+      <meta itemprop="name" content="gundamff">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gund Blog">
+      <meta itemprop="description" content="A blog about software architecture, AI, and developer career">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Code is cheap, show me the prompt | Gund Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Code is cheap, show me the prompt
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-08-17 03:03:13 / 修改时间：11:03:13" itemprop="dateCreated datePublished" datetime="2026-08-17T03:03:13+08:00">2026-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>“Talk is cheap, show me the code.” — Linus Torvalds, 2000</p>
+<p>2026 年了，这句话该翻篇了。</p>
+</blockquote>
+<hr>
+<h2 id="先讲个事儿"><a href="#先讲个事儿" class="headerlink" title="先讲个事儿"></a>先讲个事儿</h2><p>2024 年，一个朋友的团队用 AI 辅助开发一个内部管理系统。三个人，两周，从零到上线——换成以前，这种体量的项目少说也要六七个人干两三个月。</p>
+<p>项目上线那天，CTO 很开心，开发很兴奋，所有人都觉得找到了银弹。</p>
+<p>三个月后，他们开始后悔。</p>
+<p>不是因为系统不能用——能用，跑得好好的。问题在于：每次改需求，哪怕是很小的改动，都像在地雷阵里走路。一个接口改了，另一个模块莫名其妙报错；一个字段加了，三处报表的数据就不对了。到最后，没人敢说自己”完全理解”这个系统的数据流向——包括当初写它的人。</p>
+<p>原因是什么？AI 写的每一行代码，单独拿出来看，质量都不差。命名规范，逻辑清晰，边界条件也处理了。但把这些代码放到一起看，就像十个装修工人分别装修了同一套房的十个房间——风格不统一，走线不对接，承重墙的位置没人对齐过。</p>
+<p><strong>这就是当下 AI 编程最真实的困境：局部极其优秀，全局稀烂。</strong></p>
+<p>而这篇要聊的，不是”AI 行不行”这种无聊的问题。是另一个更有意思的：</p>
+<p><strong>当”写代码”变得前所未有的廉价，什么才是真贵的东西？</strong></p>
+<hr>
+<h2 id="一、AI-带来的变革：砖不要钱了，但你还是盖不起楼"><a href="#一、AI-带来的变革：砖不要钱了，但你还是盖不起楼" class="headerlink" title="一、AI 带来的变革：砖不要钱了，但你还是盖不起楼"></a>一、AI 带来的变革：砖不要钱了，但你还是盖不起楼</h2><h3 id="1-1-以前值钱的东西，现在不值钱了"><a href="#1-1-以前值钱的东西，现在不值钱了" class="headerlink" title="1.1 以前值钱的东西，现在不值钱了"></a>1.1 以前值钱的东西，现在不值钱了</h3><p>历史上的生产力革命，干掉的都是某个环节的高成本。印刷术干掉了抄书，流水线干掉了手工组装，Excel 干掉了会计扒拉算盘。</p>
+<p>AI 干掉的是什么？是<strong>把想法变成可运行代码</strong>这件事的成本。</p>
+<p>感受一下：过去你拿到一个需求，要想方案、选技术栈、写代码、调 bug、做测试。其中”写代码”这个环节，占了整个项目 60% 以上的时间和精力。现在 AI 能帮你把”写代码”这个环节压缩到原来的十分之一甚至百分之一。</p>
+<p>但请注意——<strong>AI 降低的是”执行方案”的成本，不是”想清楚方案”的成本。</strong></p>
+<p>你仍然需要知道系统该怎么拆分、模块边界划在哪、数据流怎么走、这个接口应该返回什么。区别在于，过去你花三天想清楚方案、再花两周写代码；现在你花三天想清楚方案、再花三个小时让 AI 把代码生成出来。</p>
+<p>这就引出一个根本性的变化：**”写代码”从目的变成了手段。**</p>
+<p>以前说一个人”技术好”，很大程度上是指”代码写得漂亮、写得快”。以后说一个人”技术好”，得是指”他知道该写什么、不该写什么”。</p>
+<p>就像搬砖，以前砖头是稀缺资源，你能搞到砖就能盖房。现在砖头不要钱了随便搬，问题变成了：你会不会画图纸？你知不知道房子该盖几层？承重墙在哪？地基打多深？</p>
+<h3 id="1-2-“能跑”和”能信”之间隔着十万八千里"><a href="#1-2-“能跑”和”能信”之间隔着十万八千里" class="headerlink" title="1.2 “能跑”和”能信”之间隔着十万八千里"></a>1.2 “能跑”和”能信”之间隔着十万八千里</h3><p>AI 生成的代码有一个非常危险的特征：<strong>它看起来永远是对的。</strong></p>
+<p>命名规范、结构清晰、该有的注释都有、测试用例也能通过。你拿给一个 junior 看，他会觉得”这代码写得比我好”。你拿给一个 senior 看，他可能会皱眉头说”这里有点不对劲，但具体哪不对，我要想想”。</p>
+<p>这个”想想”就是核心。</p>
+<p>举个例子：AI 生成了一个重试逻辑——请求失败后重试三次，每次间隔一秒。代码没毛病，跑起来也没问题。但一个有经验的人会追问：这个接口是幂等的吗？如果不是，重试三次意味着可能创建三个重复的订单。重试间隔一秒，在高并发下会不会把下游服务打挂？这个重试是同步阻塞的还是异步的？如果是同步的，调用方的超时设置够不够？</p>
+<p><strong>这些问题，AI 不会主动想。它只会按照”常见的做法”生成一个”看起来合理”的实现。</strong> 而”常见的做法”和”正确的做法”之间的差距，就是经验和判断力。</p>
+<p>所以我说——<strong>AI 把”能跑”的成本打到了地板上，但把”能信”的价值抬到了天花板上。</strong></p>
+<h3 id="1-3-审查速度跟不上生成速度，你就失控了"><a href="#1-3-审查速度跟不上生成速度，你就失控了" class="headerlink" title="1.3 审查速度跟不上生成速度，你就失控了"></a>1.3 审查速度跟不上生成速度，你就失控了</h3><p>这是一个很少有人讨论但极其重要的问题：</p>
+<p>AI 一秒钟能生成 200 行代码，你一秒钟能审查多少行？如果审查速度跟不上生成速度，结果就是——<strong>你的代码库在膨胀，你对它的掌控在收缩。</strong></p>
+<p>代码越来越多，但理解它的人越来越少。每一个 AI 生成的模块都是一个”我大概知道它干什么，但细节不太确定”的黑箱。等到有一天需要改一个核心逻辑的时候，你打开代码一看——3000 行，都是 AI 写的，没有任何一个人从头到尾读过一遍。</p>
+<p><strong>这就是新的技术债形式：不是代码写得烂，而是代码写得太快太多，快到没人来得及理解它。</strong></p>
+<p>以前的技术债是”为了赶工写了烂代码”。以后的技术债是”为了赶工生成了太多没人审查的代码”。病因不同，症状一样——系统变得不可维护。</p>
+<hr>
+<h2 id="二、对行业的影响：价值链在重组，值钱的东西搬家了"><a href="#二、对行业的影响：价值链在重组，值钱的东西搬家了" class="headerlink" title="二、对行业的影响：价值链在重组，值钱的东西搬家了"></a>二、对行业的影响：价值链在重组，值钱的东西搬家了</h2><h3 id="2-1-编码环节被挤扁，上游环节被顶上来"><a href="#2-1-编码环节被挤扁，上游环节被顶上来" class="headerlink" title="2.1 编码环节被挤扁，上游环节被顶上来"></a>2.1 编码环节被挤扁，上游环节被顶上来</h3><p>传统的软件开发价值链，大致是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">需求 → 设计 → 编码 → 测试 → 部署 → 运维</span><br></pre></td></tr></table></figure>
+
+<p>每个环节都有对应的角色和成本。编码，是过去几十年里人力最密集、成本最集中的环节。一个项目预算的六七成花在”把设计稿变成代码”上。</p>
+<p>现在这个环节被 AI 挤扁了。成本骤降，人力需求骤减。但需求、设计、测试、运维这些环节——它们的难度和重要性不但没有降低，反而被凸显出来了。</p>
+<p>打个比方：你开了一家饭店，以前请了 20 个厨师炒菜（编码），3 个采购员买菜（需求），2 个经理管后厨（设计）。有一天你引进了炒菜机器人，20 个厨师的活 2 个就能干了。你开心吗？开心。但现在问题来了——采购员买错菜了，机器人照炒不误，速度快、量大、看起来专业，但做出来的菜方向就错了。以前买错菜，厨师会说”老板，这鱼不新鲜”，现在机器人不会说话，它只会高效地把不新鲜的鱼做成一盘精美的菜。</p>
+<p><strong>速度不等于方向对。AI 是一台极其高效的发动机，但它不知道该往哪开。方向盘仍然在人手里。</strong></p>
+<h3 id="2-2-“全栈”这个词该重新定义了"><a href="#2-2-“全栈”这个词该重新定义了" class="headerlink" title="2.2 “全栈”这个词该重新定义了"></a>2.2 “全栈”这个词该重新定义了</h3><p>以前说全栈，意思是”前端也会、后端也会、数据库也会、部署也会”。这个定义的基础假设是：各个技术栈之间有明确的壁垒，全栈意味着你能跨过这些壁垒。</p>
+<p>AI 时代，这些壁垒正在消融——因为 AI 能帮你补任何技术栈的短板。你不懂 K8s？问 AI。你不会写 SQL 优化？问 AI。React 和 Vue 都没用过？AI 帮你各生成一版。</p>
+<p>以后真正的”全栈”不再是”什么技术都会”，而是**”能跨域”——在业务和技术之间自由翻译，在模糊和精确之间架桥。**</p>
+<p>这种人的核心能力是：</p>
+<ul>
+<li>听到”用户体验不好”，能把它拆解成”列表页加载超过 3 秒且没有骨架屏和 loading 状态”</li>
+<li>知道一个”简单的需求”背后隐藏着多少架构影响</li>
+<li>能判断”AI 生成的这段代码在当前场景没问题，但如果明年业务扩展到海外就不行了”</li>
+</ul>
+<p><strong>AI 时代的全栈 &#x3D; 理解问题的人，不是实现方案的人。</strong> 因为实现方案 AI 比你快一百倍。</p>
+<h3 id="2-3-新工种在冒出来，旧工种在变形"><a href="#2-3-新工种在冒出来，旧工种在变形" class="headerlink" title="2.3 新工种在冒出来，旧工种在变形"></a>2.3 新工种在冒出来，旧工种在变形</h3><p><strong>Prompt Engineer</strong> 是第一个被命名的新工种，但说实话这个名字太小了——它把一个本质上是”任务分解 + 约束定义 + 质量把控”的工作，降级成了”会写提示词”。</p>
+<p>一个真正有价值的 prompt 工程师，应该做的事情是：</p>
+<ol>
+<li>把模糊的业务需求拆解成 AI 能理解的子任务</li>
+<li>为每个子任务定义清晰的约束和验收标准</li>
+<li>审查 AI 输出，判断哪些能用、哪些需要改、哪些方向就错了</li>
+<li>把成功的模式沉淀下来，变成可复用的模板</li>
+</ol>
+<p>这跟”写提示词”的关系，就像”架构设计”跟”写代码”的关系——前者是思考，后者只是执行。</p>
+<p>另一个正在成型的角色是 <strong>AI Output Auditor</strong>——专门审查 AI 生成的代码和方案。这个角色的门槛不是”比 AI 更会写代码”，而是”比 AI 更理解什么代码不该存在”。</p>
+<p>往远了说，我相信会出现一类全新的角色：<strong>AI Workflow Architect</strong>，专门设计人和 AI 的协作流程——哪些环节让 AI 做主、哪些环节必须人类审查、错误信号怎么传递、知识怎么沉淀。这跟传统的项目管理不同，因为它需要对 AI 的能力边界有骨感的认知。</p>
+<hr>
+<h2 id="三、对企业管理模式的影响：你在管理一群”能力超强但毫无判断力”的员工"><a href="#三、对企业管理模式的影响：你在管理一群”能力超强但毫无判断力”的员工" class="headerlink" title="三、对企业管理模式的影响：你在管理一群”能力超强但毫无判断力”的员工"></a>三、对企业管理模式的影响：你在管理一群”能力超强但毫无判断力”的员工</h2><h3 id="3-1-管理的核心变量变了"><a href="#3-1-管理的核心变量变了" class="headerlink" title="3.1 管理的核心变量变了"></a>3.1 管理的核心变量变了</h3><p>传统软件团队管理，管三件事：人、时间、代码质量。</p>
+<p>“人”是最难的——因为人有情绪、有差异、有成长曲线、有办公室政治。管理者大量时间花在协调不同能力水平的成员、处理沟通摩擦、做绩效评估上。</p>
+<p>AI 没消灭这些问题，但它往中间插了一个新变量：<strong>你的团队里多了一批”能力极强但毫无判断力”的新成员。</strong> 它们不累、不闹情绪、不请假、产出速度惊人——但它们会在你没注意的角落埋雷。</p>
+<p>这就引出一个管理上前所未有的问题：<strong>你不再只是管理人做出来的东西，你还在管理机器做出来的东西。</strong> 而机器做出来的东西有一个危险的特性——它太完美了，完美到让人放松警惕。</p>
+<p>想象一下你团队里新来了一个人，能力超强，什么活交给他都能秒级完成，代码质量看起来无可挑剔。你是不是会减少审查？是不是会把更多活堆给他？是不是会觉得”终于来了个靠谱的”？</p>
+<p>三个月后你打开他写的代码一看——发现整个系统的架构已经被他用一种你没想到的方式”优化”了，所有模块之间多了一层你没授权的抽象，某些核心逻辑被他”重构”成了另一种风格。他不是故意的，他只是按他理解的”最优解”在做。但结果是，你的系统已经不是你原来理解的那个系统了。</p>
+<p><strong>这就是 AI 管理的核心挑战：你不能用管人的逻辑管 AI，也不能用信任人的逻辑信任 AI。</strong></p>
+<h3 id="3-2-Code-Review-从”好的实践”变成了”生存必需”"><a href="#3-2-Code-Review-从”好的实践”变成了”生存必需”" class="headerlink" title="3.2 Code Review 从”好的实践”变成了”生存必需”"></a>3.2 Code Review 从”好的实践”变成了”生存必需”</h3><p>在 AI 之前，Code Review 在很多团队里是走形式——PR 太多，reviewer 点一下 approve 就完事了。它的主要价值是教育性的：帮助 junior 成长、知识共享、偶尔发现 bug。</p>
+<p>AI 之后，Code Review 的性质变了。它不再是”锦上添花”，而是**”最后一道防线”。**</p>
+<p>原因很简单：AI 生成代码的速度意味着你的代码库正在以过去 3-5 倍的速度膨胀。如果审查跟不上膨胀，你的系统就会变成一个你自以为了解、但实际上充满了你没见过的决策的黑箱。</p>
+<p>但问题是——<strong>谁来审查？</strong></p>
+<p>如果审查的人能力不够，AI 生成的代码和人工写的代码对他来说没有区别——反正都看不懂，反正都 approve。审查仍然是形式化的，只是以前是形式化地审查人写的代码，现在是形式化地审查机器写的代码。</p>
+<p><strong>AI 时代，最需要投资的不是 AI 的能力，而是人类审查者的能力。</strong> 这是大多数企业管理者还没意识到的事。他们花大价钱买 AI 工具，却不愿意花时间培养团队的审查能力。就像买了一辆法拉利，却不愿意花钱学开车。</p>
+<h3 id="3-3-经验正在被重新定价"><a href="#3-3-经验正在被重新定价" class="headerlink" title="3.3 经验正在被重新定价"></a>3.3 经验正在被重新定价</h3><p>过去十年，软件行业的招聘市场有一个趋势：重”刷题能力”、轻”工程经验”。LeetCode 刷得好就能进大厂，十年架构经验可能在面试时还不如一个应届生。</p>
+<p>AI 正在翻转这个不等式。</p>
+<p>当算法实现可以被 AI 秒级完成时，”会写快速排序”就不再是区分度了。真正的区分度变成了：</p>
+<ul>
+<li>你能不能判断这个系统该不该用排序？</li>
+<li>排序结果缓存多久失效？</li>
+<li>当数据量增长 100 倍时这个排序策略还成立吗？</li>
+<li>如果排序逻辑是 AI 生成的，你怎么验证它在所有边界条件下都正确？</li>
+</ul>
+<p>这些全是<strong>经验驱动的判断</strong>。AI 做不了这些，LeetCode 也练不出这些。它们来自在生产环境踩过的坑、背过的锅、半夜被 oncall 叫醒的痛苦经历。</p>
+<p><strong>对企业的启示：用人逻辑需要从”找到能写代码的人”转向”找到能驾驭 AI 写代码的人”。</strong> 前者是消耗品，后者才是核心资产。</p>
+<h3 id="3-4-知识管理从”有空再做”变成了”不做就死”"><a href="#3-4-知识管理从”有空再做”变成了”不做就死”" class="headerlink" title="3.4 知识管理从”有空再做”变成了”不做就死”"></a>3.4 知识管理从”有空再做”变成了”不做就死”</h3><p>AI 没有长期记忆。每一个新会话，它都是从零开始理解你的系统。</p>
+<p>这意味着什么？你的系统架构知识、业务规则、踩坑经验——如果只存在于人的脑子里或者 AI 的上下文窗口里，那就是脆弱的。人走了，知识就断了；AI 会话结束了，知识就清空了。</p>
+<p><strong>在 AI 时代，知识管理体系（架构决策记录、领域模型文档、API 契约、设计原则）不是锦上添花，而是核心基础设施。</strong> 它是你用来”初始化”AI 的 prompt 仓库，是你在人员流动时保持连续性的唯一手段。</p>
+<p>换句话说——<strong>一个好的知识管理体系，本身就是最高质量的 prompt。</strong></p>
+<p>一个残酷的现实是：很多公司连基本的架构文档都没有，所有知识都在几个”元老”的脑子里。以前这只是风险，以后这就是死穴——因为你根本没法有效地利用 AI。</p>
+<hr>
+<h2 id="四、对项目流程的影响：敏捷没赢，瀑布也没死，该重新洗牌了"><a href="#四、对项目流程的影响：敏捷没赢，瀑布也没死，该重新洗牌了" class="headerlink" title="四、对项目流程的影响：敏捷没赢，瀑布也没死，该重新洗牌了"></a>四、对项目流程的影响：敏捷没赢，瀑布也没死，该重新洗牌了</h2><h3 id="4-1-“快速迭代”的前提正在动摇"><a href="#4-1-“快速迭代”的前提正在动摇" class="headerlink" title="4.1 “快速迭代”的前提正在动摇"></a>4.1 “快速迭代”的前提正在动摇</h3><p>敏捷宣言诞生于 2001 年，核心假设是：<strong>需求是不确定的，所以用短周期、快反馈来逼近正确答案。</strong> 重实现轻设计，因为”先做出来看看”比”想清楚再做”更经济。重结果轻流程，因为流程往往会变成官僚主义。</p>
+<p>这个假设在 AI 之前是成立的。改代码成本高，所以试错要快、反馈要早。</p>
+<p>但 AI 改变了等式的一边。当”做出来看看”的成本暴跌时，它的诱惑力也暴涨——</p>
+<p>“想那么多干嘛，先让 AI 生成一版看看？”</p>
+<p>“这个方案不确定？没事，让 AI 各写一版，跑起来对比一下。”</p>
+<p>“架构设计？先做出来再说，不行再改。”</p>
+<p>这些想法每一个都很合理，每一个都很危险。因为 AI 让你<strong>高效地走弯路</strong>。你以前三天走一条弯路，发现不对回头重来。现在你三小时走五条弯路，每条都看起来很对，每条都不是最优解。你走得越多，离正确的路越远——因为你没有花时间站在高处看地图。</p>
+<p><strong>当”做”变快了，”想”的价值就变大了。</strong> 不是因为想比做难，而是因为做错的代价乘上了 AI 的速度杠杆。</p>
+<h3 id="4-2-设计先行在回归——但不是回到瀑布"><a href="#4-2-设计先行在回归——但不是回到瀑布" class="headerlink" title="4.2 设计先行在回归——但不是回到瀑布"></a>4.2 设计先行在回归——但不是回到瀑布</h3><p>这不意味着要回到写 200 页设计文档然后花半年实现的瀑布模型。</p>
+<p>它意味着一种新的流程范式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">① 深入的领域分析和需求澄清（慢）</span><br><span class="line">      ↓</span><br><span class="line">② 清晰的架构约束和模块边界定义（慢）</span><br><span class="line">      ↓</span><br><span class="line">③ AI 驱动的并行实现（极快）</span><br><span class="line">      ↓</span><br><span class="line">④ 严格的人工验证和集成测试（慢）</span><br><span class="line">      ↓</span><br><span class="line">⑤ 在约束框架内的快速迭代（快）</span><br></pre></td></tr></table></figure>
+
+<p>注意这里面的节奏变化：<strong>① ② ④ 是慢的，③ ⑤ 是快的。</strong> 以前是全程中速——设计不充分、实现也不快、验证也马虎。现在是<strong>该慢的地方慢到位，该快的地方快到飞起。</strong></p>
+<p>而且第二步和第三步之间的间隔可以非常短——因为 AI 让实现几乎可以实时跟随设计。你不需要花三个月写详细设计文档然后花六个月编码。你可能花两天定义架构约束，然后用 AI 在一周内生成所有模块的骨架代码，再花两周打磨。</p>
+<p><strong>设计的时间占比变大了，但总周期变短了。</strong> 这才是 AI 带来的真正效率提升——不是让你在同样的时间里写更多代码，而是让你在更短的时间里做出更对的东西。</p>
+<h3 id="4-3-“重项目轻产品”的思维该翻篇了"><a href="#4-3-“重项目轻产品”的思维该翻篇了" class="headerlink" title="4.3 “重项目轻产品”的思维该翻篇了"></a>4.3 “重项目轻产品”的思维该翻篇了</h3><p>“项目”思维的本质是：有开始、有结束、有交付物、有验收标准。这是工程思维的产物——把软件当成一栋楼来盖，盖完验收交钥匙。</p>
+<p>但好的软件不是”交付”出来的，它是”长”出来的。它需要持续地理解用户、调整方向、做减法。</p>
+<p>AI 让”交付项目”变得太容易了——你几乎可以在任何时间点交付一个”看起来完整”的产品。十个功能全有了，界面也漂亮，demo 也很流畅。但”看起来完整”和”真正有价值”之间的鸿沟，AI 填不上。</p>
+<p><strong>产品思维的核心——理解用户真正需要什么，而不是他们说他们需要什么——是 AI 替代不了的能力。</strong> 因为它需要同理心、需要对人性的理解、需要在模糊信息中做判断的勇气。</p>
+<p>当实现不再是瓶颈，产品的权重自然上升。那些能把需求想清楚、把优先级排对、把”不该做的功能”砍掉的人——<strong>他们才是 AI 时代最贵的人。</strong></p>
+<h3 id="4-4-测试策略需要全面升级，不能还停留在”写完再测”"><a href="#4-4-测试策略需要全面升级，不能还停留在”写完再测”" class="headerlink" title="4.4 测试策略需要全面升级，不能还停留在”写完再测”"></a>4.4 测试策略需要全面升级，不能还停留在”写完再测”</h3><p>AI 生成的代码有一种”应试教育”的特质：<strong>它擅长通过你明确指定的测试，但不擅长应对你没测到的场景。</strong></p>
+<p>你说”测试用户登录”，它生成的代码能通过登录测试。但它不会主动考虑：SQL 注入怎么办？会话固定攻击怎么办？并发登录时 session 管理会不会出 race condition？密码错误五次要不要锁账户？</p>
+<p>如果测试用例是”考试题”，AI 就是一个刷题高手——它能确保你出的每道题都做对，但它不会主动去想”万一考到没练过的题呢”。</p>
+<p>所以测试策略需要从”覆盖已知场景”升级到”发现未知风险”：</p>
+<ul>
+<li><strong>契约测试和类型约束</strong>的权重提升——它们是不需要运行就能施加的约束，是最廉价的”防弹衣”</li>
+<li><strong>模糊测试和属性测试</strong>变得更加重要——它们能发现 AI 在设计时没有考虑到的边界</li>
+<li><strong>混沌工程</strong>的价值被放大——因为你需要验证的不只是”代码对不对”，而是”系统在压力下是否仍然可控”</li>
+</ul>
+<p>一句话：<strong>测试不再是”写完代码之后的事”，它得成为架构设计的一部分——在 AI 动手之前，你就要定义好验证的规则。</strong></p>
+<hr>
+<h2 id="五、对个人的影响：重新定义”值钱”"><a href="#五、对个人的影响：重新定义”值钱”" class="headerlink" title="五、对个人的影响：重新定义”值钱”"></a>五、对个人的影响：重新定义”值钱”</h2><h3 id="5-1-初级开发者的困境——但不是绝路"><a href="#5-1-初级开发者的困境——但不是绝路" class="headerlink" title="5.1 初级开发者的困境——但不是绝路"></a>5.1 初级开发者的困境——但不是绝路</h3><p>直说吧：AI 对初级开发者的影响是最直接的。</p>
+<p>过去一个 junior 的核心价值是”能把功能做出来”。不需要多优雅，能跑、能过测试、能交付就行。这个价值正在被 AI 直接替代——而且 AI 做得更快、bug 更少（至少表面如此）。</p>
+<p>但这不意味着初级开发者没有未来。<strong>它意味着成长路径需要换一条。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">旧路径：学语法 → 写小功能 → 写大功能 → 学设计 → 学架构</span><br><span class="line">新路径：学系统思维 → 学验证方法 → 用 AI 做实现 → 学审查 AI 输出 → 学架构</span><br></pre></td></tr></table></figure>
+
+<p>入口变了。以前是从”写”开始，现在是从”判断”开始。</p>
+<p>一个刚入行的开发者，如果能尽早建立系统思维和代码审查能力，用 AI 来加速学习而不是替代学习，反而可能成长得比以前更快。因为 AI 是一个随叫随到的老师——你问它”这段代码为什么这样写”，它能给你解释。你让它生成不同方案，你能对比学习。</p>
+<p><strong>危险的不是”AI 会写代码”，而是”以为会用 AI 写代码就等于会做软件”。</strong> 这两者之间的差距，就像”会用搜索引擎”和”会做研究”的差距一样大。</p>
+<h3 id="5-2-高级开发者：从”工匠”变成”指挥”"><a href="#5-2-高级开发者：从”工匠”变成”指挥”" class="headerlink" title="5.2 高级开发者：从”工匠”变成”指挥”"></a>5.2 高级开发者：从”工匠”变成”指挥”</h3><p>对有经验的开发者来说，AI 是杠杆，不是替代品。</p>
+<p>一个 senior 的核心能力从来不是”写代码快”——而是知道什么该写、什么不该写、什么时候该重构、什么时候该推翻重来。这些判断力在 AI 时代不仅没贬值，反而在升值。</p>
+<p>在 AI 时代，一个 senior 的工作方式可能变成这样：</p>
+<ol>
+<li><strong>60% 的时间在设计和审查上</strong>（而不是像以前那样 60% 时间写代码）</li>
+<li><strong>用 AI 生成实现的初稿</strong>，然后花时间审查、修改、重构</li>
+<li><strong>定义架构约束</strong>——不是写代码，而是写”规则”，让 AI 在规则内工作</li>
+<li><strong>建立嗅觉</strong>——对 AI 输出形成直觉，快速识别哪些结果需要深入审查</li>
+</ol>
+<p>这本质上是一种角色转变：<strong>从”工匠”变成”指挥”。</strong> 你不再亲手砌砖，但你需要知道每一面墙为什么要这么砌。</p>
+<p>一个类比：好的厨师和普通厨师的区别不在于谁切菜快——预制菜切得比谁都快——而在于谁更懂食材、谁更懂搭配、谁能吃出哪道菜里少了一味调料。AI 就是那个切菜飞快的帮厨，但决定菜单、把控出品的仍然是主厨。</p>
+<h3 id="5-3-架构师：AI-时代最稀缺的资源"><a href="#5-3-架构师：AI-时代最稀缺的资源" class="headerlink" title="5.3 架构师：AI 时代最稀缺的资源"></a>5.3 架构师：AI 时代最稀缺的资源</h3><p>“架构师”这个词在行业里被用得很烂——很多人的”架构师”头衔本质上是”高级开发+偶尔画个 PPT”。但在 AI 时代，真正的架构能力变得前所未有地重要。</p>
+<p>原因有三：</p>
+<p><strong>第一，AI 无法做真正的权衡。</strong></p>
+<p>架构设计的本质是在多个维度之间做取舍：性能 vs 可维护性、一致性 vs 可用性、短期交付 vs 长期演进。这些取舍没有标准答案，依赖对业务上下文、团队能力、技术趋势的综合判断。AI 可以给你”业界常见的做法”，但它不能告诉你”在你的场景下，不常见的做法可能更好”。</p>
+<p><strong>第二，AI 缺乏”未来感”。</strong></p>
+<p>好的架构设计是为未来的变化留空间——不是预知未来，而是保持可选择性（optionality）。这需要一种反事实思维：如果明年需求变成 X，今天的这个设计还撑得住吗？AI 的训练数据是过去，它很难为尚未发生的变化做准备。</p>
+<p><strong>第三，架构是一种社会性活动。</strong></p>
+<p>架构不只是技术决策，它还是组织决策——决定了团队怎么分工、代码怎么归属、变更怎么协调。Conway 定律说系统结构反映组织结构，反过来也成立。这种组织层面的架构思维，AI 完全不具备。</p>
+<p><strong>经验丰富的架构师是 AI 时代最稀缺的资源。因为他们是那些知道什么时候该慢下来的人。</strong></p>
+<p>在一个什么都加速的时代，知道什么时候减速，是最稀缺的能力。</p>
+<h3 id="5-4-“软技能”正在变成”硬通货”"><a href="#5-4-“软技能”正在变成”硬通货”" class="headerlink" title="5.4 “软技能”正在变成”硬通货”"></a>5.4 “软技能”正在变成”硬通货”</h3><p>如果我只能给一个年轻人一条职业建议，我会说：<strong>学好沟通。</strong></p>
+<p>不是那种”会做 PPT”的沟通。而是：</p>
+<ul>
+<li><strong>能把模糊的想法变成精确的需求文档。</strong> 这是给 AI 下达有效指令的前提。</li>
+<li><strong>能在不同角色之间翻译。</strong> 业务方说”用户体验不好”，你能把它拆解成”列表页加载超过 3 秒且没有骨架屏”。</li>
+<li><strong>能写出清晰的架构决策记录。</strong> 让三个月后的自己、刚入职的新人、以及每一个 AI 会话都能理解”为什么这么做”。</li>
+<li><strong>能说服团队在”能做”和”该做”之间选择后者。</strong> 当 AI 让什么都能做时，”不做”的决策变得更难、也更重要。</li>
+</ul>
+<p>这些能力在过去被认为是”加分项”。在 AI 时代，它们是<strong>核心竞争力</strong>。</p>
+<p>因为 AI 可以帮你写任何代码，但它不能帮你做任何一个需要人际理解的决策。</p>
+<hr>
+<h2 id="六、现在能做什么：别光想，动手"><a href="#六、现在能做什么：别光想，动手" class="headerlink" title="六、现在能做什么：别光想，动手"></a>六、现在能做什么：别光想，动手</h2><p>说了这么多问题和趋势，最后聊点实在的。</p>
+<h3 id="短期：把约束前置，别让-AI-裸奔"><a href="#短期：把约束前置，别让-AI-裸奔" class="headerlink" title="短期：把约束前置，别让 AI 裸奔"></a>短期：把约束前置，别让 AI 裸奔</h3><ol>
+<li><strong>先写约束，再让 AI 写代码。</strong> 类型定义、接口契约、架构规则——这些是给 AI 划的跑道。没有跑道，AI 跑得再快也是乱跑。</li>
+<li><strong>把架构经验 Skill 化。</strong> 团队里老人踩过的坑、总结的原则，整理成可被 AI 引用的知识库。这比培训十个新人有效得多。</li>
+<li><strong>审查流程不能省，还要加严。</strong> 代码库膨胀了，审查标准也得跟着升级。宁可慢一点出活，也不要快一倍埋雷。</li>
+<li><strong>测试前置。</strong> 先定义验收标准和测试策略，再让 AI 去实现。让测试成为约束而不是事后验证。</li>
+</ol>
+<h3 id="长期：把架构质量纳入模型训练"><a href="#长期：把架构质量纳入模型训练" class="headerlink" title="长期：把架构质量纳入模型训练"></a>长期：把架构质量纳入模型训练</h3><p>这是更远景的展望：目前的 AI 模型训练，reward 主要来自”代码是否通过测试”、”代码是否符合规范”。但很少有 reward 来自”这段代码六个月后是否仍然可维护”。</p>
+<p><strong>如果我们能把”长期可维护性”纳入模型训练的 reward 函数——比如通过大量真实项目的演化数据来训练模型理解什么是好的架构——那 AI 的能力边界就会从”写好局部代码”扩展到”做出好的全局决策”。</strong></p>
+<p>这还很远。但这是值得投资的方向。</p>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>回到标题。</p>
+<p><strong>“Code is cheap, show me the prompt”</strong> 不是在说代码不重要。它是在说——代码的含金量正在从”怎么写”转移到”为什么写”和”写什么”。</p>
+<p>“Prompt”在这里不只是”给 AI 的提示词”。它是一个隐喻——<strong>它代表所有在代码之前发生的思考</strong>：需求的澄清、架构的约束、设计的原则、验证的规则。这些东西才是 AI 时代真正的”源代码”。代码本身只是编译产物。</p>
+<p>Linus 说”talk is cheap, show me the code”的时候，软件行业还处在”能把东西做出来就不错了”的阶段。那个时代，实现能力就是核心竞争力。</p>
+<p>但现在，”把东西做出来”不再是难题。难题是——</p>
+<ul>
+<li>做什么？</li>
+<li>为什么做？</li>
+<li>为谁做？</li>
+<li>什么时候不该做？</li>
+<li>做到什么程度该停下来？</li>
+</ul>
+<p>这些问题，AI 回答不了。它们需要人的判断力、同理心、和在不确定性中做决策的勇气。</p>
+<p><strong>AI 是极其高效的执行者。但经验丰富的架构师仍然不可替代——因为他们知道什么时候该慢下来。</strong></p>
+<p>在一个一切都加速的时代，知道什么时候减速，是最稀缺的能力。</p>
+<p>Redis 的作者 antirez 说过一段话，我觉得放到这里特别合适：</p>
+<blockquote>
+<p>或许你会觉得，自己曾为学习编程付出了无数心血，可如今这些努力仿佛都被机器轻易取代。但请回想一下，当年你为了让项目成功运行而熬夜敲代码时，内心燃烧的那份热情究竟源于什么？是创造的乐趣。而现在，只要你能掌握与人工智能高效协作的方法，就能创造出更多、更棒的作品——那份创造的乐趣，从未改变。</p>
+</blockquote>
+<p>是的。工具变了，但创造的冲动没变。AI 把执行的成本打下来了，但它也把你从重复劳动中解放出来——让你有更多时间去做那些真正需要创造力的事。</p>
+<p>别害怕被取代。害怕的应该是：你花了十年练就了一身砌砖的手艺，却从来没学过怎么看图纸。</p>
+<p>现在学，还来得及。</p>
+<hr>
+<p><em>写于 2026 年 4 月。当 AI 能在一分钟内写出这篇文章的时候，花三个小时写它的意义是什么？也许是因为，有些思考只有在写的过程中才会发生。</em></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/17/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" rel="prev" title="个人项目管理经验总结">
+                  <i class="fa fa-angle-left"></i> 个人项目管理经验总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" rel="next" title="设计模式的前世今生">
+                  设计模式的前世今生 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2024 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">gundamff</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/gundamff" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

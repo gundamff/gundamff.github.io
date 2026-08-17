@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"gundamff.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":{"left":16,"right":16},"offset":12,"width":280},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="rewrite &#x2F;last.html &#x2F;index.html last; 访问 &#x2F;break.html 的时候，页面内容重写到 &#x2F;index.html 中，并停止后续的匹配rewrite &#x2F;break.html &#x2F;index.html break; 访问 &#x2F;redirect.html 的时候，页面直接302定向到 &#x2F;i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="访问 &#x2F;last.html 的时候，页面内容重写到 &#x2F;index.html 中">
+<meta property="og:url" content="https://gundamff.github.io/2026/08/17/%E8%AE%BF%E9%97%AE-last.html-%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%A1%B5%E9%9D%A2%E5%86%85%E5%AE%B9%E9%87%8D%E5%86%99%E5%88%B0-index.html-%E4%B8%AD/index.html">
+<meta property="og:site_name" content="Gund Blog">
+<meta property="og:description" content="rewrite &#x2F;last.html &#x2F;index.html last; 访问 &#x2F;break.html 的时候，页面内容重写到 &#x2F;index.html 中，并停止后续的匹配rewrite &#x2F;break.html &#x2F;index.html break; 访问 &#x2F;redirect.html 的时候，页面直接302定向到 &#x2F;i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://confluence.qltechdev.com/download/attachments/9175203/20180817230903_200.jpg?version=1&modificationDate=1561014992513&api=v2">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/682417/1593315540827-09350557-113d-40e6-811a-c4a18c7cae80.png">
+<meta property="article:published_time" content="2026-08-16T19:03:13.000Z">
+<meta property="article:modified_time" content="2026-08-17T03:03:13.597Z">
+<meta property="article:author" content="gundamff">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://confluence.qltechdev.com/download/attachments/9175203/20180817230903_200.jpg?version=1&modificationDate=1561014992513&api=v2">
+
+
+<link rel="canonical" href="https://gundamff.github.io/2026/08/17/%E8%AE%BF%E9%97%AE-last.html-%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%A1%B5%E9%9D%A2%E5%86%85%E5%AE%B9%E9%87%8D%E5%86%99%E5%88%B0-index.html-%E4%B8%AD/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://gundamff.github.io/2026/08/17/%E8%AE%BF%E9%97%AE-last.html-%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%A1%B5%E9%9D%A2%E5%86%85%E5%AE%B9%E9%87%8D%E5%86%99%E5%88%B0-index.html-%E4%B8%AD/","path":"2026/08/17/访问-last.html-的时候，页面内容重写到-index.html-中/","title":"访问 /last.html 的时候，页面内容重写到 /index.html 中"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>访问 /last.html 的时候，页面内容重写到 /index.html 中 | Gund Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Gund Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Software Architecture & AI Thoughts</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE-break-html-%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%A1%B5%E9%9D%A2%E5%86%85%E5%AE%B9%E9%87%8D%E5%86%99%E5%88%B0-index-html-%E4%B8%AD%EF%BC%8C%E5%B9%B6%E5%81%9C%E6%AD%A2%E5%90%8E%E7%BB%AD%E7%9A%84%E5%8C%B9%E9%85%8D"><span class="nav-number">1.</span> <span class="nav-text">访问 &#x2F;break.html 的时候，页面内容重写到 &#x2F;index.html 中，并停止后续的匹配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE-redirect-html-%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%A1%B5%E9%9D%A2%E7%9B%B4%E6%8E%A5302%E5%AE%9A%E5%90%91%E5%88%B0-index-html%E4%B8%AD"><span class="nav-number">2.</span> <span class="nav-text">访问 &#x2F;redirect.html 的时候，页面直接302定向到 &#x2F;index.html中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE-permanent-html-%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%A1%B5%E9%9D%A2%E7%9B%B4%E6%8E%A5301%E5%AE%9A%E5%90%91%E5%88%B0-index-html%E4%B8%AD"><span class="nav-number">3.</span> <span class="nav-text">访问 &#x2F;permanent.html 的时候，页面直接301定向到 &#x2F;index.html中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%8A-html-html-post-html-%EF%BC%8C301%E5%AE%9A%E5%90%91"><span class="nav-number">4.</span> <span class="nav-text">把 &#x2F;html&#x2F;.html &#x3D;&gt; &#x2F;post&#x2F;.html ，301定向</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%8A-search-key-search-html-keyword-key"><span class="nav-number">5.</span> <span class="nav-text">把 &#x2F;search&#x2F;key &#x3D;&gt; &#x2F;search.html?keyword&#x3D;key</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%98%B2%E7%9B%97%E9%93%BE"><span class="nav-number">5.0.0.0.1.</span> <span class="nav-text">防盗链</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1"><span class="nav-number">5.0.0.0.2.</span> <span class="nav-text">静态文件服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BC%93%E5%AD%98"><span class="nav-number">5.0.0.0.3.</span> <span class="nav-text">文件缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98"><span class="nav-number">5.0.0.0.4.</span> <span class="nav-text">浏览器缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gzip%E5%8E%8B%E7%BC%A9"><span class="nav-number">5.0.0.0.5.</span> <span class="nav-text">gzip压缩</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">5.0.0.0.6.</span> <span class="nav-text">反向代理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#upstream-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">5.0.0.0.7.</span> <span class="nav-text">upstream 负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#upstream-%E6%94%AF%E6%8C%81%E7%9A%846%E7%A7%8D%E7%AE%97%E6%B3%95"><span class="nav-number">5.0.0.0.7.1.</span> <span class="nav-text">upstream 支持的6种算法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#upstream-%E6%94%AF%E6%8C%814%E7%A7%8D%E7%8A%B6%E6%80%81%E5%8F%82%E6%95%B0"><span class="nav-number">5.0.0.0.7.2.</span> <span class="nav-text">upstream 支持4种状态参数</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">5.0.0.0.8.</span> <span class="nav-text">问题以及注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%87%E6%81%B6%E7%9A%84if"><span class="nav-number">5.0.0.0.8.1.</span> <span class="nav-text">万恶的if</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#openresty%E7%9A%84lua%E6%A8%A1%E5%9D%97"><span class="nav-number">5.1.</span> <span class="nav-text">openresty的lua模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lua%E5%85%A5%E9%97%A8%E7%AE%80%E4%BB%8B"><span class="nav-number">5.1.1.</span> <span class="nav-text">lua入门简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lua-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">Lua 基础数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#nil%EF%BC%88%E7%A9%BA%EF%BC%89"><span class="nav-number">5.1.1.1.1.</span> <span class="nav-text">nil（空）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#boolean"><span class="nav-number">5.1.1.1.2.</span> <span class="nav-text">boolean</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#number"><span class="nav-number">5.1.1.1.3.</span> <span class="nav-text">number</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#string"><span class="nav-number">5.1.1.1.4.</span> <span class="nav-text">string</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#table"><span class="nav-number">5.1.1.1.5.</span> <span class="nav-text">table</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#function"><span class="nav-number">5.1.1.1.6.</span> <span class="nav-text">function</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.1.1.2.</span> <span class="nav-text">表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.1.1.2.1.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.1.1.2.2.</span> <span class="nav-text">关系运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.1.1.2.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9E%E6%8E%A5"><span class="nav-number">5.1.1.2.4.</span> <span class="nav-text">字符串连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">5.1.1.2.5.</span> <span class="nav-text">优先级</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E6%8E%A7%E5%88%B6"><span class="nav-number">5.1.1.3.</span> <span class="nav-text">结构控制 </span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#if-else"><span class="nav-number">5.1.1.3.1.</span> <span class="nav-text">if&#x2F;else</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#while"><span class="nav-number">5.1.1.3.2.</span> <span class="nav-text">while</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#repeat"><span class="nav-number">5.1.1.3.3.</span> <span class="nav-text">repeat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#for"><span class="nav-number">5.1.1.3.4.</span> <span class="nav-text">for</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#for-%E6%B3%9B%E5%9E%8B"><span class="nav-number">5.1.1.3.5.</span> <span class="nav-text">for 泛型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#break-goto"><span class="nav-number">5.1.1.3.6.</span> <span class="nav-text">break goto</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#openresty"><span class="nav-number">5.1.2.</span> <span class="nav-text">openresty</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HelloWorld"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">HelloWorld</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8Enginx-local%E7%9A%84%E7%BB%84%E5%90%88"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">与nginx local的组合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E8%B0%83%E7%94%A8"><span class="nav-number">5.1.2.2.1.</span> <span class="nav-text">内部调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E8%B0%83%E7%94%A8"><span class="nav-number">5.1.2.2.2.</span> <span class="nav-text">并行调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">5.1.2.2.3.</span> <span class="nav-text">重定向</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84api"><span class="nav-number">5.1.2.3.</span> <span class="nav-text">一些常用的api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5%E6%A6%82%E5%BF%B5"><span class="nav-number">5.1.2.4.</span> <span class="nav-text">执行阶段概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">5.1.2.5.</span> <span class="nav-text">实际系统中的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4"><span class="nav-number">5.1.2.5.1.</span> <span class="nav-text">获取系统时间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A3%80%E6%B5%8B%E9%A1%B5"><span class="nav-number">5.1.2.5.2.</span> <span class="nav-text">客户端检测页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8E%E7%BC%93%E5%AD%98%E4%B8%AD%E8%AF%BB%E5%8F%96%E7%BB%93%E6%9E%9C"><span class="nav-number">5.1.2.5.3.</span> <span class="nav-text">从缓存中读取结果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E4%BA%BA%E6%95%B0-%E8%AF%B7%E6%B1%82%E6%95%B0%E7%B3%BB%E5%88%97"><span class="nav-number">5.1.2.5.4.</span> <span class="nav-text">在线人数&#x2F;请求数系列</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">5.1.2.6.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#OpenResty%E9%80%82%E5%90%88%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9C%BA%E6%99%AF-%E5%AE%98%E7%BD%91-wiki"><span class="nav-number">5.1.2.6.1.</span> <span class="nav-text">OpenResty适合使用的场景,官网 wiki :</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8D%E9%80%82%E5%90%88%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">5.1.2.6.2.</span> <span class="nav-text">不适合的场景</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="gundamff"
+      src="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=200">
+  <p class="site-author-name" itemprop="name">gundamff</p>
+  <div class="site-description" itemprop="description">A blog about software architecture, AI, and developer career</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gundamff" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gundamff" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gundamff.github.io/2026/08/17/%E8%AE%BF%E9%97%AE-last.html-%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E9%A1%B5%E9%9D%A2%E5%86%85%E5%AE%B9%E9%87%8D%E5%86%99%E5%88%B0-index.html-%E4%B8%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=200">
+      <meta itemprop="name" content="gundamff">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gund Blog">
+      <meta itemprop="description" content="A blog about software architecture, AI, and developer career">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="访问 &#x2F;last.html 的时候，页面内容重写到 &#x2F;index.html 中 | Gund Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          访问 /last.html 的时候，页面内容重写到 /index.html 中
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-08-17 03:03:13 / 修改时间：11:03:13" itemprop="dateCreated datePublished" datetime="2026-08-17T03:03:13+08:00">2026-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>rewrite &#x2F;last.html &#x2F;index.html last;</p>
+<h1 id="访问-break-html-的时候，页面内容重写到-index-html-中，并停止后续的匹配"><a href="#访问-break-html-的时候，页面内容重写到-index-html-中，并停止后续的匹配" class="headerlink" title="访问 &#x2F;break.html 的时候，页面内容重写到 &#x2F;index.html 中，并停止后续的匹配"></a>访问 &#x2F;break.html 的时候，页面内容重写到 &#x2F;index.html 中，并停止后续的匹配</h1><p>rewrite &#x2F;break.html &#x2F;index.html break;</p>
+<h1 id="访问-redirect-html-的时候，页面直接302定向到-index-html中"><a href="#访问-redirect-html-的时候，页面直接302定向到-index-html中" class="headerlink" title="访问 &#x2F;redirect.html 的时候，页面直接302定向到 &#x2F;index.html中"></a>访问 &#x2F;redirect.html 的时候，页面直接302定向到 &#x2F;index.html中</h1><p>rewrite &#x2F;redirect.html &#x2F;index.html redirect;</p>
+<h1 id="访问-permanent-html-的时候，页面直接301定向到-index-html中"><a href="#访问-permanent-html-的时候，页面直接301定向到-index-html中" class="headerlink" title="访问 &#x2F;permanent.html 的时候，页面直接301定向到 &#x2F;index.html中"></a>访问 &#x2F;permanent.html 的时候，页面直接301定向到 &#x2F;index.html中</h1><p>rewrite &#x2F;permanent.html &#x2F;index.html permanent;</p>
+<h1 id="把-html-html-post-html-，301定向"><a href="#把-html-html-post-html-，301定向" class="headerlink" title="把 &#x2F;html&#x2F;.html &#x3D;&gt; &#x2F;post&#x2F;.html ，301定向"></a>把 &#x2F;html&#x2F;<em>.html &#x3D;&gt; &#x2F;post&#x2F;</em>.html ，301定向</h1><p>rewrite ^&#x2F;html&#x2F;(.+?).html$ &#x2F;post&#x2F;$1.html permanent;</p>
+<h1 id="把-search-key-search-html-keyword-key"><a href="#把-search-key-search-html-keyword-key" class="headerlink" title="把 &#x2F;search&#x2F;key &#x3D;&gt; &#x2F;search.html?keyword&#x3D;key"></a>把 &#x2F;search&#x2F;key &#x3D;&gt; &#x2F;search.html?keyword&#x3D;key</h1><p>rewrite ^&#x2F;search/([^/]+?)(/|$) &#x2F;search.html?keyword&#x3D;$1 permanent;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">###### last和break的区别</span><br><span class="line">因为301和302不能简单的只返回状态码，还必须有重定向的URL，这就是return指令无法返回301,302的原因了。这里 last 和 break 区别有点难以理解：</span><br><span class="line"></span><br><span class="line">last一般写在server和if中，而break一般使用在location中</span><br><span class="line"></span><br><span class="line">last不终止重写后的url匹配，即新的url会再从server走一遍匹配流程，而break终止重写后的匹配</span><br><span class="line"></span><br><span class="line">break和last都能组织继续执行后面的rewrite指令</span><br><span class="line"></span><br><span class="line">###### if判断</span><br><span class="line">+ 当表达式只是一个变量时，如果值为空或任何以0开头的字符串都会当做false</span><br><span class="line">+ 直接比较变量和内容时，使用=或!=</span><br><span class="line">+ ~正则表达式匹配，~*不区分大小写的匹配，!~区分大小写的不匹配</span><br><span class="line"></span><br><span class="line">```plain</span><br><span class="line">-f 和 !-f 用来判断是否存在文件</span><br><span class="line">-d 和 !-d 用来判断是否存在目录</span><br><span class="line">-e 和 !-e 用来判断是否存在文件或目录</span><br><span class="line">-x 和 !-x 用来判断文件是否可执行</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$args ：这个变量等于请求行中的参数，同$query_string</span><br><span class="line">$content_length ： 请求头中的Content-length字段。</span><br><span class="line">$content_type ： 请求头中的Content-Type字段。</span><br><span class="line">$document_root ： 当前请求在root指令中指定的值。</span><br><span class="line">$host ： 请求主机头字段，否则为服务器名称。</span><br><span class="line">$http_user_agent ： 客户端agent信息</span><br><span class="line">$http_cookie ： 客户端cookie信息</span><br><span class="line">$limit_rate ： 这个变量可以限制连接速率。</span><br><span class="line">$request_method ： 客户端请求的动作，通常为GET或POST。</span><br><span class="line">$remote_addr ： 客户端的IP地址。</span><br><span class="line">$remote_port ： 客户端的端口。</span><br><span class="line">$remote_user ： 已经经过Auth Basic Module验证的用户名。</span><br><span class="line">$request_filename ： 当前请求的文件路径，由root或alias指令与URI请求生成。</span><br><span class="line">$scheme ： HTTP方法（如http，https）。</span><br><span class="line">$server_protocol ： 请求使用的协议，通常是HTTP/1.0或HTTP/1.1。</span><br><span class="line">$server_addr ： 服务器地址，在完成一次系统调用后可以确定这个值。</span><br><span class="line">$server_name ： 服务器名称。</span><br><span class="line">$server_port ： 请求到达服务器的端口号。</span><br><span class="line">$request_uri ： 包含请求参数的原始URI，不包含主机名，如：”/foo/bar.php?arg=baz”。</span><br><span class="line">$uri ： 不带请求参数的当前URI，$uri不包含主机名，如”/foo/bar.html”。</span><br><span class="line">$document_uri ： 与$uri相同。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果文件不存在则返回400</span></span><br><span class="line"><span class="attribute">if</span> (!-f <span class="variable">$request_filename</span>) &#123;</span><br><span class="line">     <span class="attribute">return</span> <span class="number">400</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 如果host不是thpower.com，则301到thpower.com中</span></span><br><span class="line"><span class="attribute">if</span> ( <span class="variable">$host</span> != <span class="string">&#x27;thpower.com&#x27;</span> )&#123;</span><br><span class="line">     <span class="attribute">rewrite</span><span class="regexp"> ^/(.*)$</span> https://thpower.com/<span class="variable">$1</span> <span class="literal">permanent</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 如果请求类型不是POST则返回405</span></span><br><span class="line"><span class="attribute">if</span> (<span class="variable">$request_method</span> = POST) &#123;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">405</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 如果参数中有 a=1 则301到指定域名</span></span><br><span class="line"><span class="attribute">if</span> (<span class="variable">$args</span> <span class="regexp">~ a=1)</span> &#123;</span><br><span class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^</span> http://thpower.com/ <span class="literal">permanent</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="防盗链"><a href="#防盗链" class="headerlink" title="防盗链"></a>防盗链</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">valid_referers none | blocked | server_names | string ...;</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#494949;">该指令会根据Referer Header头的内容分配一个值为0或1给变量$invalid_referer。如果Referer Header头不符合valid_referers指令设置的有效Referer，变量$invalid_referer</font></p>
+<ul>
+<li><font style="color:#494949;">none:表示无Referer值的情况。</font></li>
+<li><font style="color:#494949;">blocked:表示Referer值被防火墙进行伪装。</font></li>
+<li><font style="color:#494949;">server_names:表示一个或多个主机名称。server_names中可以使用通配符”*”号。</font></li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> <span class="regexp">~* \.(gif|jpg|swf)$</span> &#123;</span><br><span class="line">    <span class="attribute">valid_referers</span> <span class="literal">none</span> <span class="literal">blocked</span> id.qlteacher.com yx.qlteacher.com;</span><br><span class="line">    <span class="attribute">if</span> (<span class="variable">$invalid_referer</span>) &#123;</span><br><span class="line">       <span class="attribute">rewrite</span><span class="regexp"> ^/</span> http://<span class="variable">$host</span>/403.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="静态文件服务"><a href="#静态文件服务" class="headerlink" title="静态文件服务"></a>静态文件服务</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">        <span class="attribute">server_name</span> www.thpower.com;</span><br><span class="line">        <span class="attribute">charset</span> utf-<span class="number">8</span>;</span><br><span class="line">        <span class="attribute">root</span>   /lvm/static/;</span><br><span class="line">        <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="文件缓存"><a href="#文件缓存" class="headerlink" title="文件缓存"></a>文件缓存</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 这个将为打开文件指定缓存，默认是没有启用的，max 指定缓存数量，建议和打开文件数一致，inactive 是指经过多长时间文件没被请求后删除缓存。</span><br><span class="line">open_file_cache max=204800 inactive=20s;</span><br><span class="line"># open_file_cache 指令中的inactive 参数时间内文件的最少使用次数，如果超过这个数字，文件描述符一直是在缓存中打开的，如上例，如果有一个文件在inactive 时间内一次没被使用，它将被移除。</span><br><span class="line">open_file_cache_min_uses 1;</span><br><span class="line"># 这个是指多长时间检查一次缓存的有效信息</span><br><span class="line">open_file_cache_valid 30s;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h5><p>| <code>&lt;font style=&quot;color:#8e908c;&quot;&gt;# 这个是告诉浏览器缓存5天&lt;/font&gt;</code><br/>expires 5d;<br/><br/>工作流程如下<br/><!-- 这是一张图片，ocr 内容为： --></p>
+<table>
+<thead>
+<tr>
+<th><img src="https://confluence.qltechdev.com/download/attachments/9175203/20180817230903_200.jpg?version=1&modificationDate=1561014992513&api=v2"></th>
+</tr>
+</thead>
+</table>
+<h5 id="gzip压缩"><a href="#gzip压缩" class="headerlink" title="gzip压缩"></a>gzip压缩</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#默认情况下，Nginx的gzip压缩是关闭的,gzip压缩功能就是可以让你节省不少带宽,但是会增加服务器CPU的开销,Nginx默认只对text/html进行压缩 如果要对html之外的内容进行压缩传输,我们需要手动来设置</span></span><br><span class="line"><span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">gzip_min_length</span> <span class="number">1k</span>;</span><br><span class="line"><span class="attribute">gzip_buffers</span> <span class="number">4</span> <span class="number">16k</span>;</span><br><span class="line"><span class="attribute">gzip_http_version</span> <span class="number">1</span>.<span class="number">0</span>;</span><br><span class="line"><span class="attribute">gzip_comp_level</span> <span class="number">2</span>;</span><br><span class="line"><span class="attribute">gzip_types</span> text/plain application/x-javascript text/css application/xml;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h5><p>       反向代理（Reverse Proxy）方式是指nginx受的连接请求,后将请求转发给内部网络上的服务器,并将从服务器上得到的结果返回给上游的客户端,此时nginx对外就表现为一个反向代理服务器。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">  <span class="comment"># 将请求反向代理到指定的url上</span></span><br><span class="line">  <span class="attribute">proxy_pass</span>  https://github.com; </span><br><span class="line">  <span class="comment"># 当上游服务器返回的响应是重定向或刷新请求(301|302)</span></span><br><span class="line">  <span class="comment"># proxy_redirect可以重设HTTP头部的location或refresh字段</span></span><br><span class="line">  <span class="attribute">proxy_redirect</span>   <span class="literal">off</span>;</span><br><span class="line">  <span class="comment"># 默认情况下，反向代理不会转发原始请求中的 Host 头部，如果需要转发，就需要加上</span></span><br><span class="line">  <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;    </span><br><span class="line">  <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">  <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">location</span> /thpower &#123;</span><br><span class="line">  <span class="attribute">proxy_set_header</span> X-Real-IP  <span class="variable">$remote_addr</span>;</span><br><span class="line">  <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">  <span class="attribute">proxy_pass</span> https://github.com/thpower;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="upstream-负载均衡"><a href="#upstream-负载均衡" class="headerlink" title="upstream 负载均衡"></a>upstream 负载均衡</h5><p>          当需要反向代理的服务器不止一个时,我们需要动态的根据环境分配负载<font style="color:#333333;">以达到最佳化资源使用,最大化吞吐率,最小化响应时间,同时避免过载的目的;upstream 是 Nginx 的 HTTP Upstream 模块，这个模块通过一个简单的调度算法来实现客户端 IP 到后端服务器的负载均衡。</font></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这个名字随便起</span></span><br><span class="line"><span class="section">upstream</span> test&#123;</span><br><span class="line">    ip_hash;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.0.1:80</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.0.2:80</span>  down;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.0.3:8009</span>  max_fails=<span class="number">3</span>  fail_timeout=<span class="number">20s</span>;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">192.168.0.4:8080</span> backup;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span>  http://test; <span class="comment">#与这里对应即可</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="upstream-支持的6种算法"><a href="#upstream-支持的6种算法" class="headerlink" title="upstream 支持的6种算法"></a>upstream 支持的6种算法</h6><ol>
+<li>轮询（默认）：每个请求按时间顺序逐一分配到不同的后端服务器，如果后端某台服务器宕机，故障系统被自动剔除，使用户访问不受影响。Weight 指定轮询权值，Weight 值越大，分配到的访问机率越高，主要用于后端每个服务器性能不均的情况下。</li>
+<li>ip_hash：每个请求按访问 IP 的 hash 结果分配，这样来自同一个 IP 的访客固定访问一个后端服务器，后端使用session的且没有用共享session方案的 可以这个解决问题。</li>
+<li>fair：这是比上面两个更加智能的负载均衡算法。此种算法可以依据加载时间长短智能地进行负载均衡，也就是根据后端服务器的响应时间来分配请求，响应时间短的优先分配。Nginx 本身是不支持 fair 的，如果需要使用这种调度算法，必须下载 Nginx 的 upstream_fair 模块。</li>
+<li>url_hash：此方法按访问 url 的 hash 结果来分配请求，使每个 url 定向到同一个后端服务器，可以进一步提高后端缓存服务器的效率。Nginx 本身是不支持 url_hash 的，如果需要使用这种调度算法，必须安装 Nginx 的 hash 软件包。</li>
+<li>least_conn：最少连接负载均衡算法，简单来说就是每次选择的后端都是当前最少连接的一个 server(这个最少连接不是共享的，是每个 worker 都有自己的一个数组进行记录后端 server 的连接数)。</li>
+<li>hash：这个 hash 模块又支持两种模式 hash, 一种是普通的 hash, 另一种是一致性 hash(consistent)。<ol>
+<li><font style="color:#4d4d4d;">普通的hash算法支持配置http变量值作为hash值计算的key，通过hash计算得出的hash值和总权重的余数作为挑选server的依据</font></li>
+<li><font style="color:#4d4d4d;">一致性hash是普通hash的增强版,具体算法见 </font><a target="_blank" rel="noopener" href="https://www.nginx.com/resources/wiki/modules/consistent_hash/"><font style="color:#4d4d4d;">官网 </font></a></li>
+</ol>
+</li>
+</ol>
+<h6 id="upstream-支持4种状态参数"><a href="#upstream-支持4种状态参数" class="headerlink" title="upstream 支持4种状态参数"></a>upstream 支持4种状态参数</h6><ul>
+<li><font style="color:#333333;">down：表示当前的 server 暂时不参与负载均衡</font></li>
+<li><font style="color:#333333;">backup：预留的备份机器。当其他所有的非 backup 机器出现故障或者忙的时候，才会请求 backup 机器，因此这台机器的压力最轻</font></li>
+<li><font style="color:#333333;">max_fails：允许请求失败的次数，默认为 1 。当超过最大次数时，返回 proxy_next_upstream 模块定义的错误</font></li>
+<li><font style="color:#333333;">fail_timeout：在经历了 max_fails 次失败后，暂停服务的时间。max_fails 可以和 fail_timeout 一起使用</font></li>
+</ul>
+<h5 id="问题以及注意事项"><a href="#问题以及注意事项" class="headerlink" title="问题以及注意事项"></a>问题以及注意事项</h5><h6 id="万恶的if"><a href="#万恶的if" class="headerlink" title="万恶的if"></a>万恶的if</h6><p>               详见官方文档 <a target="_blank" rel="noopener" href="https://www.nginx.com/resources/wiki/start/topics/depth/ifisevil/">邪恶的 if 指令</a></p>
+<p>在 HTTPS 中使用 SSLv3</p>
+<p><font style="color:#333333;">由于 SSLv3 的 </font><a target="_blank" rel="noopener" href="https://www.openssl.org/~bodo/ssl-poodle.pdf">POODLE 漏洞</a><font style="color:#333333;">， 不要在开启 SSL 的网站使用 SSLv3。 你可以简单粗暴的直接禁用 SSLv3，用 TLS 来替代：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#333333;"></font></p>
+<h2 id="openresty的lua模块"><a href="#openresty的lua模块" class="headerlink" title="openresty的lua模块"></a>openresty的lua模块</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">  <span class="attribute">default_type</span> text/html;</span><br><span class="line">  <span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">    ngx.say(&quot;HelloWorld&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="lua入门简介"><a href="#lua入门简介" class="headerlink" title="lua入门简介"></a>lua入门简介</h3><p>                Lua 是一门轻量级脚本语言遵从着简单、小巧、可移植、快速的原则。Lua 在游戏开发、机器人控制、分布式应用、图像处理、生物信息学等各种各样的领域中得到了广泛的应用。其中尤以游戏开发为最，比如World of Warcraft、大话西游，都采用了 Lua 来配合引擎完成数据描述、配置管理和逻辑控制等任务。即使像 Redis 这样中性的内存键值数据库也提供了内嵌用户 Lua 脚本的官方支持</p>
+<p> Lua 有着如下的特性:</p>
+<ul>
+<li><font style="color:#333333;">变量名没有类型，值才有类型，变量名在运行时可与任何类型的值绑定</font></li>
+<li><font style="color:#333333;">语言只提供唯一一种数据结构，称为表(table)，它混合了数组、哈希，可以用任何类型的值作为 key 和 value</font></li>
+<li><font style="color:#333333;">函数是一等类型，支持匿名函数和正则尾递归</font></li>
+<li><font style="color:#333333;">支持词法定界(lexical scoping)和闭包(closure)</font></li>
+<li><font style="color:#333333;">提供 thread 类型和结构化的协程(coroutine)机制，在此基础上可方便实现协作式多任务</font></li>
+<li><font style="color:#333333;">运行期能编译字符串形式的程序文本并载入虚拟机执行</font></li>
+<li><font style="color:#333333;">通过元表(metatable)和元方法(metamethod)提供动态元机制(dynamic meta-mechanism)，从而允许程序运行时根据需要改变或扩充语法设施的内定语义</font></li>
+<li>能方便地利用表和动态元机制实现基于原型(prototype-based)的面向对象模型;</li>
+</ul>
+<h4 id="Lua-基础数据类型"><a href="#Lua-基础数据类型" class="headerlink" title="Lua 基础数据类型"></a>Lua 基础数据类型</h4><h5 id="nil（空）"><a href="#nil（空）" class="headerlink" title="nil（空）"></a>nil（空）</h5><p>nil 是一种类型，Lua 将 nil 用于表示“无效值”。一个变量在第一次赋值前的默认值是 nil，将 nil 赋予给一个全局变量就等同于删除它</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> num</span><br><span class="line"><span class="built_in">print</span>(num)        <span class="comment">--&gt;output:nil</span></span><br><span class="line">num = <span class="number">100</span></span><br><span class="line"><span class="built_in">print</span>(num)        <span class="comment">--&gt;output:100</span></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#333333;">值得一提的是，OpenResty 的 Lua 接口还提供了一种特殊的空值，即 </font><code>ngx.null</code><font style="color:#333333;">，用来表示不同于 nil 的“空值”。</font></p>
+<h5 id="boolean"><a href="#boolean" class="headerlink" title="boolean"></a>boolean</h5><p>布尔类型，可选值 true&#x2F;false；Lua 中 nil 和 false 为“假”，其它所有值均为“真”。比如 0 和空字符串就是“真”；</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> a = <span class="literal">true</span></span><br><span class="line"><span class="keyword">local</span> b = <span class="number">0</span></span><br><span class="line"><span class="keyword">local</span> c = <span class="literal">nil</span></span><br><span class="line"><span class="keyword">if</span> a <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;a&quot;</span>)        <span class="comment">--&gt;output:a</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;not a&quot;</span>)    <span class="comment">--这个没有执行</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> b <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;b&quot;</span>)        <span class="comment">--&gt;output:b</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;not b&quot;</span>)    <span class="comment">--这个没有执行</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">if</span> c <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;c&quot;</span>)        <span class="comment">--这个没有执行</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;not c&quot;</span>)    <span class="comment">--&gt;output:not c</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="number"><a href="#number" class="headerlink" title="number"></a>number</h5><p>Number 类型用于表示实数，和 C&#x2F;C++ 里面的 double 类型很类似</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> order = <span class="number">3.99</span></span><br><span class="line"><span class="keyword">local</span> score = <span class="number">98.01</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">floor</span>(order))   <span class="comment">--&gt;output:3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">math</span>.<span class="built_in">ceil</span>(score))    <span class="comment">--&gt;output:99</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="string"><a href="#string" class="headerlink" title="string"></a>string</h5><p><font style="color:#333333;">Lua 中有三种方式表示字符串</font></p>
+<p><font style="color:#333333;">使用一对匹配的单引号。例：’hello’</font></p>
+<p><font style="color:#333333;">使用一对匹配的双引号。例：”abclua”</font></p>
+<p><font style="color:#333333;">字符串还可以用一种长括号（即[[ ]]）括起来的方式定义 </font></p>
+<p><font style="color:#333333;">            我们把两个正的方括号（即[[）间插入 n 个等号定义为第 n 级正长括号。就是说，0 级正的长括号写作 [[ ，一级正的长括号写作 [&#x3D;[，如此等等。反的长括号也作类似定义；举个例子，4 级反的长括号写作 ]&#x3D;&#x3D;&#x3D;&#x3D;]。一个长字符串可以由任何一级的正的长括号开始，而由第一个碰到的同级反的长括号结束。整个词法分析过程将不受分行限制，不处理任何转义符，并且忽略掉任何不同级别的长括号。这种方式描述的字符串可以包含任何东西，当然本级别的反长括号除外。例：[[abc\nbc]]，里面的 “\n” 不会被转义</font></p>
+<p><font style="color:#333333;">注意，Lua 的字符串是不可改变的值，不能像在其他语言中那样直接修改字符串的某个字符，而是根据修改要求来创建一个新的字符串。Lua 也不能通过下标来访问字符串的某个字符。</font>两个完全一样的 Lua 字符串在 Lua 虚拟机中只会存储一份。每一个 Lua 字符串在创建时都会插入到 Lua 虚拟机内部的一个全局的哈希表中。 这意味着</p>
+<p>创建相同的 Lua 字符串并不会引入新的动态内存分配操作，所以相对便宜（但仍有全局哈希表查询的开销）</p>
+<p>内容相同的 Lua 字符串不会占用多份存储空间，</p>
+<p>已经创建好的 Lua 字符串之间进行相等性比较时是 <code>O(1)</code> 时间度的开销，而不是通常见到的 <code>O(n) &lt;font style=&quot;color:#333333;&quot;&gt;即需要逐个字节（或按若干个连续字节）进行比较&lt;/font&gt;</code></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> str1 = <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"><span class="keyword">local</span> str2 = <span class="string">&quot;hello lua&quot;</span></span><br><span class="line"><span class="keyword">local</span> str3 = <span class="string">[[&quot;add\name&quot;,&#x27;hello&#x27;]]</span></span><br><span class="line"><span class="keyword">local</span> str4 = <span class="string">[=[string have a [[]].]=]</span></span><br><span class="line"><span class="built_in">print</span>(str1)    <span class="comment">--&gt;output:hello world</span></span><br><span class="line"><span class="built_in">print</span>(str2)    <span class="comment">--&gt;output:hello lua</span></span><br><span class="line"><span class="built_in">print</span>(str3)    <span class="comment">--&gt;output:&quot;add\name&quot;,&#x27;hello&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(str4)    <span class="comment">--&gt;output:string have a [[]].</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="table"><a href="#table" class="headerlink" title="table"></a>table</h5><p><font style="color:#333333;">Table 类型实现了一种抽象的“关联数组”。“关联数组”是一种具有特殊索引方式的数组，索引通常是字符串（string）或者 number 类型，但也可以是除 </font><code>nil</code><font style="color:#333333;"> 以外的任意类型的值。</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> corp = &#123;</span><br><span class="line">    web = <span class="string">&quot;www.google.com&quot;</span>,   <span class="comment">--索引为字符串，key = &quot;web&quot;,</span></span><br><span class="line">                              <span class="comment">--            value = &quot;www.google.com&quot;</span></span><br><span class="line">    telephone = <span class="string">&quot;12345678&quot;</span>,   <span class="comment">--索引为字符串</span></span><br><span class="line">    staff = &#123;<span class="string">&quot;Jack&quot;</span>, <span class="string">&quot;Scott&quot;</span>, <span class="string">&quot;Gary&quot;</span>&#125;, <span class="comment">--索引为字符串，值也是一个表</span></span><br><span class="line">    <span class="number">100876</span>,              <span class="comment">--相当于 [1] = 100876，此时索引为数字</span></span><br><span class="line">                         <span class="comment">--      key = 1, value = 100876</span></span><br><span class="line">    <span class="number">100191</span>,              <span class="comment">--相当于 [2] = 100191，此时索引为数字</span></span><br><span class="line">    [<span class="number">10</span>] = <span class="number">360</span>,          <span class="comment">--直接把数字索引给出</span></span><br><span class="line">    [<span class="string">&quot;city&quot;</span>] = <span class="string">&quot;Beijing&quot;</span> <span class="comment">--索引为字符串</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">print</span>(corp.web)               <span class="comment">--&gt;output:www.google.com</span></span><br><span class="line"><span class="built_in">print</span>(corp[<span class="string">&quot;telephone&quot;</span>])      <span class="comment">--&gt;output:12345678</span></span><br><span class="line"><span class="built_in">print</span>(corp[<span class="number">2</span>])                <span class="comment">--&gt;output:100191</span></span><br><span class="line"><span class="built_in">print</span>(corp[<span class="string">&quot;city&quot;</span>])           <span class="comment">--&gt;output:&quot;Beijing&quot;</span></span><br><span class="line"><span class="built_in">print</span>(corp.staff[<span class="number">1</span>])          <span class="comment">--&gt;output:Jack</span></span><br><span class="line"><span class="built_in">print</span>(corp[<span class="number">10</span>])               <span class="comment">--&gt;output:360</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="function"><a href="#function" class="headerlink" title="function"></a>function</h5><p><font style="color:#333333;">在 Lua 中，</font><strong>函数</strong><font style="color:#333333;"> 也是一种数据类型，函数可以存储在变量中，可以通过参数传递给其他函数，还可以作为其他函数的返回值。</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 由于全局变量一般会污染全局名字空间，同时也有性能损耗（即查询全局环境表的开销），因此我们应当尽量使用“局部函数”，其记法是类似的，只是开头加上 local 修饰符</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(args)</span></span> <span class="comment">--args参数，函数的参数列表可以为空 </span></span><br><span class="line">    <span class="built_in">print</span>(args..<span class="string">&quot; in the function&quot;</span>)</span><br><span class="line">    <span class="comment">--dosomething()</span></span><br><span class="line">    <span class="keyword">local</span> x = <span class="number">10</span></span><br><span class="line">    <span class="keyword">local</span> y = <span class="number">20</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> a = foo    <span class="comment">--把函数赋给变量</span></span><br><span class="line"><span class="built_in">print</span>(a(<span class="string">&quot;foo&quot;</span>))</span><br><span class="line"><span class="comment">--output:</span></span><br><span class="line">foo <span class="keyword">in</span> the <span class="function"><span class="keyword">function</span></span></span><br><span class="line"><span class="function">30</span></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#333333;">由于函数定义本质上就是变量赋值，而变量的定义总是应放置在变量使用之前，所以函数的定义也需要放置在函数调用之前。</font><font style="color:#333333;">有名函数的定义本质上是匿名函数对变量的赋值。</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span></span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>等价于</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#333333;">Lua 函数的参数大部分是按值传递的。值传递就是调用函数时，实参把它的值通过赋值运算传递给形参，然后形参的改变和实参就没有关系了。在这个过程中，实参是通过它在参数表中的位置与形参匹配起来的。</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">swap</span><span class="params">(a, b)</span></span> <span class="comment">--定义函数swap,函数内部进行交换两个变量的值</span></span><br><span class="line">   <span class="keyword">local</span> temp = a</span><br><span class="line">   a = b</span><br><span class="line">   b = temp</span><br><span class="line">   <span class="built_in">print</span>(a, b)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> x = <span class="string">&quot;hello&quot;</span></span><br><span class="line"><span class="keyword">local</span> y = <span class="number">20</span></span><br><span class="line"><span class="built_in">print</span>(x, y)</span><br><span class="line">swap(x, y)    <span class="comment">--调用swap函数</span></span><br><span class="line"><span class="built_in">print</span>(x, y)   <span class="comment">--调用swap函数后，x和y的值并没有交换</span></span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line">hello <span class="number">20</span></span><br><span class="line"><span class="number">20</span>  hello</span><br><span class="line">hello <span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#333333;">在调用函数的时候，若形参个数和实参个数不同时，Lua 会自动调整实参个数。调整规则：若实参个数大于形参个数，从左向右，多余的实参被忽略；若实参个数小于形参个数，从左向右，没有被实参初始化的形参会被初始化为 nil。</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">fun1</span><span class="params">(a, b)</span></span>       <span class="comment">--两个形参，多余的实参被忽略掉</span></span><br><span class="line">   <span class="built_in">print</span>(a, b)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">fun2</span><span class="params">(a, b, c, d)</span></span> <span class="comment">--四个形参，没有被实参初始化的形参，用nil初始化</span></span><br><span class="line">   <span class="built_in">print</span>(a, b, c, d)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> x = <span class="number">1</span></span><br><span class="line"><span class="keyword">local</span> y = <span class="number">2</span></span><br><span class="line"><span class="keyword">local</span> z = <span class="number">3</span></span><br><span class="line">fun1(x, y, z)         <span class="comment">-- z被函数fun1忽略掉了，参数变成 x, y</span></span><br><span class="line">fun2(x, y, z)         <span class="comment">-- 后面自动加上一个nil，参数变成 x, y, z, nil</span></span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line"><span class="number">1</span>   <span class="number">2</span></span><br><span class="line"><span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="literal">nil</span></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#333333;">上面函数的参数都是固定的，其实 Lua 还支持变长参数。若形参为 </font><code>&lt;font style=&quot;color:#333333;&quot;&gt;...&lt;/font&gt;</code><font style="color:#333333;"> , 表示该函数可以接收不同长度的参数。访问参数的时候也要使用 </font><code>&lt;font style=&quot;color:#333333;&quot;&gt;...&lt;/font&gt;</code><font style="color:#333333;">。</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">func</span><span class="params">( ... )</span></span>                <span class="comment">-- 形参为 ... ,表示函数采用变长参数</span></span><br><span class="line">   <span class="keyword">local</span> temp = &#123;...&#125;                     <span class="comment">-- 访问的时候也要使用 ...</span></span><br><span class="line">   <span class="keyword">local</span> ans = <span class="built_in">table</span>.<span class="built_in">concat</span>(temp, <span class="string">&quot; &quot;</span>)    <span class="comment">-- 使用 table.concat 库函数对数</span></span><br><span class="line">                                          <span class="comment">-- 组内容使用 &quot; &quot; 拼接成字符串。</span></span><br><span class="line">   <span class="built_in">print</span>(ans)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">func(<span class="number">1</span>, <span class="number">2</span>)        <span class="comment">-- 传递了两个参数</span></span><br><span class="line">func(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)  <span class="comment">-- 传递了四个参数</span></span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#333333;">Lua 还支持通过名称来指定实参，这时候要把所有的实参组织到一个 table 中，并将这个 table 作为唯一的实参传给函数。</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">change</span><span class="params">(arg)</span></span> <span class="comment">-- change 函数，改变长方形的长和宽，使其各增长一倍</span></span><br><span class="line">  <span class="built_in">arg</span>.width = <span class="built_in">arg</span>.width * <span class="number">2</span></span><br><span class="line">  <span class="built_in">arg</span>.height = <span class="built_in">arg</span>.height * <span class="number">2</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">arg</span>  <span class="comment">--这里去掉return 最后结果是怎样的?</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> rectangle = &#123; width = <span class="number">20</span>, height = <span class="number">15</span> &#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;before change:&quot;</span>, <span class="string">&quot;width  =&quot;</span>, rectangle.width,</span><br><span class="line">                        <span class="string">&quot;height =&quot;</span>, rectangle.height)</span><br><span class="line">rectangle = change(rectangle)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;after  change:&quot;</span>, <span class="string">&quot;width  =&quot;</span>, rectangle.width,</span><br><span class="line">                        <span class="string">&quot;height =&quot;</span>, rectangle.height)</span><br><span class="line"><span class="comment">--&gt;output</span></span><br><span class="line">before change: width = <span class="number">20</span>  height =  <span class="number">15</span></span><br><span class="line">after  change: width = <span class="number">40</span>  height =  <span class="number">30</span></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#333333;">当函数参数是 table 类型时，传递进来的是 实际参数的引用，此时在函数内部对该 table 所做的修改，会直接对调用者所传递的实际参数生效</font></p>
+<p><font style="color:#333333;">Lua 具有一项与众不同的特性，允许函数返回多个值。</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> s, e = <span class="built_in">string</span>.<span class="built_in">find</span>(<span class="string">&quot;hello world&quot;</span>, <span class="string">&quot;llo&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(s, e)  <span class="comment">--&gt;output 3  5</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">swap</span><span class="params">(a, b)</span></span>   <span class="comment">-- 定义函数 swap，实现两个变量交换值</span></span><br><span class="line">   <span class="keyword">return</span> b, a              <span class="comment">-- 按相反顺序返回变量的值</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> x = <span class="number">1</span></span><br><span class="line"><span class="keyword">local</span> y = <span class="number">20</span></span><br><span class="line">x, y = swap(x, y)           <span class="comment">-- 调用 swap 函数</span></span><br><span class="line"><span class="built_in">print</span>(x, y)                 <span class="comment">--&gt; output   20     1</span></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#333333;">当函数返回值的个数和接收返回值的变量的个数不一致时，Lua 也会自动调整参数个数。</font><font style="color:#333333;">调整规则： 若返回值个数大于接收变量的个数，多余的返回值会被忽略掉； 若返回值个数小于参数个数，从左向右，没有被返回值初始化的变量会被初始化为 nil。</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span></span>             <span class="comment">--init 函数 返回两个值 1 和 &quot;lua&quot;</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>, <span class="string">&quot;lua&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">x = init()</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">x, y, z = init()</span><br><span class="line"><span class="built_in">print</span>(x, y, z)</span><br><span class="line"><span class="comment">--output</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">1</span> lua <span class="literal">nil</span></span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#333333;">当一个函数有一个以上返回值，且函数调用不是一个列表表达式的最后一个元素，那么函数调用只会产生一个返回值, 也就是第一个返回值。</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span></span>       <span class="comment">-- init 函数 返回两个值 1 和 &quot;lua&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>, <span class="string">&quot;lua&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> x, y, z = init(), <span class="number">2</span>   <span class="comment">-- init 函数的位置不在最后，此时只返回 1</span></span><br><span class="line"><span class="built_in">print</span>(x, y, z)              <span class="comment">--&gt;output  1  2  nil</span></span><br><span class="line"><span class="keyword">local</span> a, b, c = <span class="number">2</span>, init()   <span class="comment">-- init 函数的位置在最后，此时返回 1 和 &quot;lua&quot;</span></span><br><span class="line"><span class="built_in">print</span>(a, b, c)              <span class="comment">--&gt;output  2  1  lua</span></span><br><span class="line"><span class="built_in">print</span>(init(), <span class="number">2</span>)   <span class="comment">--&gt;output  1  2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">2</span>, init())   <span class="comment">--&gt;output  2  1  lua</span></span><br><span class="line"><span class="built_in">print</span>((init()), <span class="number">2</span>)   <span class="comment">--&gt;output  1  2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">2</span>, (init()))   <span class="comment">--&gt;output  2  1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h4><h5 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h5><table>
+<thead>
+<tr>
+<th align="center">算术运算符</th>
+<th align="center"><font style="color:#333333;">说明</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><font style="color:#333333;">+</font></td>
+<td align="center"><font style="color:#333333;">加</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">-</font></td>
+<td align="center"><font style="color:#333333;">减</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">*</font></td>
+<td align="center"><font style="color:#333333;">乘</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">&#x2F;</font></td>
+<td align="center"><font style="color:#333333;">除</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">^</font></td>
+<td align="center"><font style="color:#333333;">指数</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">%</font></td>
+<td align="center"><font style="color:#333333;">取模</font></td>
+</tr>
+</tbody></table>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="number">1</span> + <span class="number">2</span>)       <span class="comment">--&gt;打印 3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">5</span> / <span class="number">10</span>)      <span class="comment">--&gt;打印 0.5。 这是Lua不同于c语言的</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">5.0</span> / <span class="number">10</span>)    <span class="comment">--&gt;打印 0.5。 浮点数相除的结果是浮点数</span></span><br><span class="line"><span class="comment">-- print(10 / 0)   --&gt;注意除数不能为0，计算的结果会出错</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">2</span> ^ <span class="number">10</span>)      <span class="comment">--&gt;打印 1024。 求2的10次方</span></span><br><span class="line"><span class="keyword">local</span> num = <span class="number">1357</span></span><br><span class="line"><span class="built_in">print</span>(num % <span class="number">2</span>)       <span class="comment">--&gt;打印 1</span></span><br><span class="line"><span class="built_in">print</span>((num % <span class="number">2</span>) == <span class="number">1</span>) <span class="comment">--&gt;打印 true。 判断num是否为奇数</span></span><br><span class="line"><span class="built_in">print</span>((num % <span class="number">5</span>) == <span class="number">0</span>)  <span class="comment">--&gt;打印 false。判断num是否能被5整数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h5><table>
+<thead>
+<tr>
+<th align="center">关系运算符</th>
+<th align="center"><font style="color:#333333;">说明</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><font style="color:#333333;">&lt;</font></td>
+<td align="center"><font style="color:#333333;">小于</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">&gt;</font></td>
+<td align="center"><font style="color:#333333;">大于</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">&lt;&#x3D;</font></td>
+<td align="center"><font style="color:#333333;">小于等于</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">&gt;&#x3D;</font></td>
+<td align="center"><font style="color:#333333;">大于等于</font></td>
+</tr>
+<tr>
+<td align="center">&#x3D;&#x3D;</td>
+<td align="center"><font style="color:#333333;">等于</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">~&#x3D;</font></td>
+<td align="center"><font style="color:#333333;">不等于</font></td>
+</tr>
+</tbody></table>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="number">1</span> &lt; <span class="number">2</span>)    <span class="comment">--&gt;打印 true</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">1</span> == <span class="number">2</span>)   <span class="comment">--&gt;打印 false</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">1</span> ~= <span class="number">2</span>)   <span class="comment">--&gt;打印 true</span></span><br><span class="line"><span class="keyword">local</span> a, b = <span class="literal">true</span>, <span class="literal">false</span></span><br><span class="line"><span class="built_in">print</span>(a == b)  <span class="comment">--&gt;打印 false</span></span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th><font style="color:#858585;">在使用“&#x3D;&#x3D;”做等于判断时，要注意对于 table, userdate 和函数， Lua 是作引用比较的。也就是说，只有当两个变量引用同一个对象时，才认为它们相等。可以看下面的例子</font></th>
+</tr>
+</thead>
+</table>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> a = &#123; x = <span class="number">1</span>, y = <span class="number">0</span>&#125;</span><br><span class="line"><span class="keyword">local</span> b = &#123; x = <span class="number">1</span>, y = <span class="number">0</span>&#125;</span><br><span class="line"><span class="keyword">if</span> a == b <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;a==b&quot;</span>)</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;a~=b&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">---output:</span></span><br><span class="line">a~=b</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h5><table>
+<thead>
+<tr>
+<th align="center">逻辑运算符</th>
+<th align="center"><font style="color:#333333;">说明</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><font style="color:#333333;">and</font></td>
+<td align="center"><font style="color:#333333;">逻辑与</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">or</font></td>
+<td align="center"><font style="color:#333333;">逻辑或</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">not</font></td>
+<td align="center"><font style="color:#333333;">逻辑非</font></td>
+</tr>
+</tbody></table>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> c = <span class="literal">nil</span></span><br><span class="line"><span class="keyword">local</span> d = <span class="number">0</span></span><br><span class="line"><span class="keyword">local</span> e = <span class="number">100</span></span><br><span class="line"><span class="built_in">print</span>(c <span class="keyword">and</span> d)  <span class="comment">--&gt;打印 nil</span></span><br><span class="line"><span class="built_in">print</span>(c <span class="keyword">and</span> e)  <span class="comment">--&gt;打印 nil</span></span><br><span class="line"><span class="built_in">print</span>(d <span class="keyword">and</span> e)  <span class="comment">--&gt;打印 100</span></span><br><span class="line"><span class="built_in">print</span>(c <span class="keyword">or</span> d)   <span class="comment">--&gt;打印 0</span></span><br><span class="line"><span class="built_in">print</span>(c <span class="keyword">or</span> e)   <span class="comment">--&gt;打印 100</span></span><br><span class="line"><span class="built_in">print</span>(<span class="keyword">not</span> c)    <span class="comment">--&gt;打印 true</span></span><br><span class="line"><span class="built_in">print</span>(<span class="keyword">not</span> d)    <span class="comment">--&gt;打印 false</span></span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>所有逻辑操作符将 false 和 nil 视作假，其他任何值视作真，对于 and 和 or，“短路求值”，对于 not，永远只返回 true 或者 false。</th>
+</tr>
+</thead>
+</table>
+<h5 id="字符串连接"><a href="#字符串连接" class="headerlink" title="字符串连接"></a>字符串连接</h5><p><font style="color:#333333;">                在 Lua 中连接两个字符串，可以使用操作符“..”（两个点）。如果其任意一个操作数是数字的话，Lua 会将这个数字转换成字符串。注意，连接操作符只会创建一个新字符串，而不会改变原操作数。也可以使用 string 库函数 </font><code>string.format</code><font style="color:#333333;"> 连接字符串。</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello &quot;</span> .. <span class="string">&quot;World&quot;</span>)    <span class="comment">--&gt;打印 Hello World</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">0</span> .. <span class="number">1</span>)                 <span class="comment">--&gt;打印 01</span></span><br><span class="line">str1 = <span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%s-%s&quot;</span>,<span class="string">&quot;hello&quot;</span>,<span class="string">&quot;world&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(str1)              <span class="comment">--&gt;打印 hello-world</span></span><br><span class="line">str2 = <span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%d-%s-%.2f&quot;</span>,<span class="number">123</span>,<span class="string">&quot;world&quot;</span>,<span class="number">1.21</span>)</span><br><span class="line"><span class="built_in">print</span>(str2)              <span class="comment">--&gt;打印 123-world-1.21</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><font style="color:#333333;">                 由于 Lua 字符串本质上是只读的，因此字符串连接运算符几乎总会创建一个新的（更大的）字符串。这意味着如果有很多这样的连接操作（比如在循环中使用 .. 来拼接最终结果），则性能损耗会非常大。在这种情况下，推荐使用 table 和 </font><code>table.concat()</code><font style="color:#333333;"> 来进行很多字符串的拼接，例如：</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> pieces = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i, elem <span class="keyword">in</span> <span class="built_in">ipairs</span>(my_list) <span class="keyword">do</span></span><br><span class="line">    pieces[i] = my_process(elem)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">local</span> res = <span class="built_in">table</span>.<span class="built_in">concat</span>(pieces)</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h5><p><font style="color:#333333;">优先级如下表所示(从高到低)</font></p>
+<table>
+<thead>
+<tr>
+<th align="center"><font style="color:#333333;">优先级</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><font style="color:#333333;">^</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">not   # -</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">*   &#x2F;   %</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">+   -</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">..</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">&lt; &gt; &lt;&#x3D;  &gt;&#x3D;  &#x3D;&#x3D;  ~&#x3D;</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">and</font></td>
+</tr>
+<tr>
+<td align="center"><font style="color:#333333;">or</font></td>
+</tr>
+</tbody></table>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> a, b = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line"><span class="keyword">local</span> x, y = <span class="number">3</span>, <span class="number">4</span></span><br><span class="line"><span class="keyword">local</span> i = <span class="number">10</span></span><br><span class="line"><span class="keyword">local</span> res = <span class="number">0</span></span><br><span class="line">res = a + i &lt; b/<span class="number">2</span> + <span class="number">1</span>  <span class="comment">--&gt;等价于res =  (a + i) &lt; ((b/2) + 1)</span></span><br><span class="line">res = <span class="number">5</span> + x^<span class="number">2</span>*<span class="number">8</span>        <span class="comment">--&gt;等价于res =  5 + ((x^2) * 8)</span></span><br><span class="line">res = a &lt; y <span class="keyword">and</span> y &lt;=x  <span class="comment">--&gt;等价于res =  (a &lt; y) and (y &lt;= x)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="结构控制"><a href="#结构控制" class="headerlink" title="结构控制 "></a><font style="color:#333333;">结构控制 </font></h4><h5 id="if-else"><a href="#if-else" class="headerlink" title="if&#x2F;else"></a><font style="color:#333333;">if&#x2F;else</font></h5><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">score = <span class="number">0</span></span><br><span class="line"><span class="keyword">if</span> score == <span class="number">100</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Very good!Your score is 100&quot;</span>)</span><br><span class="line"><span class="keyword">elseif</span> score &gt;= <span class="number">60</span> <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Congratulations, you have passed it,your score greater or equal to 60&quot;</span>)</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">if</span> score &gt; <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Your score is better than 0&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;My God, your score turned out to be 0&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span> <span class="comment">--与上一示例代码不同的是，此处要添加一个end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="while"><a href="#while" class="headerlink" title="while"></a><font style="color:#333333;">while</font></h5><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> x &lt;= <span class="number">5</span> <span class="keyword">do</span></span><br><span class="line">    sum = sum + x</span><br><span class="line">    x = x + <span class="number">1</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">print</span>(sum)  <span class="comment">--&gt;output 15</span></span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>Lua 并没有像许多其他语言那样提供类似 <code>continue</code><br/> 这样的控制语句用来立即进入下一个循环迭代（如果有的话）。因此，我们需要仔细地安排循环体里的分支，以避免这样的需求。只提供了<code>break</code><br/>，可以跳出当前循环。</th>
+</tr>
+</thead>
+</table>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> t = &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">11</span>, <span class="number">18</span>, <span class="number">21</span>&#125;</span><br><span class="line"><span class="keyword">local</span> i</span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">ipairs</span>(t) <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> <span class="number">11</span> == v <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;index[&quot;</span> .. i .. <span class="string">&quot;] have right value[11]&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="repeat"><a href="#repeat" class="headerlink" title="repeat"></a><font style="color:#333333;">repeat</font></h5><p><font style="color:#333333;">类似于do-while</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span></span><br><span class="line"><span class="keyword">repeat</span></span><br><span class="line">    <span class="built_in">print</span>(x)</span><br><span class="line"><span class="keyword">until</span> <span class="literal">false</span> <span class="comment">-- 死循环</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="for"><a href="#for" class="headerlink" title="for"></a><font style="color:#333333;">for</font></h5><p><font style="color:#333333;">for 数字型</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> var = begin, finish, step <span class="keyword">do</span></span><br><span class="line">    <span class="comment">--body</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>+ <font style="color:#333333;">var 从 begin 变化到 finish，每次变化都以 step 作为步长递增 var </font><br/>+ <font style="color:#333333;">begin、finish、step 三个表达式只会在循环开始时执行一次</font><br/>+ <font style="color:#333333;">第三个表达式 step 是可选的，默认为 1</font><br/>+ <font style="color:#333333;">控制变量 var 的作用域仅在 for 循环内，需要在外面控制，则需将值赋给一个新的变量</font><br/>+ <font style="color:#333333;">循环过程中不要改变控制变量的值，那样会带来不可预知的影响</font></th>
+</tr>
+</thead>
+</table>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">print</span>(i)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- output:</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span> <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">print</span>(i)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- output:</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i = <span class="number">10</span>, <span class="number">1</span>, <span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">print</span>(i)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- output : ?</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="for-泛型"><a href="#for-泛型" class="headerlink" title="for 泛型"></a><font style="color:#333333;">for 泛型</font></h5><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> a = &#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">ipairs</span>(a) <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;index:&quot;</span>, i, <span class="string">&quot; value:&quot;</span>, v)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- output:</span></span><br><span class="line">index:  <span class="number">1</span>  value: a</span><br><span class="line">index:  <span class="number">2</span>  value: b</span><br><span class="line">index:  <span class="number">3</span>  value: c</span><br><span class="line">index:  <span class="number">4</span>  value: d</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="break-goto"><a href="#break-goto" class="headerlink" title="break goto"></a><font style="color:#333333;">break goto</font></h5><p><font style="color:#333333;">break</font></p>
+<p><font style="color:#333333;">语句 </font><code>&lt;font style=&quot;color:#333333;&quot;&gt;break&lt;/font&gt;</code><font style="color:#333333;"> 用来终止 </font><code>&lt;font style=&quot;color:#333333;&quot;&gt;while&lt;/font&gt;</code><font style="color:#333333;">、</font><code>&lt;font style=&quot;color:#333333;&quot;&gt;repeat&lt;/font&gt;</code><font style="color:#333333;"> 和 </font><code>&lt;font style=&quot;color:#333333;&quot;&gt;for&lt;/font&gt;</code><font style="color:#333333;"> 三种循环的执行，并跳出当前循环体， 继续执行当前循环之后的语句。下面举一个 </font><code>&lt;font style=&quot;color:#333333;&quot;&gt;while&lt;/font&gt;</code><font style="color:#333333;"> 循环中的 </font><code>&lt;font style=&quot;color:#333333;&quot;&gt;break&lt;/font&gt;</code><font style="color:#333333;"> 的例子来说明：</font></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 计算最小的x,使从1到x的所有数相加和大于100</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line">i = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></span><br><span class="line">    sum = sum + i</span><br><span class="line">    <span class="keyword">if</span> sum &gt; <span class="number">100</span> <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    i = i + <span class="number">1</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;The result is &quot;</span> .. i)  <span class="comment">--&gt;output:The result is 14</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><font style="color:#333333;">goto</font></p>
+<p>LuaJIT 一开始对标的是 Lua 5.1，但渐渐地也开始加入部分 Lua 5.2 甚至 Lua 5.3 的有用特性。 <code>goto</code> 就是其中一个不得不提的例子。有了 <code>goto</code>，我们可以实现 <code>continue</code> 的功能：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>, <span class="number">3</span> <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> i &lt;= <span class="number">2</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">print</span>(i, <span class="string">&quot;yes continue&quot;</span>)</span><br><span class="line">        <span class="keyword">goto</span> continue</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="built_in">print</span>(i, <span class="string">&quot; no continue&quot;</span>)</span><br><span class="line">    ::continue::</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">[[i&#x27;m end]]</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="openresty"><a href="#openresty" class="headerlink" title="openresty"></a>openresty</h3><h4 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a><code>HelloWorld</code></h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">  <span class="attribute">default_type</span> text/html;</span><br><span class="line">  <span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">    ngx.say(&quot;HelloWorld&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="与nginx-local的组合"><a href="#与nginx-local的组合" class="headerlink" title="与nginx local的组合"></a>与nginx local的组合</h4><h5 id="内部调用"><a href="#内部调用" class="headerlink" title="内部调用"></a>内部调用</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> = /sum &#123;</span><br><span class="line">    <span class="comment"># 只允许内部调用</span></span><br><span class="line">    internal;</span><br><span class="line">    <span class="comment"># 这里做了一个求和运算只是一个例子，可以在这里完成一些数据库、</span></span><br><span class="line">    <span class="comment"># 缓存服务器的操作，达到基础模块和业务逻辑分离目的</span></span><br><span class="line">    <span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">        <span class="attribute">local</span> args = ngx.req.get_uri_args()</span><br><span class="line">        ngx.say(tonumber(args.a) + tonumber(args.b))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">location = /app/test &#123;</span><br><span class="line">    <span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">        <span class="attribute">local</span> res = ngx.location.capture(</span><br><span class="line">                        <span class="string">&quot;/sum&quot;</span>, &#123;args=&#123;a=3, b=8&#125;&#125;</span><br><span class="line">                        )</span><br><span class="line">        ngx.say(&quot;status:&quot;, res.status, &quot; response:&quot;, res.body)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="并行调用"><a href="#并行调用" class="headerlink" title="并行调用"></a>并行调用</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> = /sum &#123;</span><br><span class="line">    internal;</span><br><span class="line">    <span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">        ngx.sleep(0.1)</span><br><span class="line">        <span class="attribute">local</span> args = ngx.req.get_uri_args()</span><br><span class="line">        ngx.print(tonumber(args.a) + tonumber(args.b))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">location = /subduction &#123;</span><br><span class="line">    internal;</span><br><span class="line">    <span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">        ngx.sleep(0.1)</span><br><span class="line">        <span class="attribute">local</span> args = ngx.req.get_uri_args()</span><br><span class="line">        ngx.print(tonumber(args.a) - tonumber(args.b))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">location = /app/test_parallels &#123;</span><br><span class="line">    <span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">        <span class="attribute">local</span> start_time = ngx.now()</span><br><span class="line">        local res1, res2 = ngx.location.capture_multi( &#123;</span><br><span class="line">                        &#123;&quot;/sum&quot;, &#123;args=&#123;a=3, b=8&#125;&#125;&#125;,</span><br><span class="line">                        &#123;&quot;/subduction&quot;, &#123;args=&#123;a=3, b=8&#125;&#125;&#125;</span><br><span class="line">                    &#125;)</span><br><span class="line">        ngx.say(&quot;status:&quot;, res1.status, &quot; response:&quot;, res1.body)</span><br><span class="line">        ngx.say(&quot;status:&quot;, res2.status, &quot; response:&quot;, res2.body)</span><br><span class="line">        ngx.say(&quot;<span class="attribute">time</span> used:<span class="string">&quot;, ngx.now() - start_time)</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">location = /app/test_queue &#123;</span></span><br><span class="line"><span class="string">    content_by_lua_block &#123;</span></span><br><span class="line"><span class="string">        local start_time = ngx.now()</span></span><br><span class="line"><span class="string">        local res1 = ngx.location.capture_multi( &#123;</span></span><br><span class="line"><span class="string">                        &#123;&quot;</span>/sum<span class="string">&quot;, &#123;args=&#123;a=3, b=8&#125;&#125;&#125;</span></span><br><span class="line"><span class="string">                    &#125;)</span></span><br><span class="line"><span class="string">        local res2 = ngx.location.capture_multi( &#123;</span></span><br><span class="line"><span class="string">                        &#123;&quot;</span>/subduction<span class="string">&quot;, &#123;args=&#123;a=3, b=8&#125;&#125;&#125;</span></span><br><span class="line"><span class="string">                    &#125;)</span></span><br><span class="line"><span class="string">        ngx.say(&quot;</span>status:<span class="string">&quot;, res1.status, &quot;</span> response:<span class="string">&quot;, res1.body)</span></span><br><span class="line"><span class="string">        ngx.say(&quot;</span>status:<span class="string">&quot;, res2.status, &quot;</span> response:<span class="string">&quot;, res2.body)</span></span><br><span class="line"><span class="string">        ngx.say(&quot;</span>time used:<span class="string">&quot;, ngx.now() - start_time)</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ curl 127.0.0.1/app/test_parallels</span><br><span class="line">status:200 response:11</span><br><span class="line">status:200 response:-5</span><br><span class="line">time used:0.10099983215332</span><br><span class="line">➜  ~ curl 127.0.0.1/app/test_queue</span><br><span class="line">status:200 response:11</span><br><span class="line">status:200 response:-5</span><br><span class="line">time used:0.20199990272522</span><br></pre></td></tr></table></figure>
+
+
+
+<p><font style="color:#333333;">利用 </font><code>ngx.location.capture_multi</code><font style="color:#333333;"> 函数，直接完成了两个子请求并行执行。当两个请求没有相互依赖，这种方法可以极大提高查询效率。两个无依赖请求，各自是 100ms，顺序执行需要 200ms，但通过并行执行可以在 100ms 完成两个请求。</font></p>
+<h5 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> = /foo &#123;</span><br><span class="line">    <span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">        ngx.say([[<span class="attribute">I</span> am foo]])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">location = / &#123;</span><br><span class="line">    <span class="section">rewrite_by_lua_block</span> &#123;</span><br><span class="line">        <span class="attribute">return</span> ngx.<span class="literal">redirect</span>(<span class="string">&#x27;/foo&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="一些常用的api"><a href="#一些常用的api" class="headerlink" title="一些常用的api"></a>一些常用的api</h4><ul>
+<li>获取请求 uri 参数     <a target="_blank" rel="noopener" href="https://confluence.qltechdev.com/pages/viewpage.action?pageId=9175270">body 偶尔读取不到</a>的问题</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /print_param &#123;</span><br><span class="line">       <span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">           <span class="attribute">local</span> arg = ngx.req.get_uri_args()</span><br><span class="line">           for k,v in pairs(arg) do</span><br><span class="line">               ngx.say(<span class="string">&quot;[GET ] key:&quot;</span>, k, <span class="string">&quot; v:&quot;</span>, v)</span><br><span class="line">           end</span><br><span class="line">           ngx.req.read_body() -- 解析 body 参数之前一定要先读取 body</span><br><span class="line">           local arg = ngx.req.get_post_args()</span><br><span class="line">           for k,v in pairs(arg) do</span><br><span class="line">               ngx.say(<span class="string">&quot;[POST] key:&quot;</span>, k, <span class="string">&quot; v:&quot;</span>, v)</span><br><span class="line">           end</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  ~  curl &#x27;127.0.0.1/print_param?a=1&amp;b=2%26&#x27; -d &#x27;c=3&amp;d=4%26&#x27;</span><br><span class="line">[GET ] key:b v:2&amp;</span><br><span class="line">[GET ] key:a v:1</span><br><span class="line">[POST] key:d v:4&amp;</span><br><span class="line">[POST] key:c v:3</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>传递请求 uri 参数</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">local</span> res = ngx.location.capture(<span class="string">&#x27;/print_param&#x27;</span>,</span><br><span class="line">         &#123;</span><br><span class="line">            <span class="attribute">method</span> = ngx.HTTP_POST,</span><br><span class="line">            args = &#123;<span class="attribute">a</span> = <span class="number">1</span>, b = <span class="string">&#x27;2&amp;&#x27;</span>&#125;,</span><br><span class="line">            body = <span class="string">&#x27;c=3&amp;d=4%26&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">     )</span><br><span class="line">ngx.say(res.body)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>输出响应体</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://confluence.qltechdev.com/pages/viewpage.action?pageId=9175272">HTTP响应报文</a></p>
+<p>                对于 HTTP 响应体的输出，在 OpenResty 中调用 <code>ngx.say</code> 或 <code>ngx.print</code> 即可。区别是 <code>ngx.say</code> 会对输出响应体多输出一个 <code>\n</code> 。如果你用的是浏览器完成的功能调试，使用这两着是没有区别的。但是如果使用各种终端工具，这时候使用 <code>ngx.say</code> 明显就更方便了。</p>
+<p>ngx.say 与 ngx.print 均为异步输出 <font style="color:#333333;">也就是说当调用 </font><code>ngx.say</code><font style="color:#333333;"> 后并不会立刻输出响应体。</font></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /test &#123;</span><br><span class="line">  <span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">    ngx.say(&quot;hello&quot;)</span><br><span class="line">    ngx.sleep(3)</span><br><span class="line">    ngx.say(&quot;<span class="attribute">the</span> world<span class="string">&quot;)</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">location /test2 &#123;</span></span><br><span class="line"><span class="string">  content_by_lua_block &#123;</span></span><br><span class="line"><span class="string">    ngx.say(&quot;</span>hello<span class="string">&quot;)</span></span><br><span class="line"><span class="string">    ngx.flush() -- 显式的向客户端刷新响应输出</span></span><br><span class="line"><span class="string">    ngx.sleep(3)</span></span><br><span class="line"><span class="string">    ngx.say(&quot;</span>the world<span class="string">&quot;)</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">location /test3 &#123;</span></span><br><span class="line"><span class="string">  content_by_lua_block &#123;</span></span><br><span class="line"><span class="string">     ngx.say(string.rep(&quot;</span>hello<span class="string">&quot;, 1000))</span></span><br><span class="line"><span class="string">     ngx.sleep(3)</span></span><br><span class="line"><span class="string">     ngx.say(&quot;</span>the world<span class="string">&quot;)</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>/test</code><font style="color:#333333;"> 响应内容实在触发请求 3s 后一起接收到响应体，而 </font><code>/test2</code><font style="color:#333333;"> 则是先收到一个 </font><code>hello</code><font style="color:#333333;"> 停顿 3s 后又接收到后面的 </font><code>the world&lt;font style=&quot;color:#333333;&quot;&gt;，/test3首先收到了所有的 &quot;hello&quot; ，停顿大约 3 秒后，接着又收到了 &quot;the world&quot; &lt;/font&gt;</code></p>
+<p>应用点: 响应体过大的输出</p>
+<p><font style="color:#333333;">利用 HTTP 1.1 特性 CHUNKED 编码来完成 把一个大的响应体拆分成多个小的应答体，分批、有节制的响应给请求方。</font></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /test &#123;</span><br><span class="line">    <span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">        -- ngx.var.<span class="attribute">limit_rate</span> = <span class="number">1024</span>*<span class="number">1024</span></span><br><span class="line">        local file, err = io.open(ngx.config.prefix() .. <span class="string">&quot;data.db&quot;</span>,<span class="string">&quot;r&quot;</span>)</span><br><span class="line">        if not file then</span><br><span class="line">            ngx.log(ngx.ERR, <span class="string">&quot;open file error:&quot;</span>, err)</span><br><span class="line">            ngx.exit(ngx.HTTP_SERVICE_UNAVAILABLE)</span><br><span class="line">        end</span><br><span class="line">        local data</span><br><span class="line">        while <span class="literal">true</span> do</span><br><span class="line">            data = file:read(<span class="number">1024</span>)</span><br><span class="line">            if nil == data then</span><br><span class="line">                <span class="literal">break</span></span><br><span class="line">            end</span><br><span class="line">            ngx.print(data)</span><br><span class="line">            ngx.flush(<span class="literal">true</span>)</span><br><span class="line">        end</span><br><span class="line">        file:close()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><font style="color:#333333;">按块读取本地文件内容（每次 1KB），并以流式方式进行响应。</font></p>
+<ul>
+<li>日志输出</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">content_by_lua_block</span> &#123;</span><br><span class="line">        ngx.log(ngx.ERR, &quot;<span class="attribute">this</span> is err<span class="string">&quot;)</span></span><br><span class="line"><span class="string">        ngx.log(ngx.INFO, &quot;</span>this is <span class="literal">info</span><span class="string">&quot;)</span></span><br><span class="line"><span class="string">        ngx.log(ngx.DEBUG, &quot;</span>this is <span class="literal">debug</span><span class="string">&quot;)</span></span><br><span class="line"><span class="string"> &#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ngx.<span class="attribute">STDERR</span>     -- 标准输出</span><br><span class="line">ngx.EMERG      -- 紧急报错</span><br><span class="line">ngx.ALERT      -- 报警</span><br><span class="line">ngx.CRIT       -- 严重，系统故障，触发运维告警系统</span><br><span class="line">ngx.ERR        -- 错误，业务不可恢复性错误</span><br><span class="line">ngx.WARN       -- 告警，业务中可忽略错误</span><br><span class="line">ngx.NOTICE     -- 提醒，业务比较重要信息</span><br><span class="line">ngx.INFO       -- 信息，业务琐碎日志信息，包含不同情况判断等</span><br><span class="line">ngx.DEBUG      -- 调试</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:#333333;">如果你的日志需要归集，并且对时效性要求比较高那么可以用 </font>lua-resty-logger-socket<font style="color:#333333;">  以非阻塞 IO 方式推送 access log 到远程服务器上。对远程服务器的要求是支持 syslog-ng 的日志服务。目前生产上的elk服务就支持 syslog-ng</font></p>
+<h4 id="执行阶段概念"><a href="#执行阶段概念" class="headerlink" title="执行阶段概念"></a>执行阶段概念</h4><p><font style="color:#333333;">OpenResty 处理一个请求，它的处理流程请参考下图（从 Request start 开始）：</font></p>
+<!-- 这是一张图片，ocr 内容为：OrderofLuaNginxModuleDirectives initbylua* initworkerby_lua lnitializationPhase Yes sslcertificatebylua Requeststart Securereguest? No setbylua rewritebylua* accessby_lua* Rewrite/AccessPhase Lua Upstream Contentgeneratedby? balancerby_lua* contentbylua* Otherdirective headerfilterbylua body_flterby_Jua* ContentPhase log_bylua* LogPhase -->
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/682417/1593315540827-09350557-113d-40e6-811a-c4a18c7cae80.png"></p>
+<p><font style="color:#333333;">          这几个阶段的存在，应该是 OpenResty 不同于其他多数 Web 平台编程的最明显特征了。由于 Nginx 把一个请求分成了很多阶段，这样第三方模块就可以根据自己行为，挂载到不同阶段进行处理达到目的。OpenResty 也应用了同样的特性。所不同的是，OpenResty 挂载的是我们编写的 Lua 代码。</font>这样我们就可以根据我们的需要，在不同的阶段直接完成大部分典型处理了。</p>
+<ul>
+<li>set_by_lua*: 流程分支处理判断变量初始化</li>
+<li>rewrite_by_lua*: 转发、重定向、缓存等功能(例如特定请求代理到外网)</li>
+<li>access_by_lua*: IP 准入、接口权限等情况集中处理(例如配合 iptable 完成简单防火墙)</li>
+<li>content_by_lua*: 内容生成</li>
+<li>header_filter_by_lua*: 响应头部过滤处理(例如添加头部信息)</li>
+<li>body_filter_by_lua*: 响应体过滤处理(例如完成应答内容统一成大写)</li>
+<li>log_by_lua*: 会话完成后本地异步完成日志记录(日志可以记录在本地，还可以同步到其他机器)</li>
+</ul>
+<p><font style="color:#333333;">举一个例子，请求体和响应体都需要使用 aes 加密，利用不同的执行阶段，我们可以非常简单的实现：</font></p>
+<p><font style="color:#333333;"></font></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 明文协议版本</span></span><br><span class="line"><span class="section">location</span> /mixed &#123;</span><br><span class="line">    <span class="attribute">content_by_lua_file</span> ...;       <span class="comment"># 请求处理</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 加密协议版本</span></span><br><span class="line"><span class="section">location</span> /mixed &#123;</span><br><span class="line">    <span class="attribute">access_by_lua_file</span> ...;        <span class="comment"># 请求加密解码</span></span><br><span class="line">    <span class="attribute">content_by_lua_file</span> ...;       <span class="comment"># 请求处理，不需要关心通信协议</span></span><br><span class="line">    <span class="attribute">body_filter_by_lua_file</span> ...;   <span class="comment"># 应答加密编码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="实际系统中的应用"><a href="#实际系统中的应用" class="headerlink" title="实际系统中的应用"></a>实际系统中的应用</h4><h5 id="获取系统时间"><a href="#获取系统时间" class="headerlink" title="获取系统时间"></a>获取系统时间</h5><p><a target="_blank" rel="noopener" href="https://yanxiu.qlteacher.com/api/currentTime">https://yanxiu.qlteacher.com/api/currentTime</a></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> = /api/currentTime &#123;	  </span><br><span class="line">   <span class="attribute">default_type</span> <span class="string">&quot;application/json; charset=utf-8&quot;</span>;</span><br><span class="line">   <span class="attribute">content_by_lua</span> <span class="string">&#x27;</span></span><br><span class="line"><span class="string">     local cjson = require(&quot;cjson&quot;)</span></span><br><span class="line"><span class="string">     local t = &#123;data = ngx.time()..&quot;000&quot;&#125;</span></span><br><span class="line"><span class="string">     ngx.say(cjson.encode(t))</span></span><br><span class="line"><span class="string">  &#x27;</span>;</span><br><span class="line">			</span><br><span class="line">  <span class="attribute">proxy_redirect</span> <span class="literal">off</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="客户端检测页"><a href="#客户端检测页" class="headerlink" title="客户端检测页"></a>客户端检测页</h5><p><a target="_blank" rel="noopener" href="https://www.qlteacher.com/check/">https://www.qlteacher.com/check/</a></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /check &#123;</span><br><span class="line">  <span class="attribute">alias</span> /lvm/client-detection/;</span><br><span class="line">  <span class="attribute">index</span> index.html;</span><br><span class="line">  <span class="attribute">expires</span> <span class="number">5d</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">location</span> = /testmethod &#123;</span><br><span class="line">  <span class="attribute">add_header</span> Access-Control-Allow-Origin <span class="variable">$http_origin</span>;</span><br><span class="line">  <span class="attribute">add_header</span> Access-Control-Allow-Credentials <span class="string">&quot;true&quot;</span>;</span><br><span class="line">  <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span> <span class="string">&#x27;GET,PUT, POST, OPTIONS, DELETE&#x27;</span>;</span><br><span class="line">  <span class="attribute">default_type</span> <span class="string">&quot;application/json; charset=utf-8&quot;</span>;</span><br><span class="line">  <span class="attribute">content_by_lua_file</span> testmethod.lua;</span><br><span class="line">  <span class="attribute">proxy_redirect</span> <span class="literal">off</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">location</span> = /getdomains &#123;</span><br><span class="line">  <span class="attribute">add_header</span> Access-Control-Allow-Origin <span class="variable">$http_origin</span>;</span><br><span class="line">  <span class="attribute">add_header</span> Access-Control-Allow-Credentials <span class="string">&quot;true&quot;</span>;</span><br><span class="line">  <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span> <span class="string">&#x27;GET,PUT, POST, OPTIONS, DELETE&#x27;</span>;</span><br><span class="line">  <span class="attribute">default_type</span> <span class="string">&quot;application/json; charset=utf-8&quot;</span>;</span><br><span class="line">  <span class="attribute">content_by_lua</span> <span class="string">&#x27;</span></span><br><span class="line"><span class="string">    local mainHost = &#123;&quot;www.qlteacher.com&quot;,&quot;zone.qlteacher.com&quot;,&quot;player.qlteacher.com&quot;,&quot;yanxiu.qlteacher.com&quot;,&quot;id.qlteacher.com&quot;,&quot;blog.qlteacher.com&quot;&#125;</span></span><br><span class="line"><span class="string">    local cjson = require(&quot;cjson&quot;)</span></span><br><span class="line"><span class="string">    ngx.say(cjson.encode(mainHost))</span></span><br><span class="line"><span class="string">  &#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">local</span> cjson = require(<span class="string">&quot;cjson&quot;</span>)</span><br><span class="line">if ngx.req.get_method() == <span class="string">&quot;OPTIONS&quot;</span> then</span><br><span class="line">ngx.exit(<span class="number">204</span>)</span><br><span class="line">end</span><br><span class="line">local t = &#123;<span class="attribute">time</span> = ngx.time(),method = ngx.req.get_method()&#125;</span><br><span class="line">t.urlargs =  ngx.req.get_uri_args()</span><br><span class="line">ngx.req.read_body()</span><br><span class="line">local postargs = ngx.req.get_post_args()</span><br><span class="line">if postargs then</span><br><span class="line">   t.postargs = postargs</span><br><span class="line">end</span><br><span class="line">t.host = ngx.req.get_headers()[<span class="string">&quot;Host&quot;</span>]</span><br><span class="line">ngx.say(cjson.encode(t))</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="从缓存中读取结果"><a href="#从缓存中读取结果" class="headerlink" title="从缓存中读取结果"></a>从缓存中读取结果</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">upstream</span> statredis_pool_stream &#123;</span><br><span class="line">  <span class="attribute">server</span> redis:<span class="number">6379</span>;</span><br><span class="line">  <span class="attribute">keepalive</span> <span class="number">128</span>;</span><br><span class="line">&#125;    </span><br><span class="line"><span class="section">location</span><span class="regexp"> ^~</span> /api/getUserFromRedis/&#123;</span><br><span class="line">   <span class="attribute">default_type</span> <span class="string">&quot;application/json; charset=utf-8&quot;</span>;</span><br><span class="line">   <span class="attribute">if</span> (<span class="variable">$uri</span> <span class="regexp">~* &quot;^/api/getUserFromRedis/([^/]+)/user/([0-9a-z]</span>&#123;1,32&#125;)$&quot;)&#123;</span><br><span class="line">     <span class="attribute">set</span> <span class="variable">$projectid</span> <span class="variable">$1</span>;</span><br><span class="line">     <span class="attribute">set</span> <span class="variable">$userid</span> <span class="variable">$2</span>;</span><br><span class="line">     <span class="attribute">set</span> <span class="variable">$redis_key</span> <span class="string">&quot;user:<span class="variable">$&#123;projectid&#125;</span>:<span class="variable">$&#123;userid&#125;</span>&quot;</span>;</span><br><span class="line">     <span class="attribute">redis_pass</span> statredis_pool_stream;</span><br><span class="line">      <span class="attribute">error_page</span> <span class="number">404</span> = <span class="variable">@user404</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="attribute">proxy_pass</span> http://user-web/;</span><br><span class="line">   <span class="attribute">proxy_redirect</span> <span class="literal">off</span>;</span><br><span class="line">   <span class="attribute">proxy_set_header</span>   Host            <span class="variable">$host</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">location</span> <span class="variable">@user404</span> &#123;</span><br><span class="line">   <span class="attribute">rewrite</span> . /stat-web/<span class="variable">$&#123;projectid&#125;</span>/user/<span class="variable">$&#123;userid&#125;</span> <span class="literal">break</span>;</span><br><span class="line">   <span class="attribute">proxy_pass</span> http://stat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="在线人数-请求数系列"><a href="#在线人数-请求数系列" class="headerlink" title="在线人数&#x2F;请求数系列"></a>在线人数&#x2F;请求数系列</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span><span class="regexp"> ^~</span> /api/ &#123;</span><br><span class="line">  <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">  <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">  <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://user_web/;</span><br><span class="line">  <span class="attribute">proxy_redirect</span> <span class="literal">off</span>;</span><br><span class="line">  <span class="attribute">log_by_lua_file</span> sitelog.lua;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">local</span> online = require(<span class="string">&quot;online&quot;</span>)</span><br><span class="line">local handler</span><br><span class="line">function handler(premature,domain,uri,userInfo)</span><br><span class="line">  --ngx.log(ngx.ERR,<span class="string">&quot;domain=&quot;</span>,domain)</span><br><span class="line">  --ngx.log(ngx.ERR,<span class="string">&quot;uri=&quot;</span>,uri)</span><br><span class="line">  --ngx.log(ngx.ERR,<span class="string">&quot;userInfo=&quot;</span>,userInfo)</span><br><span class="line">  online.broadcast(premature,domain,uri,userInfo)</span><br><span class="line">end</span><br><span class="line">local ok, err = ngx.timer.at(<span class="number">0</span>, handler,tostring(ngx.var.HTTP_HOST),tostring(ngx.var.uri),ngx.var.cookie_userInfo)</span><br><span class="line">if not ok then</span><br><span class="line">  ngx.log(ngx.ERR, <span class="string">&quot;onlineCount error&quot;</span>, err)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">local</span> redis = require <span class="string">&quot;resty.redis&quot;</span></span><br><span class="line">local ResourceTemplate = &#123;&#125;</span><br><span class="line"><span class="attribute">function</span> ResourceTemplate:new(o)</span><br><span class="line">        o = o or &#123;&#125;</span><br><span class="line">        setmetatable(o,self)</span><br><span class="line">    self.<span class="attribute">__index</span> = self</span><br><span class="line">    return o</span><br><span class="line">end</span><br><span class="line">function ResourceTemplate:dealWith(callback)</span><br><span class="line">        local r = self:open()</span><br><span class="line">        if not r then</span><br><span class="line">            <span class="literal">error</span>(<span class="string">&quot;No resource opened&quot;</span>)</span><br><span class="line">        end</span><br><span class="line">        local ok, data = pcall(callback,r)</span><br><span class="line">        self:close(r)</span><br><span class="line">        if not ok then</span><br><span class="line">            <span class="literal">error</span>(data)</span><br><span class="line">        else</span><br><span class="line">            return data</span><br><span class="line">        end</span><br><span class="line">end</span><br><span class="line">local RedisTemplate = ResourceTemplate:new(&#123;    </span><br><span class="line">    <span class="attribute">open</span> = function(self)       </span><br><span class="line">        local red = redis:new()</span><br><span class="line">        red:set_timeout(<span class="number">1000</span>) </span><br><span class="line">--        local ips = &#123;&#123;host=&quot;10.0.0.246&quot;,port=6379&#125;,&#123;host=&quot;10.0.0.247&quot;,port=6379&#125;&#125;</span><br><span class="line">--    math.randomseed( tonumber(tostring(os.time()):reverse():sub(1,6)) )</span><br><span class="line">--        <span class="attribute">local</span> ip = ips[math.random(<span class="number">2</span>)] </span><br><span class="line">--        local ok, err = red:connect(ip.host, ip.port,&#123; <span class="attribute">pool</span> = <span class="string">&quot;my_redis_cluster&quot;</span> &#125;)</span><br><span class="line">        local ok, err = red:connect(<span class="string">&quot;10.0.0.220&quot;</span>, <span class="number">6379</span>)</span><br><span class="line">        if not ok then</span><br><span class="line">            <span class="literal">error</span>(<span class="string">&quot;failed to connect: &quot;</span>..err)</span><br><span class="line">        end</span><br><span class="line">        return red</span><br><span class="line">    end,        </span><br><span class="line">    close = function(self, red)</span><br><span class="line">        local ok, err = red:set_keepalive(<span class="number">10000</span>, <span class="number">100</span>)</span><br><span class="line">        if not ok then                    </span><br><span class="line">            <span class="literal">error</span>(<span class="string">&quot;failed to set keepalive: &quot;</span>..err)</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line">&#125;)</span><br><span class="line">return &#123;</span><br><span class="line">    <span class="attribute">ResourceTemplate</span> = ResourceTemplate,</span><br><span class="line">    RedisTemplate = RedisTemplate</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">local</span> SID_PERFIX =<span class="string">&quot;sid:&quot;</span></span><br><span class="line">local UID_PERFIX =<span class="string">&quot;uid:&quot;</span></span><br><span class="line">local VID_PERFIX =<span class="string">&quot;vid:&quot;</span></span><br><span class="line">local PV_PREFIX =<span class="string">&quot;pv:&quot;</span></span><br><span class="line">local mainHost = &#123;&quot;id.thpower.com&quot;&#125;</span><br><span class="line"><span class="attribute">local</span> cjson = require(<span class="string">&quot;cjson&quot;</span>)</span><br><span class="line">local Resource = require(<span class="string">&quot;resource&quot;</span>)</span><br><span class="line">local DecodeCookie = require(<span class="string">&quot;decode_cookie&quot;</span>)</span><br><span class="line">local redis = Resource.RedisTemplate</span><br><span class="line">local Online = &#123;&#125;</span><br><span class="line"><span class="attribute">function</span> Online:broadcast(domain,uri,userInfo)</span><br><span class="line">	--判断请求地址是否记录</span><br><span class="line">	local address = <span class="string">&quot;www.thpower.com&quot;</span></span><br><span class="line">	for key,value in pairs(mainHost) do</span><br><span class="line">		if string.find(domain..uri,value..<span class="string">&quot;*&quot;</span>) then</span><br><span class="line">			address = value</span><br><span class="line">		end</span><br><span class="line">	end</span><br><span class="line">	local cookie = DecodeCookie:new(&#123;token=userInfo&#125;)</span><br><span class="line">	<span class="attribute">local</span> userid</span><br><span class="line">	local userkey</span><br><span class="line">	if cookie:isValid() then</span><br><span class="line">		--登陆用户</span><br><span class="line">		local currentUser = cookie:currentUser()</span><br><span class="line">		local index = string.find(currentUser,<span class="string">&quot;@&quot;</span>)</span><br><span class="line">		userid = string.sub(currentUser,<span class="number">0</span>,index-<span class="number">1</span>)</span><br><span class="line">		userkey = UID_PERFIX..userid</span><br><span class="line">	else</span><br><span class="line">		-- 未登录用户记录</span><br><span class="line">		userid = userInfo</span><br><span class="line">		userkey = SID_PERFIX..userid</span><br><span class="line">	end</span><br><span class="line">	</span><br><span class="line">	redis:dealWith(function(red)</span><br><span class="line">  	--red:init_pipeline()</span><br><span class="line">    red:incr(PV_PREFIX..address)</span><br><span class="line">    red:expire(PV_PREFIX..address,<span class="number">120</span>)</span><br><span class="line">    red:set(VID_PERFIX..address..<span class="string">&quot;:&quot;</span>..userid,<span class="string">&quot;&quot;</span>,<span class="string">&quot;EX&quot;</span>,<span class="number">120</span>,<span class="string">&quot;NX&quot;</span>)</span><br><span class="line">    red:set(userkey,userid,<span class="string">&quot;EX&quot;</span>,<span class="number">1800</span>)</span><br><span class="line">    --red:commit_pipeline()</span><br><span class="line">	end)</span><br><span class="line">	</span><br><span class="line">end</span><br><span class="line">return Online</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>以上逻辑执行完后redis的数据如下:</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vid:id.thpower.com:&#123;userid&#125;</span><br><span class="line">...</span><br><span class="line">vid:iot.thpower.com:&#123;userid&#125;</span><br><span class="line"></span><br><span class="line">uid:&#123;userId&#125;</span><br><span class="line"></span><br><span class="line">pv:&#123;domain&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>以上的数据经过后端一个服务简单的处理后,又把处理结果再次放回redis内</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">key</span> :online</span><br><span class="line">value: 取以uid:开头的key的数量</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">key</span> :OnLine:&#123;domain&#125;</span><br><span class="line">value: [&#123;</span><br><span class="line">&quot;domain&quot;: &quot;&#123;domain&#125;&quot;,</span><br><span class="line">&quot;vidCount&quot;: 65475,  取以vid:开头的key的数量</span><br><span class="line">&quot;pvCount&quot;: 84934,   取pv:&#123;domain&#125;这个计数器的值</span><br><span class="line">&quot;date&quot;: 1561087844540 这次计算的时间戳</span><br><span class="line">&#125;</span><br><span class="line">,</span><br><span class="line">&#123;</span><br><span class="line">&quot;domain&quot;: &quot;&#123;domain&#125;&quot;,</span><br><span class="line">&quot;vidCount&quot;: 66683,</span><br><span class="line">&quot;pvCount&quot;: 84654,</span><br><span class="line">&quot;date&quot;: 1561087783763</span><br><span class="line">&#125;</span><br><span class="line">,......]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>再通过openresty读取</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span><span class="regexp"> ^~</span> /dapi/online/ &#123;</span><br><span class="line">    <span class="attribute">proxy_set_header</span>   Host            <span class="variable">$host</span>; </span><br><span class="line">    <span class="attribute">add_header</span> Access-Control-Allow-Origin *;</span><br><span class="line">    <span class="attribute">content_by_lua_file</span> <span class="string">&#x27;readUser.lua&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">local</span> cjson = require(<span class="string">&quot;cjson&quot;</span>)</span><br><span class="line">--local Resource = require(<span class="string">&quot;redisCl&quot;</span>)</span><br><span class="line">--local redis = Resource.RedisTemplate</span><br><span class="line">local Resource = require(<span class="string">&quot;resource&quot;</span>)</span><br><span class="line">local redis = Resource.RedisTemplate</span><br><span class="line">ngx.header.content_type = <span class="string">&quot;application/json; charset=utf-8&quot;</span></span><br><span class="line">redis:dealWith(function(red)</span><br><span class="line">	local count,err = red:get(<span class="string">&quot;online&quot;</span>)</span><br><span class="line">	ngx.say(count)</span><br><span class="line">end)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://zone.qlteacher.com/dapi/online/</span><br><span class="line">&quot;155606&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /dapi/site/ &#123;</span><br><span class="line">      <span class="attribute">proxy_set_header</span>   Host            <span class="variable">$host</span>; </span><br><span class="line">	  <span class="attribute">add_header</span> Access-Control-Allow-Origin *;</span><br><span class="line">	  <span class="attribute">content_by_lua_file</span> <span class="string">&#x27;readOnline.lua&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">local</span> cjson = require(<span class="string">&quot;cjson&quot;</span>)</span><br><span class="line">--local Resource = require(<span class="string">&quot;redisCl&quot;</span>)</span><br><span class="line">--local redis = Resource.RedisTemplate</span><br><span class="line">local Resource = require(<span class="string">&quot;resource&quot;</span>)</span><br><span class="line">local redis = Resource.RedisTemplate</span><br><span class="line">ngx.header.content_type = <span class="string">&quot;application/json; charset=utf-8&quot;</span></span><br><span class="line">local domain = ngx.var.arg_domain</span><br><span class="line">local _max = ngx.var.arg_max</span><br><span class="line">local _min = ngx.var.arg_min</span><br><span class="line">if domain == nil then</span><br><span class="line">	ngx.say(<span class="string">&quot;错误的请求&quot;</span>)</span><br><span class="line">	return</span><br><span class="line">end</span><br><span class="line">if _max == nil then</span><br><span class="line">	_max=<span class="number">1440</span></span><br><span class="line">end</span><br><span class="line">if _min == nil then</span><br><span class="line">	_min=<span class="number">0</span></span><br><span class="line">end</span><br><span class="line">redis:dealWith(function(red)</span><br><span class="line">	local view,err = red:lrange(<span class="string">&quot;OnLine:&quot;</span>..domain,_min,_max)</span><br><span class="line">	</span><br><span class="line">	local list = &#123;&#125;</span><br><span class="line">	<span class="attribute">for</span> key, value in pairs(view) do </span><br><span class="line">		local item = cjson.decode(value)</span><br><span class="line">		--ngx.say(item.count)</span><br><span class="line">		table.insert(list,item)</span><br><span class="line">	end</span><br><span class="line">	ngx.say(cjson.encode(list))</span><br><span class="line">end)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">curl https://zone.qlteacher.com/dapi/site/?domain=www.qlteacher.com&amp;max=1</span><br><span class="line">[&#123;</span><br><span class="line">  &quot;domain&quot;: &quot;www.qlteacher.com&quot;,</span><br><span class="line">  &quot;date&quot;: 1561088634171,</span><br><span class="line">  &quot;vidCount&quot;: 61324,</span><br><span class="line">  &quot;pvCount&quot;: 79789,</span><br><span class="line">  &quot;@class&quot;: &quot;com.qlteacher.pv.OnLineEvent&quot;&#125;,</span><br><span class="line">&#123;</span><br><span class="line">&quot;domain&quot;: &quot;www.qlteacher.com&quot;,</span><br><span class="line">&quot;date&quot;: 1561088573488,</span><br><span class="line">&quot;vidCount&quot;: 61703,</span><br><span class="line">&quot;pvCount&quot;: 80486,</span><br><span class="line">&quot;@class&quot;: &quot;com.qlteacher.pv.OnLineEvent&quot;&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><p><font style="color:#333333;">任何一个开发语言、开发框架，都有它存在的明确目的，重心是为了解决什么问题。没有说我们学习一门语言或技术，就可以解决所有的问题。</font></p>
+<h5 id="OpenResty适合使用的场景-官网-wiki"><a href="#OpenResty适合使用的场景-官网-wiki" class="headerlink" title="OpenResty适合使用的场景,官网 wiki :"></a>OpenResty适合使用的场景,<font style="color:#333333;">官网 wiki</font><font style="color:#333333;"> :</font></h5><ul>
+<li>在 Lua 中混合处理不同 Nginx 模块输出（proxy, drizzle, postgres, Redis, memcached 等）。</li>
+<li>在请求真正到达上游服务之前，Lua 中处理复杂的准入控制和安全检查。</li>
+<li>比较随意的控制应答头（通过 Lua）。</li>
+<li>从外部存储中获取后端信息，并用这些信息来实时选择哪一个后端来完成业务访问。</li>
+<li>在内容 handler 中随意编写复杂的 web 应用，同步编写异步访问后端数据库和其他存储。</li>
+<li>在 rewrite 阶段，通过 Lua 完成非常复杂的处理。</li>
+<li>在 Nginx 子查询、location 调用中，通过 Lua 实现高级缓存机制。</li>
+<li><font style="color:#333333;">对外暴露强劲的 Lua 语言，允许使用各种 Nginx 模块，自由拼合没有任何限制。该模块的脚本有充分的灵活性，同时提供的性能水平与本地 C 语言程序无论是在 CPU 时间方面以及内存占用差距非常小。</font></li>
+</ul>
+<h5 id="不适合的场景"><a href="#不适合的场景" class="headerlink" title="不适合的场景"></a>不适合的场景</h5><ul>
+<li><font style="color:#333333;">有长时间阻塞调用的过程,</font><ul>
+<li>例如通过 <code>Lua</code> 完成系统命令行调用</li>
+<li>使用阻塞的<code>Lua API</code>完成相应操作</li>
+</ul>
+</li>
+<li><font style="color:#333333;">单个请求处理逻辑复杂，尤其是需要和请求方多次交互的长连接场景</font></li>
+<li><font style="color:#333333;">内存占用高的处理 受制于Lua VM的最大使用内存 1G 的限制</font></li>
+<li><font style="color:#333333;">两个请求之间有交流的场景 如在线聊天</font></li>
+<li><font style="color:#333333;">与行业专用的组件对接 由于OpenResty必须要使用非阻塞 API ，所以传统的阻塞 API ，我们是没法直接使用的</font></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/17/%E9%80%9A%E7%94%A8%E9%85%8D%E7%BD%AE/" rel="next" title="通用配置">
+                  通用配置 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2024 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">gundamff</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/gundamff" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

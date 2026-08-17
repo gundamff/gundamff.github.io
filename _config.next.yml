@@ -1,0 +1,232 @@
+# ---------------------------------------------------------------
+# NexT Theme Configuration
+# ---------------------------------------------------------------
+
+# ---------------------------------------------------------------
+# Scheme Settings
+# ---------------------------------------------------------------
+scheme: Muse
+
+# ---------------------------------------------------------------
+# Dark Mode
+# ---------------------------------------------------------------
+darkmode: false
+
+# ---------------------------------------------------------------
+# Menu Settings
+# ---------------------------------------------------------------
+menu:
+  home: / || fa fa-home
+  about: /about/ || fa fa-user
+  tags: /tags/ || fa fa-tags
+  categories: /categories/ || fa fa-th
+  archives: /archives/ || fa fa-archive
+  # commonweal: /404/ || fa fa-heartbeat
+
+# ---------------------------------------------------------------
+# Social Settings
+# ---------------------------------------------------------------
+social:
+  GitHub: https://github.com/gundamff || fab fa-github
+
+# ---------------------------------------------------------------
+# Avatar Settings
+# ---------------------------------------------------------------
+avatar:
+  url: https://www.gravatar.com/avatar/00000000000000000000000000000000?s=200
+  rounded: false
+  rotated: false
+
+# ---------------------------------------------------------------
+# Code Highlight Theme
+# ---------------------------------------------------------------
+highlight_theme: night
+
+# ---------------------------------------------------------------
+# Tag Plugin Settings
+# ---------------------------------------------------------------
+# Tab tag plugin
+tabs:
+  enable: true
+  border:
+    enable: true
+    style: solid
+  active: false
+  language:
+    enable: false
+
+# ---------------------------------------------------------------
+# Back to top Button
+# ---------------------------------------------------------------
+back2top:
+  enable: true
+  sidebar: false
+  scrollpercent: true
+
+# ---------------------------------------------------------------
+# Reading Progress
+# ---------------------------------------------------------------
+reading_progress:
+  enable: true
+  position: top
+  color: "#37c6c0"
+  height: 2px
+
+# ---------------------------------------------------------------
+# Sidebar Settings
+# ---------------------------------------------------------------
+sidebar:
+  # Sidebar Position - left or right
+  position: left
+  # Sidebar Display - block or inline
+  display: post
+  padding:
+    left: 16
+    right: 16
+  # Sidebar Offset from Top
+  offset: 12
+  # Width of Sidebar
+  width: 280
+
+# ---------------------------------------------------------------
+# Post Meta Settings
+# ---------------------------------------------------------------
+post_meta:
+  enable: true
+  categories: true
+  tags: true
+
+# ---------------------------------------------------------------
+# TOC Settings
+# ---------------------------------------------------------------
+toc:
+  enable: true
+  number: true
+  wrap: true
+
+# ---------------------------------------------------------------
+# Related Popular Posts
+# ---------------------------------------------------------------
+related_posts:
+  enable: true
+  icon: fa fa-signs-post
+
+# ---------------------------------------------------------------
+# Misc Theme Settings
+# ---------------------------------------------------------------
+mobile_layout_economy: true
+android_chrome_color: "#1ec6c0"
+android_chrome_color_splash: "#1ec6c0"
+
+# ---------------------------------------------------------------
+# Font Settings
+# ---------------------------------------------------------------
+font:
+  enable: true
+  host: https://fonts.googleapis.com
+  global:
+    external: true
+    family: "Noto Sans SC"
+    size: 1
+  title:
+    external: true
+    family: "Noto Sans SC"
+    size:
+  headings:
+    external: true
+    family: "Noto Sans SC"
+    size:
+  posts:
+    external: true
+    family: "Noto Sans SC"
+    size:
+  codes:
+    external: true
+    family: "JetBrains Mono"
+    size: 0.875
+
+# ---------------------------------------------------------------
+# Footer Settings
+# ---------------------------------------------------------------
+footer:
+  since: 2024
+  icon:
+    name: fa fa-heart
+    animated: true
+    color: "#e74c3c"
+  copyright: gundamff
+
+# ---------------------------------------------------------------
+# Schemes Settings
+# ---------------------------------------------------------------
+# scheme: Muse
+# scheme: Mist
+# scheme: Pisces
+# scheme: Gemini
+
+# ---------------------------------------------------------------
+# Tags Settings
+# ---------------------------------------------------------------
+tags:
+  enable: true
+  type: flat
+  icon: fa fa-tags
+
+# ---------------------------------------------------------------
+# Categories Settings
+# ---------------------------------------------------------------
+categories:
+  enable: true
+  type: flat
+  icon: fa fa-folder
+
+# ---------------------------------------------------------------
+# Archives Settings
+# ---------------------------------------------------------------
+archives:
+  enable: true
+  type: flat
+  icon: fa fa-archive
+
+# ---------------------------------------------------------------
+# Search Settings
+# ---------------------------------------------------------------
+# Local Search
+local_search:
+  enable: true
+  trigger: auto
+  top_n_per_article: 1
+  unescape: false
+
+# ---------------------------------------------------------------
+# Animation Settings
+# ---------------------------------------------------------------
+motion:
+  enable: true
+  async: false
+  transition:
+    menu_item: fadeInDown
+    post_block: fadeIn
+    post_header: fadeInDown
+    post_body: fadeInDown
+    coll_header: fadeInLeft
+    # Sidebar
+    sidebar: fadeInUp
+
+# ---------------------------------------------------------------
+# GitHub Banner
+# ---------------------------------------------------------------
+github_banner:
+  enable: true
+  permalink: https://github.com/gundamff
+  title: Follow me on GitHub
+
+# ---------------------------------------------------------------
+# SEO Settings
+# ---------------------------------------------------------------
+seo: true
+
+# ---------------------------------------------------------------
+# Debug Settings
+# ---------------------------------------------------------------
+debug: false

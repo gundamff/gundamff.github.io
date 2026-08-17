@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"gundamff.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":{"left":16,"right":16},"offset":12,"width":280},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="在金庸先生的 &lt;笑傲江湖&gt; 里啊,有这么一门武功绝学, 叫 &lt;葵花宝典&gt;, 乃绝世武功, 书上第一页赫然写着 “欲练此功,必先自宫“ 少年初读书时, 我哑然失笑, 练武功如同做学问, 那自然是丰富自我啊, 又怎会有如此这般自我残害之道理, 那必定是为了书中情节服务啊 刻意编撰为之, 不料数年之后, 在他乡异地, 我刷新了认知 方才大彻大悟 此为非同一般之大道理 这叫必有大舍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从葵花宝典到软件研发">
+<meta property="og:url" content="https://gundamff.github.io/2026/08/17/%E4%BB%8E%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8%E5%88%B0%E8%BD%AF%E4%BB%B6%E7%A0%94%E5%8F%91/index.html">
+<meta property="og:site_name" content="Gund Blog">
+<meta property="og:description" content="在金庸先生的 &lt;笑傲江湖&gt; 里啊,有这么一门武功绝学, 叫 &lt;葵花宝典&gt;, 乃绝世武功, 书上第一页赫然写着 “欲练此功,必先自宫“ 少年初读书时, 我哑然失笑, 练武功如同做学问, 那自然是丰富自我啊, 又怎会有如此这般自我残害之道理, 那必定是为了书中情节服务啊 刻意编撰为之, 不料数年之后, 在他乡异地, 我刷新了认知 方才大彻大悟 此为非同一般之大道理 这叫必有大舍">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-16T19:03:13.000Z">
+<meta property="article:modified_time" content="2026-08-17T03:03:13.611Z">
+<meta property="article:author" content="gundamff">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://gundamff.github.io/2026/08/17/%E4%BB%8E%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8%E5%88%B0%E8%BD%AF%E4%BB%B6%E7%A0%94%E5%8F%91/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://gundamff.github.io/2026/08/17/%E4%BB%8E%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8%E5%88%B0%E8%BD%AF%E4%BB%B6%E7%A0%94%E5%8F%91/","path":"2026/08/17/从葵花宝典到软件研发/","title":"从葵花宝典到软件研发"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>从葵花宝典到软件研发 | Gund Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Gund Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Software Architecture & AI Thoughts</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="gundamff"
+      src="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=200">
+  <p class="site-author-name" itemprop="name">gundamff</p>
+  <div class="site-description" itemprop="description">A blog about software architecture, AI, and developer career</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gundamff" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gundamff" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gundamff.github.io/2026/08/17/%E4%BB%8E%E8%91%B5%E8%8A%B1%E5%AE%9D%E5%85%B8%E5%88%B0%E8%BD%AF%E4%BB%B6%E7%A0%94%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=200">
+      <meta itemprop="name" content="gundamff">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gund Blog">
+      <meta itemprop="description" content="A blog about software architecture, AI, and developer career">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="从葵花宝典到软件研发 | Gund Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从葵花宝典到软件研发
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-08-17 03:03:13 / 修改时间：11:03:13" itemprop="dateCreated datePublished" datetime="2026-08-17T03:03:13+08:00">2026-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>在金庸先生的 &lt;笑傲江湖&gt; 里啊,有这么一门武功绝学, 叫 &lt;葵花宝典&gt;, 乃绝世武功, 书上第一页赫然写着 “<strong>欲练此功,必先自宫</strong>“</p>
+<p>少年初读书时, 我哑然失笑, 练武功如同做学问, 那自然是丰富自我啊, 又怎会有如此这般自我残害之道理, 那必定是为了书中情节服务啊 刻意编撰为之, 不料数年之后, 在他乡异地, 我刷新了认知 方才大彻大悟 此为非同一般之大道理 这叫必有大舍 才能大得啊. 遥想当年初入社会, 远赴帝都研习软件设计武学, 导师老板60来岁 ,银发背头 亲自面试, 一开口就是地道的京腔</p>
+<p><em><font style="color:#DF2A3F;">“不是我说 前面面的那几个小伙子 人都硕士博士软件工程的 就你小子学网络的, 咱编程这玩意你能学明白了啊”</font></em></p>
+<p>还未等我辩解, 导师又说 </p>
+<p><em><font style="color:#DF2A3F;">“我出三个问题吧 你只需答对一题 我破例收你为关窗大弟子啊”</font></em></p>
+<p><em><font style="color:#DF2A3F;">“第一题 搞研发人最重要的素质是什么啊”</font></em></p>
+<p>我脱口而出 </p>
+<p><em><font style="color:#117CEE;">“那必须是逻辑思维,归纳抽象啊”</font></em></p>
+<p>导师啊 双眼向上翻动啊 头颅轻摇 双手十指全部打开 标准的京爷老炮轻蔑表情说</p>
+<p><em><font style="color:#DF2A3F;">“不对 必须要懒, 手懒脑勤快”</font></em></p>
+<p><em><font style="color:#DF2A3F;">“下一题 你现在接手一个项目啊 干了一段时间进度缓慢 那你认为最大的原因是什么”</font></em></p>
+<p>那我脱口而出啊 </p>
+<p><em><font style="color:#117CEE;">“这就需求理解不准确呗 刚开始没和客户沟通好呗”</font></em></p>
+<p>这导师白眼一翻说 </p>
+<p><em><font style="color:#DF2A3F;">“不对 那因为你没做好技术选型 一开始选了个不适合这个项目的框架 业务模型梳理不清晰 导致开发效率低下 你这啥也不懂啊你”</font></em></p>
+<p><em><font style="color:#DF2A3F;">“下一题 项目延期的主要原因 你觉得是什么啊”</font></em></p>
+<p>我刚要脱口而出啊 我说需求变更呗 转念一想啊 这已经是最后一题了 而且我在人家这地盘学软件开发 说需求变更多 这礼貌吗? 冒昧! 无礼!</p>
+<p> 我这略加思考 我说是 <em><font style="color:#117CEE;">“这是团队协作效率不高啊” </font></em></p>
+<p>其实这事咱想一下也知道啊 就大部分项目延期啊 都是团队内部沟通不畅或者分工不明确所造成的啊 大家都忙不可怕 怕的就是有忙有闲嘛</p>
+<p>这导师听了如释重负啊, 拍了拍我的肩膀说 <em><font style="color:#DF2A3F;">“没错啊 咱们虽然项目多吧 全球各地项目延期率 咱们也只是中位数水平 看来你小子不至于啥也不懂啊 你发现没有 前面这些问题的答案 全部都是反直觉的啊”</font></em></p>
+<p><em><font style="color:#DF2A3F;">“咱们程序员要做设计 头一件事必先放弃直觉 开始思考 今天想拜入我的门下 你准备好要和直觉割舍了吗”</font></em></p>
+<p>我说这玩意有啥不能割舍的 除了我弟 我啥都能割舍</p>
+<p>导师摇摇头啊 跟我说 <em><font style="color:#DF2A3F;">“放弃直觉 坚持思考 此乃程序员一生的修为 从此你的眼中不再有原型 交互 PPT 有的只是数据结构算法 你的视线将不会停留在UI界面而是深入到他们之后的业务逻辑 数据流 乃至生活中你面前的美人娇艳欲滴在你眼中也透视为像素堆叠 她的美颜滤镜里面是哪种算法 你一眼便知 她朋友圈的点赞数 排行榜更新周期 你关注几天就心知肚明 甚至你的衣柜里将来只能有格子衫牛仔裤 头顶青丝啊随着时间也要斑驳凋零 程序员注定将于自然之法抗争 将世间万物混沌调理为整齐有序 这就是程序员的宿命 你准备好了吗”</font></em></p>
+<p>说实话啊 我犹豫了 那相比挥刀自宫啊 这穿格子衫其实不算什么 而且这个看朋友圈点赞数 这也谈不上损失 主要是掉头发这事 我舍不得</p>
+<p>导师看出了我的犹豫 微微叹气道 <em><font style="color:#DF2A3F;">“我料想你啊 对尘俗之事仍有留恋 只是今日之道理你要记于心间啊 此后定有用途”</font></em></p>
+<p><font style="color:rgb(31, 35, 40);">此后白驹过隙，时光荏苒，当我再次审视国科诸多项目的设计方案时, 才恍然察觉导师当年的教诲犹如烙印般潜移默化地伴随至今. 我们惯常依赖直觉去解析世界，以为仅凭原型库表就可以驾驭那些看似坚不可摧的复杂系统. 然而, 在软件设计的世界里, 一旦我们摒弃直觉, 深思思考, 那些看似寻常的设计原则实则蕴含着惊人的力量.</font></p>
+<p><font style="color:rgb(31, 35, 40);">以软件架构为例, 初看时它似乎只是一套规则与组织方式, 直觉上或许仅被视为数据的存储读取. 然而, 当我们深入剖析其内在逻辑, 便会发现架构实为一整套生产力工具的精妙组合. 模块化的划分、接口的设计、依赖关系的梳理,这些特性在软件工程的经典文献中被赞誉为”架构模式”. 当我们对架构稍作思考, 打破直觉的束缚, 以更深层次的思考审视其价值, 会惊讶地发现, 这些设计并非仅为了增删改查, 其深远影响实则在于成倍提升软件的可维护性, 扩展性和可靠性.</font></p>
+<p><font style="color:rgb(31, 35, 40);">就如同软件工程先驱鲁迅曾言: “给我一个合理的架构,我能构建出横跨星辰的系统.”这句话精准地揭示了架构设计这一高级武学理论的核心要义. 只要架构设计得当, 充分发挥其指导作用, 诸如模块复用、热插拔、故障隔离、负载均衡等高级特性便能发挥效用，使得无论多么庞大的项目，都能够高效地开发、测试、部署和持续演化，避免陷入混乱与低效的泥沼。</font></p>
+<p>再看软件开发 一个大型项目就如同一座巍峨的数字城堡 直觉来看 编写代码如同砖瓦匠砌砖块 一块一块堆砌而成 但若以工程师思维加以思考 则会发现这并非简单的叠加 代码之间存在着复杂的逻辑关系 数据流如同城堡的血脉 程序架构如同城堡的骨骼 模块划分如同城堡的分区布局 每一处细节都经过精密计算和精心设计 以确保整个系统的高效稳定运行 即使面对看似不可能的任务 如实现高并发处理 或处理海量数据 若能深入理解并运用这些反直觉的工科原理 如分治算法、分布式计算、数据压缩等技术 结合强大的开发工具 如DEVOPS、版本控制系统、自动化测试框架等 即使最复杂的项目也能硬生生重构完成 此乃程序员武学之大乘不可不畏也</p>
+<p><font style="color:rgb(31, 35, 40);">再论团队组织沟通协调，恰似武侠世界中的内功修炼，看似无形，实则决定整体实力。高效的沟通并非直觉所认为的频繁开会、详尽汇报，而是建立在清晰的角色定位、明确的责任分配与有效的信息传递之上。</font><strong><font style="color:#DF2A3F;">团队成员需舍弃个人主义，主动分享信息，倾听他人意见，形成开放、透明的沟通氛围。这需要我们“自宫”般地舍弃固有观念，学会倾听、表达与协作，方能提升团队的整体战斗力。组织协调亦是如此。面对复杂的项目任务，直觉往往驱使我们急于动手，却忽视了前期的规划与分工。真正的高手懂得“大舍”，在项目启动之初，便投入大量精力进行需求分析、任务分解与资源调配，确保每个人清楚自己的职责，理解项目目标</font></strong><font style="color:#DF2A3F;">。</font><font style="color:rgb(31, 35, 40);">这看似耽误了时间，实则避免了后期因理解偏差、责任不清导致的返工与冲突，大幅提升工作效率。</font>此绝非为私活编程之套路 细细思量过后啊 感觉国科项目 不耐思考 顿时感觉索然无味</p>
+<p>再看美女 亦如导师所云 只是像素堆叠而已(<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hw411t7jC/"><strong>这道理我都懂 但我就是喜欢佳佳啊</strong></a>) 方才回忆导师寄语 此乃一生之修为 我这方面的修为不够啊 怪不得人家写在书上第一页 那能没道理吗</p>
+<p>:::info<br><strong><font style="color:rgb(255, 0, 0);background-color:rgb(255, 248, 247);">欲成架构师, 放弃直觉, 开始思考</font></strong></p>
+<p>:::</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/17/%E5%85%B3%E4%BA%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="prev" title="关于分布式事务的一些知识点">
+                  <i class="fa fa-angle-left"></i> 关于分布式事务的一些知识点
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/17/%E4%BB%8E-10mb-%E7%9A%84%E3%80%8A%E4%B8%89%E5%9B%BD%E6%BC%94%E4%B9%89%E3%80%8B%E5%88%B0%E6%98%9F%E8%BE%B0%E5%A4%A7%E6%B5%B7%EF%BC%9A%E4%B8%80%E5%9C%BA%E5%85%B3%E4%BA%8E-ai-%E8%BF%9B%E5%8C%96%E7%BB%88%E5%B1%80%E7%9A%84%E5%AF%B9%E8%B0%88/" rel="next" title="从 10MB 的《三国演义》到星辰大海：一场关于 AI 进化终局的对谈">
+                  从 10MB 的《三国演义》到星辰大海：一场关于 AI 进化终局的对谈 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2024 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">gundamff</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/gundamff" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

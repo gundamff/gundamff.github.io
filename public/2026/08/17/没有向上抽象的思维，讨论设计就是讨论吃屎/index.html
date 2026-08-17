@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"gundamff.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":{"left":16,"right":16},"offset":12,"width":280},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="咱们这行天天开会讨论技术，听起来挺高端，实际上跟讨论吃屎分几个步骤没啥区别——第一步开嘴，第二步把屎塞进去，第三步闭嘴。三步走完，周报上写”已完成需求开发”，屎味四溢，产能翻倍，老板点赞。 这篇献给所有把产品原型当 ER 图、把 ext_info 当万能抽屉、把 AI 当挡箭牌的同仁。也献给三年前的我自己。 一、那个下午，我对着表结构陷入了沉思“用户管理模块的数据表设计，大家看一下。” 技术总监老">
+<meta property="og:type" content="article">
+<meta property="og:title" content="没有向上抽象的思维，讨论设计就是讨论吃屎">
+<meta property="og:url" content="https://gundamff.github.io/2026/08/17/%E6%B2%A1%E6%9C%89%E5%90%91%E4%B8%8A%E6%8A%BD%E8%B1%A1%E7%9A%84%E6%80%9D%E7%BB%B4%EF%BC%8C%E8%AE%A8%E8%AE%BA%E8%AE%BE%E8%AE%A1%E5%B0%B1%E6%98%AF%E8%AE%A8%E8%AE%BA%E5%90%83%E5%B1%8E/index.html">
+<meta property="og:site_name" content="Gund Blog">
+<meta property="og:description" content="咱们这行天天开会讨论技术，听起来挺高端，实际上跟讨论吃屎分几个步骤没啥区别——第一步开嘴，第二步把屎塞进去，第三步闭嘴。三步走完，周报上写”已完成需求开发”，屎味四溢，产能翻倍，老板点赞。 这篇献给所有把产品原型当 ER 图、把 ext_info 当万能抽屉、把 AI 当挡箭牌的同仁。也献给三年前的我自己。 一、那个下午，我对着表结构陷入了沉思“用户管理模块的数据表设计，大家看一下。” 技术总监老">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-16T19:03:13.000Z">
+<meta property="article:modified_time" content="2026-08-17T03:03:13.619Z">
+<meta property="article:author" content="gundamff">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://gundamff.github.io/2026/08/17/%E6%B2%A1%E6%9C%89%E5%90%91%E4%B8%8A%E6%8A%BD%E8%B1%A1%E7%9A%84%E6%80%9D%E7%BB%B4%EF%BC%8C%E8%AE%A8%E8%AE%BA%E8%AE%BE%E8%AE%A1%E5%B0%B1%E6%98%AF%E8%AE%A8%E8%AE%BA%E5%90%83%E5%B1%8E/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://gundamff.github.io/2026/08/17/%E6%B2%A1%E6%9C%89%E5%90%91%E4%B8%8A%E6%8A%BD%E8%B1%A1%E7%9A%84%E6%80%9D%E7%BB%B4%EF%BC%8C%E8%AE%A8%E8%AE%BA%E8%AE%BE%E8%AE%A1%E5%B0%B1%E6%98%AF%E8%AE%A8%E8%AE%BA%E5%90%83%E5%B1%8E/","path":"2026/08/17/没有向上抽象的思维，讨论设计就是讨论吃屎/","title":"没有向上抽象的思维，讨论设计就是讨论吃屎"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>没有向上抽象的思维，讨论设计就是讨论吃屎 | Gund Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Gund Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Software Architecture & AI Thoughts</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%82%A3%E4%B8%AA%E4%B8%8B%E5%8D%88%EF%BC%8C%E6%88%91%E5%AF%B9%E7%9D%80%E8%A1%A8%E7%BB%93%E6%9E%84%E9%99%B7%E5%85%A5%E4%BA%86%E6%B2%89%E6%80%9D"><span class="nav-number">1.</span> <span class="nav-text">一、那个下午，我对着表结构陷入了沉思</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%90%83%E5%B1%8E%E7%9A%84%E4%B8%89%E7%A7%8D%E4%B8%93%E4%B8%9A%E5%A7%BF%E5%8A%BF"><span class="nav-number">2.</span> <span class="nav-text">二、吃屎的三种专业姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A7%BF%E5%8A%BF%E4%B8%80%EF%BC%9A%E4%BA%A7%E5%93%81%E5%8E%9F%E5%9E%8B%E9%A9%B1%E5%8A%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E6%8A%8A%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3%E5%BD%93-ER-%E5%9B%BE"><span class="nav-number">2.1.</span> <span class="nav-text">姿势一：产品原型驱动数据库设计——把需求文档当 ER 图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A7%BF%E5%8A%BF%E4%BA%8C%EF%BC%9A%E4%B8%87%E7%89%A9%E7%9A%86%E5%8F%AF-JSON%E2%80%94%E2%80%94%E7%94%A8-ext-info-%E5%AD%97%E6%AE%B5%E5%9F%8B%E8%91%AC%E4%B8%80%E5%88%87%E5%BB%BA%E6%A8%A1"><span class="nav-number">2.2.</span> <span class="nav-text">姿势二：万物皆可 JSON——用 ext_info 字段埋葬一切建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A7%BF%E5%8A%BF%E4%B8%89%EF%BC%9A%E7%8A%B6%E6%80%81%E9%9D%A0%E5%B8%83%E5%B0%94%E6%A0%87%E5%BF%97%E2%80%94%E2%80%94%E7%94%A8%E5%8D%81%E4%B8%AA-is-xxx-%E5%B9%B2%E7%8A%B6%E6%80%81%E6%9C%BA%E7%9A%84%E6%B4%BB"><span class="nav-number">2.3.</span> <span class="nav-text">姿势三：状态靠布尔标志——用十个 is_xxx 干状态机的活</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%B1%8E%E7%9A%84%E4%B8%83%E5%8D%81%E4%BA%8C%E5%8F%98%EF%BC%9A%E9%82%A3%E4%BA%9B%E4%BD%A0%E5%A4%A9%E5%A4%A9%E5%9C%A8%E5%86%99%E7%9A%84%E2%80%9D%E8%AE%BE%E8%AE%A1%E2%80%9D"><span class="nav-number">3.</span> <span class="nav-text">三、屎的七十二变：那些你天天在写的”设计”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81AI-Coding-%E6%97%B6%E4%BB%A3%EF%BC%9A%E5%B1%8E%E5%B1%B1%E5%88%B6%E9%80%A0%E8%BF%9B%E5%85%A5%E5%B7%A5%E4%B8%9A-4-0"><span class="nav-number">4.</span> <span class="nav-text">四、AI Coding 时代：屎山制造进入工业 4.0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%90%91%E4%B8%8A%E6%8A%BD%E8%B1%A1%EF%BC%8C%E5%B0%B1%E6%98%AF%E9%97%AE%E4%B8%80%E5%8F%A5%E2%80%9D%E8%BF%99%E4%BB%96%E5%A6%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%95%A5%EF%BC%9F%E2%80%9D"><span class="nav-number">5.</span> <span class="nav-text">五、向上抽象，就是问一句”这他妈到底是啥？”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%BB%93%E8%AF%AD%EF%BC%9AAI-%E6%97%B6%E4%BB%A3%EF%BC%8C%E6%8A%BD%E8%B1%A1%E8%83%BD%E5%8A%9B%E6%98%AF%E6%9C%80%E5%90%8E%E7%9A%84%E6%8A%A4%E5%9F%8E%E6%B2%B3"><span class="nav-number">6.</span> <span class="nav-text">六、结语：AI 时代，抽象能力是最后的护城河</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95%EF%BC%9A%E5%A6%82%E6%9E%9C%E4%BD%A0%E8%A7%89%E5%BE%97%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%E6%98%AF%E5%B1%8E"><span class="nav-number">7.</span> <span class="nav-text">附录：如果你觉得这篇文章是屎</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="gundamff"
+      src="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=200">
+  <p class="site-author-name" itemprop="name">gundamff</p>
+  <div class="site-description" itemprop="description">A blog about software architecture, AI, and developer career</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gundamff" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gundamff" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gundamff.github.io/2026/08/17/%E6%B2%A1%E6%9C%89%E5%90%91%E4%B8%8A%E6%8A%BD%E8%B1%A1%E7%9A%84%E6%80%9D%E7%BB%B4%EF%BC%8C%E8%AE%A8%E8%AE%BA%E8%AE%BE%E8%AE%A1%E5%B0%B1%E6%98%AF%E8%AE%A8%E8%AE%BA%E5%90%83%E5%B1%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=200">
+      <meta itemprop="name" content="gundamff">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gund Blog">
+      <meta itemprop="description" content="A blog about software architecture, AI, and developer career">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="没有向上抽象的思维，讨论设计就是讨论吃屎 | Gund Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          没有向上抽象的思维，讨论设计就是讨论吃屎
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-08-17 03:03:13 / 修改时间：11:03:13" itemprop="dateCreated datePublished" datetime="2026-08-17T03:03:13+08:00">2026-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><em><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">咱们这行天天开会讨论技术，听起来挺高端，实际上跟讨论吃屎分几个步骤没啥区别——</font><strong><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">第一步开嘴，第二步把屎塞进去，第三步闭嘴</font></strong></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。三步走完，周报上写”已完成需求开发”，屎味四溢，产能翻倍，老板点赞。</font></em></p>
+<p><em><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这篇献给所有把产品原型当 ER 图、把 ext_info 当万能抽屉、把 AI 当挡箭牌的同仁。也献给三年前的我自己。</font></em></p>
+<h2 id="一、那个下午，我对着表结构陷入了沉思"><a href="#一、那个下午，我对着表结构陷入了沉思" class="headerlink" title="一、那个下午，我对着表结构陷入了沉思"></a><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">一、那个下午，我对着表结构陷入了沉思</font></h2><p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">“用户管理模块的数据表设计，大家看一下。” 技术总监老 K 把投影切到 Navicat。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">屏幕上是一张</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;t_user&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">表，字段列表像裹脚布一样往下滚：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user_name, password, nickname, avatar_url, phone, email, gender,</span><br><span class="line">birthday, province, city, district, address_detail, id_card,</span><br><span class="line">real_name, wechat_openid, qq_openid, alipay_user_id,</span><br><span class="line">last_login_time, last_login_ip, login_fail_count, account_locked,</span><br><span class="line">locked_until, register_time, register_ip, register_channel,</span><br><span class="line">invite_code, inviter_id, user_level, user_points, user_balance ......</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">“停停停。” 我实在忍不住了，”这表是谁设计的？”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">“产品原型上有这些字段啊。” 后端主力小张理直气壮，”产品经理画的个人资料页里要展示这些信息，我们就照着建表呗。”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">我深吸一口气：”那好，我问你——</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;wechat_openid&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">、</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;qq_openid&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">、</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;alipay_user_id&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这三个字段，有没有发现它们本质上是同一类东西？”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">“呃……都是第三方登录的标识？”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">“那你为什么建了三个字段，而不是一张</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;t_user_third_party_auth&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">关联表？”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">小张愣了愣：”产品原型上就是这么画的啊，微信登录一个框，QQ 登录一个框，支付宝登录一个框……”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">“所以你就建了三个字段。将来要接入抖音登录，再加一个</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;douyin_openid&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。要接入 Apple 登录，再加一个</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;apple_user_id&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。这张表最终会有五十个第三方登录字段，像不像一条被塞满各种杂物的裤衩？”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">会议室沉默了。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这就是第一种吃屎姿势：</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">产品原型画成什么样，数据库表就设计成什么样</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。产品经理在 Axure 里拖一个输入框，后端就加一个字段；产品经理画一个 tab 页，后端就建一张表。美其名曰”快速响应需求”，实际上是</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">把数据库当成了产品原型的像素级复刻</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">有没有人向上问一句：</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这些字段在业务上究竟是什么关系？它们是同一个实体的属性，还是应该被抽象成独立的实体？</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">没有人问。因为问这个问题需要抽象思维，而抽象思维需要动脑子。动脑子累，照着原型建表多轻松啊——</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">屎来伸手，屎去张口</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<h2 id="二、吃屎的三种专业姿势"><a href="#二、吃屎的三种专业姿势" class="headerlink" title="二、吃屎的三种专业姿势"></a><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">二、吃屎的三种专业姿势</font></h2><h3 id="姿势一：产品原型驱动数据库设计——把需求文档当-ER-图"><a href="#姿势一：产品原型驱动数据库设计——把需求文档当-ER-图" class="headerlink" title="姿势一：产品原型驱动数据库设计——把需求文档当 ER 图"></a><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">姿势一：产品原型驱动数据库设计——把需求文档当 ER 图</font></h3><p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">“产品让我加一个收货地址，我就给订单表加</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;receiver_name&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">、</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;receiver_phone&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">、</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;receiver_province&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">、</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;receiver_city&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">、</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;receiver_district&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">、</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;receiver_address&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">六个字段。简单粗暴！”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">确实简单。一个月后，产品说一个订单要支持多个收货地址（分批发货）。你怎么办？再加六乘 N 个字段？还是把订单表拆成</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;t_order&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">和</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;t_order_shipment&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">？</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">后者需要抽象——你需要理解”订单”和”发货单”是</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">两个不同的领域实体</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">，它们之间是一对多的关系。但你没有这个意识，因为产品原型上”订单详情页”就是把收货地址嵌在里面的，你就原样搬到了数据库里。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这是一种病，学名叫**”原型依存型数据库设计综合征”**。患者临床表现包括但不限于：</font></p>
+<ul>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">产品经理画了几个筛选条件，他就建几个索引，从不问这些查询场景是否真的存在</font></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">产品经理说”这个字段以后可能用到”，他就加一个</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;varchar(255)&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">的</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext1&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">、</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext2&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">、</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext3&lt;/font&gt;</code></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">产品经理画了一个”用户标签”的多选框，他就给用户表加一个逗号分隔的</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;tags&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">字段，然后在查询时写</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;FIND_IN_SET&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">自我感动</font></li>
+</ul>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你看，数据库设计本质上是</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">抽象建模</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">的过程。你需要从纷繁的业务需求中提炼出核心实体、属性和关系。但很多人做的是</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">反向建模</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">——把 UI 上的每一个像素都映射成数据库里的一个字段，仿佛产品原型就是上帝赐予的 ER 图。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">屎的形状取决于产品经理那天画原型时喝了多少咖啡。</font></p>
+<h3 id="姿势二：万物皆可-JSON——用-ext-info-字段埋葬一切建模"><a href="#姿势二：万物皆可-JSON——用-ext-info-字段埋葬一切建模" class="headerlink" title="姿势二：万物皆可 JSON——用 ext_info 字段埋葬一切建模"></a><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">姿势二：万物皆可 JSON——用 ext_info 字段埋葬一切建模</font></h3><p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这是高阶姿势。初级选手才会复制粘贴 Controller，中级选手早就学会了”灵活设计”——</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">给每张表加一个</font>****<font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font></strong><code>**&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext_info&lt;/font&gt;**</code><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><strong><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">&#x2F;</font></strong></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font></strong><code>**&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;config_json&lt;/font&gt;**</code><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><strong><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">&#x2F;</font></strong></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font></strong><code>**&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;attrs&lt;/font&gt;**</code><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font>****<font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">字段，JSON 存储，啥都往里扔</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">需求来了：”订单要支持发票信息。” “简单，在</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;t_order&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">的</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext_info&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">里加个 JSON 字段。”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">又来：”订单要支持优惠券核销记录。” “简单，</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext_info&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">里再塞一个数组。”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">再来：”订单要记录分销商的返佣规则。” “简单，</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext_info&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">里加个嵌套对象。”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">半年后，你打开线上一条订单的</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext_info&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">，里面是一坨 4KB 的 JSON，</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext_info&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">里嵌套</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;rule_json&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">，</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;rule_json&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">里再嵌套</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;config_json&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">——一层套一层，</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">像俄罗斯套娃，只不过每一层都是屎</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">有没有人向上问一句：</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">发票是不是一个独立的领域实体？优惠券核销是不是一条独立的业务事实？返佣规则是不是一套独立的配置模型？</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">没有人问。因为建一张新表要跟 DBA 对接、要走 DDL 审批、要改十几个 DAO，而往</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext_info&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">里塞一个字段只需要改一行代码。</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">懒是第一生产力，JSON 是懒的官方赞助商</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">真正可怕的是这一招的”政治正确性”。当你提出”这应该拆成</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;t_order_invoice&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">独立建模”时，一定会有人跳出来说：”不不不，用 JSON 更灵活、更敏捷、schema-less 是现代架构趋势。”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">——</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">放屁</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。schema-less 不是让你放弃 schema，而是让你把 schema 放到应用层强约束地管起来。但你根本没管，你只是把数据库该做的建模工作，</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">外包给了一个永远没人维护的 JSON 黑洞</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">三年后，当你需要统计”本月开了多少张专票”时，你发现要全表扫描解析 JSON。当你需要给发票表加唯一索引时，你发现根本没有发票表。当审计要求对返佣规则做版本追溯时，你发现 JSON 里只有当前值，没有历史。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你试图迁移数据——发现线上有十几种不同版本的 JSON 结构，因为每个同事塞进去的格式都不一样，而且没人知道哪些字段还在用、哪些是历史遗留。</font></p>
+<p><code>**&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext_info&lt;/font&gt;**</code><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font>****<font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">不是一个字段，是一座垃圾填埋场</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。你以为你在做”灵活设计”，其实你在做</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">向未来的自己拉屎</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<h3 id="姿势三：状态靠布尔标志——用十个-is-xxx-干状态机的活"><a href="#姿势三：状态靠布尔标志——用十个-is-xxx-干状态机的活" class="headerlink" title="姿势三：状态靠布尔标志——用十个 is_xxx 干状态机的活"></a><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">姿势三：状态靠布尔标志——用十个 is_xxx 干状态机的活</font></h3><p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这是最隐蔽、最致命的一种。因为它看起来</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">完全符合”代码清晰”的直觉</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">订单有个状态，怎么设计？初级程序员会加一个字段：</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_paid BOOLEAN&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">然后需求变了，要区分”是否发货”。再加一个：</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_shipped BOOLEAN&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">然后要区分”是否取消”：</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_cancelled BOOLEAN&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。 然后是退款：</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_refunded BOOLEAN&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。 然后是审核：</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_reviewed BOOLEAN&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。 然后是锁定：</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_locked BOOLEAN&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。 然后是删除：</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_deleted BOOLEAN&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">（逻辑删除，你懂的）。 然后是异常：</font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;has_exception BOOLEAN&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">半年后，你的订单表有</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">8 个 boolean 字段</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。你觉得每一个都清晰明了，代码里到处写：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(order.getIsPaid()&amp;&amp;!order.getIsShipped()&amp;&amp;!order.getIsCancelled())&#123;</span><br><span class="line">// 这是&quot;已付款未发货&quot;状态</span><br><span class="line">&#125;</span><br><span class="line">if(order.getIsPaid()&amp;&amp;order.getIsShipped()&amp;&amp;!order.getIsRefunded())&#123;</span><br><span class="line">// 这是&quot;已发货未退款&quot;状态</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">停一下。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">8 个 boolean 有</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">2 的 8 次方 &#x3D; 256 种组合</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。其中合法的业务状态只有</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">12 种</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。剩下 244 种组合，全都是</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">非法状态</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">——比如</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_paid=true, is_cancelled=true, is_refunded=false&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这种四不像。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">但你的代码里有任何地方约束”这 244 种组合不能出现”吗？</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">没有。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">于是线上 bug 永不绝迹。用户发邮件骂：”为什么我的订单显示’已付款已取消已发货未退款’？” 你一查数据库——是的，这个订单四个标志位同时为真。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">为什么会这样？因为你没有状态机，只有 8 个互相独立的开关。任何一段代码都可以在任何时刻把任何一个开关拨到任何位置，</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">没有任何约束</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。你以为你在用布尔值”表达状态”，其实你在用布尔值</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">放弃状态</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">有没有人向上问一句：</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">订单本质上只有一个状态属性，它的取值是一组互斥的枚举；状态之间的流转是一张有向图。我们要设计的不是 8 个 boolean，是一个状态机。</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">没有人问。因为</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_paid&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这种字段名叫”语义清晰”，是写在面试题里的最佳实践。没人告诉你</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">语义清晰的字段堆在一起，会变成语义爆炸</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">更精彩的是当产品说：”新增一种’部分发货’状态。” 你慌了：现在要</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_partially_shipped&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">还是</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;shipped_ratio&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">？和</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_shipped&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">什么关系？历史数据怎么回刷？代码里所有</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;if (is_shipped)&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">的地方都要加上”或者 is_partially_shipped”——你打开 IDE 全局搜索，1200 个结果。</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你不是在加一个状态，你是在给一座 8 阶屎山再加一层。</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这就是</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">没有状态机抽象的代价</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。你今天省下的那 30 分钟建模时间，将来会以每月两次 P2 故障的频率还回来。</font></p>
+<h2 id="三、屎的七十二变：那些你天天在写的”设计”"><a href="#三、屎的七十二变：那些你天天在写的”设计”" class="headerlink" title="三、屎的七十二变：那些你天天在写的”设计”"></a><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">三、屎的七十二变：那些你天天在写的”设计”</font></h2><p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">上面三个姿势只是基本功。真到工位上，屎有七十二变：</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">屎变 #1：多张结构完全相同的表</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你见过这样的数据库吗？</font></p>
+<ul>
+<li><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;t_order_202401&lt;/font&gt;</code></li>
+<li><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;t_order_202402&lt;/font&gt;</code></li>
+<li><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;t_order_202403&lt;/font&gt;</code></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">…</font></li>
+</ul>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">按月分表，听起来挺专业的对吧？但当你发现每一张表的字段完全一样，只是表名后缀不同，而查询时需要动态拼接表名——你就知道这是一泡分装在不同罐子里的屎。为什么不设计一张分区表？为什么不用中间件？因为”按月分表”是你在某篇博客上看到的，你觉得很酷，就照做了。</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">屎变 #2：魔术数字漫山遍野，枚举值散落各处</font></strong></p>
+<p><font style="color:rgb(179, 0, 63);background-color:rgb(252, 252, 252);">if</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">(</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">order</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">.</font><font style="color:rgb(219, 112, 75);background-color:rgb(252, 252, 252);">getStatus</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">()</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">&#x3D;&#x3D;</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">1</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">)</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">{</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">…</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">}</font><em><font style="color:rgba(20, 20, 20, 0.68);background-color:rgb(252, 252, 252);">&#x2F;&#x2F; OrderServiceImpl</font></em></p>
+<p><font style="color:rgb(179, 0, 63);background-color:rgb(252, 252, 252);">if</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">(</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">status</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">.</font><font style="color:rgb(219, 112, 75);background-color:rgb(252, 252, 252);">equals</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">(</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">“</font><font style="color:rgb(158, 148, 213);background-color:rgb(252, 252, 252);">1</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">“</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">))</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">{</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">…</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">}</font><em><font style="color:rgba(20, 20, 20, 0.68);background-color:rgb(252, 252, 252);">&#x2F;&#x2F; OrderController</font></em></p>
+<p><font style="color:rgb(179, 0, 63);background-color:rgb(252, 252, 252);">WHERE</font><font style="color:rgb(34, 34, 34);background-color:rgb(252, 252, 252);"> status </font><font style="color:rgb(219, 112, 75);background-color:rgb(252, 252, 252);">IN</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">(</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">1</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">,</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">2</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">,</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">3</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">)</font><font style="color:rgb(179, 0, 63);background-color:rgb(252, 252, 252);">AND</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">type</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">&#x3D;</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">5</font><em><font style="color:rgba(20, 20, 20, 0.68);background-color:rgb(252, 252, 252);">&#x2F;&#x2F; mapper.xml</font></em></p>
+<p><font style="color:rgb(179, 0, 63);background-color:rgb(252, 252, 252);">const</font><font style="color:rgb(34, 34, 34);background-color:rgb(252, 252, 252);"> STATUS_PAID </font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">&#x3D;</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">1</font><font style="color:rgb(32, 101, 149);background-color:rgb(252, 252, 252);">;</font><em><font style="color:rgba(20, 20, 20, 0.68);background-color:rgb(252, 252, 252);">&#x2F;&#x2F; 前端 constants.js</font></em></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">同一个”已支付”在代码里有四种写法，在数据库里有一份，在需求文档里还有一句”支付成功的订单”。当产品说”把’已支付’拆成’已支付-待风控’和’已支付-已放行’”时，你需要改多少地方？没人知道，因为</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">没人敢 grep</font>****<font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font></strong><code>**&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;== 1&lt;/font&gt;**</code><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">——会出来一万个结果</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">抽象的正解是什么？一个枚举类、一张字典表、一套类型安全的转换器。但这需要你把”1”当成一个概念而不是一个整数——这一步动作，大部分人懒得做。</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">屎变 #3：参数校验逻辑散落在 30 个地方</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">同一个手机号格式校验，你可以在：</font></p>
+<ul>
+<li><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;UserController.add()&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">里找到一份</font></li>
+<li><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;UserController.update()&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">里找到一份</font></li>
+<li><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;OrderController.create()&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">里找到一份</font></li>
+<li><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;RegisterService.validate()&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">里找到一份</font></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">前端的</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;utils.js&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">里还有一份</font></li>
+</ul>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">当工信部要求手机号支持 17 位物联网卡时，你需要改多少地方？没人知道，因为没人记得全。这就是</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">没有抽象</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">的后果——同一个规则被复制了无数次，每一次复制都是在制造未来的技术债。</font></p>
+<h2 id="四、AI-Coding-时代：屎山制造进入工业-4-0"><a href="#四、AI-Coding-时代：屎山制造进入工业-4-0" class="headerlink" title="四、AI Coding 时代：屎山制造进入工业 4.0"></a><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">四、AI Coding 时代：屎山制造进入工业 4.0</font></h2><p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">好了，前面说的都是”人手造屎”的时代。现在，咱们进入了 AI Coding 时代。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">情况变好了吗？</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">变得更糟了。</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">GitClear 的研究数据显示，AI 生成代码的</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">重复率是人工代码的 8 倍</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">，技术债增加</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">32.45 issues&#x2F;KLOC</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。Sonar 的报告更触目惊心：AI 生成的代码中，</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">90% 存在代码异味</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这不是 AI 的错。AI 只是一个放大器。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你给它一个”在订单表加个发票信息”的 prompt，它很贴心地给你生成</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ALTER TABLE t_order ADD COLUMN invoice_info JSON&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。你很满意，点下 Accept。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你又给它一个”再加个订单是否需要人工审核的标志”的 prompt，它又很贴心地给你</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ADD COLUMN need_manual_review BOOLEAN&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。你又 Accept。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你连脑子都没过过——因为</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你自己就没有抽象意识</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">，你根本不知道发票应该独立建模，状态应该抽成状态机。AI 忠实地执行了你的低水平指令，帮你把屎的生产效率提升了 125%。</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你从一个人造屎，变成了一个人指挥 AI 造屎。生产效率飞跃，屎的质量没变，只是产量翻倍了。</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这还不是最可怕的。最可怕的是</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">Vibe Coding</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">——这个概念由 OpenAI 联合创始人 Andrej Karpathy 在 2025 年提出，核心理念是”完全跟着感觉走，拥抱指数增长，忘掉代码本身的存在”。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">翻译成人话就是：</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">不知道怎么写的代码，就让 AI 帮你写。看不懂也没关系，能跑就行。</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">GitClear 的研究显示，在 AI 编码助手普及后，</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">提交历史中的重构活动在减少</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。微软的研究则指出，AI 驱动的信心往往</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">以牺牲批判性思维为代价</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">——开发者对 AI 生成代码的盲目信任，正在侵蚀他们原本就脆弱的抽象能力。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这是一个完美的恶性循环：</font></p>
+<ol>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你没有抽象思维，不知道什么是好的设计</font></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你用 AI 帮你生成代码，AI 也抽象不出好的设计（因为它只会从训练数据中找最相似的模式拼凑）</font></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">AI 生成的屎比你手写的屎更隐蔽——它看起来工整、有注释、甚至还有单元测试</font></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你欣然接受，觉得自己生产力爆棚</font></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">屎山以</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">8 倍的速度</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">增长</font></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">当你终于意识到问题时，屎山已经高到你不敢重构——因为 AI 生成的代码你根本没仔细看过，你不知道动哪里会塌方</font></li>
+</ol>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">AI 没有帮你解决问题，AI 只是帮你更快地到达问题。</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">ThoughtWorks 的技术雷达已经将”自满于 AI 生成的代码”列为</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">暂缓采用</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">的技术实践。而那些真正有抽象能力的工程师，正在用 AI</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">辅助重构</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">，让 AI 帮他们把屎山改造成可维护的系统——前提是，他们自己知道”好”长什么样。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">而对于没有抽象思维的你，AI 就是一台</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">屎山 3D 打印机</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。以前你一天造一坨屎，现在你一天能打印十坨。</font></p>
+<h2 id="五、向上抽象，就是问一句”这他妈到底是啥？”"><a href="#五、向上抽象，就是问一句”这他妈到底是啥？”" class="headerlink" title="五、向上抽象，就是问一句”这他妈到底是啥？”"></a><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">五、向上抽象，就是问一句”这他妈到底是啥？”</font></h2><p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">所谓向上抽象，就是逼着自己从 Ctrl+V 的手指运动中停下来，问几个该死的问题：</font></p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong><font style="background-color:rgb(248, 248, 248);">沉迷吃屎的日常</font></strong></th>
+<th align="left"><strong><font style="background-color:rgb(248, 248, 248);">向上抽象的提问</font></strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">产品原型有这个字段，加！</font></td>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">这个字段是什么实体？和现有实体是什么关系？</font></td>
+</tr>
+<tr>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">塞进 ext_info JSON 里就行了！</font></td>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">这是一条业务事实，还是一个独立实体？它需不需要被查询、被索引、被审计？</font></td>
+</tr>
+<tr>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">再加一个 is_xxx 标志位！</font></td>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">这是一个独立属性，还是状态机的一个节点？整体状态空间有多少种合法组合？</font></td>
+</tr>
+<tr>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">按月建表，简单！</font></td>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">分区和分表的区别是什么？我真的需要分表吗？</font></td>
+</tr>
+<tr>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">代码里到处</font><font style="background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;status == 1&lt;/font&gt;</code><font style="background-color:rgb(248, 248, 248);">！</font></td>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">“1”代表什么概念？这个概念的完整取值集合是什么？</font></td>
+</tr>
+<tr>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">AI 帮我写好了，Accept！</font></td>
+<td align="left"><font style="background-color:rgb(248, 248, 248);">这段代码在整体架构中的位置是什么？它和已有代码是否重复？</font></td>
+</tr>
+</tbody></table>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">问完这几个问题，你可能会发现——</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你准备造的屎，其实根本就不用造</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">有一次，团队要做一个”优惠券发放”功能。产品经理画了满屏的原型：新人券、满减券、折扣券、兑换券、限时券、分享券……</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">后端老李熟练地打开 Navicat，准备建六张表。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">我问了一句：”这六种券的本质是什么？”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">“优惠券啊。”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">“那它们的核心字段是不是都一样？名称、面值、使用门槛、有效期、适用商品范围。不同的只是类型和某些特定的规则。”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">“所以？”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">“所以我们建一张</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;t_coupon&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">表，用一个</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;type&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">字段区分类型，特定规则用策略模式处理发放&#x2F;核销逻辑，类型本身是受控枚举，不是字符串。”</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">老李愣了愣，默默关掉了新建表的窗口。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">后来这个系统支持了 20 多种券类型，核心表只有 3 张。</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">原来这些屎，根本不用分开拉。</font></strong></p>
+<h2 id="六、结语：AI-时代，抽象能力是最后的护城河"><a href="#六、结语：AI-时代，抽象能力是最后的护城河" class="headerlink" title="六、结语：AI 时代，抽象能力是最后的护城河"></a><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">六、结语：AI 时代，抽象能力是最后的护城河</font></h2><p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">我写这篇文章，不是为了教你设计模式——那是另一本书的事。我只想留下几个问题，供你在下一次想按 Ctrl+V 的时候思考：</font></p>
+<ol>
+<li><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这段代码和已有的某段代码，相似度超过 80% 吗？</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">如果是，你应该抽象，而不是复制。</font></li>
+<li><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这个字段和其他几个字段，本质上是同一类东西吗？</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">如果是，它们应该被建模成关联实体，而不是在一张表里无限追加，也不是塞进一个 JSON 黑洞。</font></li>
+<li><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">AI 生成的这段代码，你真的理解它在整体设计中的位置吗？</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">如果不理解，你就不是在编程，你是在给屎山添砖加瓦。</font></li>
+</ol>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">在 AI 能把任何 prompt 变成代码的今天，</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">写出能跑的代码已经是最不值钱的能力</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。AI 写得比你快、比你多、比你规范。但它无法替你做一件事——</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">判断什么是一个好的设计</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">因为”好”不是一个能从训练数据中统计出来的概率，它是一种需要抽象思维才能把握的判断。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">而没有抽象思维的人，在 AI 时代会变成什么？</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">会变成</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">屎山车间的车间主任</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">——管理着一群不知疲倦的 AI 机器人，24 小时不间断地生产形状各异的屎，产量惊人，品控为零。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">所以，在你下一次打开 Cursor 之前，在你下一次按 Tab 补全之前，在你下一次说”能跑就行”之前——</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">抬头看一眼：你是在造系统，还是在吃屎。</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">开嘴之前多想半秒，这半秒就是你跟那群 24 小时不停嘴的同行之间，唯一的区别。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">而这半秒钟，正在成为 AI 时代程序员最后的护城河。</font></p>
+<hr>
+<h2 id="附录：如果你觉得这篇文章是屎"><a href="#附录：如果你觉得这篇文章是屎" class="headerlink" title="附录：如果你觉得这篇文章是屎"></a><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">附录：如果你觉得这篇文章是屎</font></h2><p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">是的，这篇文章是 AI 辅助写的。</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">我知道你在想什么。你可能从第一段就开始警惕了——“嗯，这种排比句、这种金句密度、这种情绪浓度……AI 味儿。” 你可能已经在心里给它贴好了标签：</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">逻辑混乱、以偏概全、满嘴喷粪</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">很好。请你继续这么想。因为你正在用一种非常纯粹的方式，</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">亲身验证本文唯一的论点</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">请跟上我的逻辑：</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你读完这篇文章，做的第一件事不是逐句核对每一个论据的严密性，不是去翻 GitClear 的原始报告，不是去查</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext_info&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">反模式是否真的导致了你项目里那次 P0。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你做的第一件事是——</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">向上抽象</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。你把两万字压缩成三个字：”这是屎”。你甚至没意识到，你刚刚完成的，是本文通篇苦口婆心在教你做的那件事：</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">从混乱的细节里提炼本质</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">区别只在于：</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你在批判一篇文章的时候，本能地会向上抽象；你在写代码的时候，本能地不会</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你读文章时会问”作者的核心论点是什么”，写代码时却不问”这个字段的核心实体是什么”。 你读文章时会质疑”这段论据和结论的关系”，写代码时却不质疑”这个 boolean 和上一个 boolean 的关系”。 你读文章时能一眼看穿”这是 AI 拼凑的”，打开 IDE 却看不穿”这是 AI 拼凑的屎山”。</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">为什么？</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">因为骂一篇文章不用负责，维护一座屎山要你加班。你的大脑只在对你无利害的场合启用抽象能力，在对你有利害的场合——比如你需要交付、需要写周报、需要下班——它自动熄火。你不是没有抽象能力，</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你是把抽象能力精准地调度到了最没用的地方</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">现在让我把退路一条一条堵上：</font></p>
+<ul>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你说这篇文章是屎？ → 你已经启动了抽象思维 → 但你只在批判别人时启动 → 你写的代码依然是屎。</font></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你说这篇文章是金句之作？ → 你认同观点 → 但你明天照样</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext_info&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">塞一切 → 你写的代码依然是屎。</font></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你说这篇文章一般般？ → 你连抽象都懒得做 → 你写的代码 100% 是屎。</font></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你说”这是 AI 写的，不算数”？ → 你把对象从论点偷换成了作者 → 你用这种偷换逻辑工作了多少年 → 你写的代码依然是屎。</font></li>
+<li><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你说”我跟这文章里写的不一样”？ → 请打开你的订单表看一眼 → 数一数</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;ext_info&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">多少字段</font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><code>&lt;font style=&quot;color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);&quot;&gt;is_xxx&lt;/font&gt;</code><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);"> </font><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">多少标志位 → 谢谢配合。</font></li>
+</ul>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">无论你怎么选，结论只有一个。</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">这不是诡辩。这是你自己的行为在不同维度上的投影。你可以骂我逻辑强奸——但逻辑从来强奸不了人，</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">是你自己的代码先把自己钉在了屎山上，我只是指了指钉子</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">至于这篇文章是不是 AI 写的——无所谓。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">如果你是因为”AI 写的”所以觉得是屎，那你反对的是作者身份，不是论点本身，你就是本文骂的那种”放弃抽象、放弃批判性阅读”的人。你恰好证明了：</font><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">当一个人把”信息来源”当成”信息价值”的全部判断标准时，他已经失去了向上抽象的能力</font></strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">如果你是因为”内容不对”所以觉得是屎，那请具体指出哪一个论点错了——不是”感觉”错了，是哪一条结论在你真实的工程实践里不成立。如果你说得出来，这篇文章就该被改；如果你说不出来，那你刚才的”屎”就是一种情绪，而情绪无法反驳论证。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你当然可以关掉这篇文章，骂一句”狗屁不通”，然后继续你的日常。AI 能帮你把下一段文字写得更流畅，也能帮你把下一坨屎写得更整齐。它唯一帮不了你的是——</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">在你按下 Tab 补全之前，替你问一句”这他妈到底是啥？”</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">那一句，只能你自己问。问出来，你就是系统设计者；问不出来——</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">打开你的 IDE 看一眼。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">那坨东西，是你写的，还是 AI 替你拉的？</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">区别重要吗？</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">不重要。因为反正都是你的名字挂在 Git blame 上。</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">所以，现在，认真回答最后一个问题：</font></p>
+<p><strong><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你写的下一行代码，是屎，还是系统？</font></strong></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">别回答我。</font></p>
+<p><font style="color:rgb(34, 34, 34);background-color:rgb(248, 248, 248);">你答不答都已经被这篇文章判过刑了——因为我不回答问题，我本身就是一个答案。</font></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/17/%E8%AE%B8%E6%84%BF%E5%BC%8F%E7%BC%96%E7%A8%8B-vs-%E5%A5%B4%E9%9A%B6%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%9Aai-%E6%97%B6%E4%BB%A3%EF%BC%8C%E6%88%91%E4%BB%AC%E5%88%B0%E5%BA%95%E8%AF%A5%E6%80%8E%E4%B9%88%E5%81%9A%E7%94%B5%E5%AD%90%E5%B1%8E%E5%A3%B3%E9%83%8E%EF%BC%9F/" rel="prev" title="许愿式编程 VS 奴隶式编程：AI 时代，我们到底该怎么做电子屎壳郎？">
+                  <i class="fa fa-angle-left"></i> 许愿式编程 VS 奴隶式编程：AI 时代，我们到底该怎么做电子屎壳郎？
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/17/%E6%96%B0%E4%B8%80%E4%BB%A3%E6%95%B0%E7%A0%81%E9%AA%86%E9%A9%BC%E7%A5%A5%E5%AD%90/" rel="next" title="新一代数码骆驼祥子">
+                  新一代数码骆驼祥子 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2024 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">gundamff</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/gundamff" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
