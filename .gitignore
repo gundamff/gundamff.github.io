@@ -3,3 +3,8 @@ deploy_*/
 .DS_Store
 Thumbs.db
 *.log
+
+# hexo 生成目录与本地临时文件
+public/
+.gitmsg.tmp
+db.json
