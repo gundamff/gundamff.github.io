@@ -230,3 +230,15 @@ seo: true
 # Debug Settings
 # ---------------------------------------------------------------
 debug: false
+
+# ---------------------------------------------------------------
+# Busuanzi Count（不蒜子浏览量）
+# ---------------------------------------------------------------
+busuanzi_count:
+  enable: true
+  total_visitors: true
+  total_visitors_icon: fa fa-user
+  total_views: true
+  total_views_icon: fa fa-eye
+  post_views: true
+  post_views_icon: far fa-eye
